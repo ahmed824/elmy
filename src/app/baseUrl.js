@@ -1,0 +1,1 @@
+export const baseUrl = "https://sci.com.sa/elmy/public/api/v1/"
