@@ -15,9 +15,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"; // Import shadcn/ui dropdown components
 import { IoIosArrowDown } from "react-icons/io";
+import { useTranslation } from "react-i18next";
 
 export default function UserProfileSection({ userData, isLoading, isError }) {
   const router = useRouter();
+  const { t } = useTranslation();
 
   // Handle logout
   const handleLogout = () => {
@@ -29,8 +31,7 @@ export default function UserProfileSection({ userData, isLoading, isError }) {
     <div className="hidden lg:flex items-center gap-4 relative">
       {/* Cart Icon */}
       <Link href="/cart" className="text-black hover:text-purple-600 transition-colors">
-        <CgShoppingCart  className="text-lg" />
-        
+        <CgShoppingCart className="text-lg" />
       </Link>
 
       {/* Notification Bell Icon */}
@@ -42,7 +43,7 @@ export default function UserProfileSection({ userData, isLoading, isError }) {
       {isLoading ? (
         <DotsLoader />
       ) : isError ? (
-        <span className="text-black">خطأ في التحميل</span>
+        <span className="text-black">{t("loadingError")}</span>
       ) : (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -55,7 +56,7 @@ export default function UserProfileSection({ userData, isLoading, isError }) {
                 className="rounded-full"
                 quality={80}
               />
-              <span>{userData?.data?.user?.name || "المستخدم"}</span>
+              <span>{userData?.data?.user?.name || t("user")}</span>
               <IoIosArrowDown />
             </button>
           </DropdownMenuTrigger>
@@ -64,7 +65,7 @@ export default function UserProfileSection({ userData, isLoading, isError }) {
               onClick={handleLogout}
               className="cursor-pointer text-sm text-gray-700 hover:bg-gray-100 hover:text-purple-600 flex justify-end"
             >
-              تسجيل الخروج
+              {t("navbar.logout")}
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

@@ -1,0 +1,157 @@
+{
+  "header": {
+    "joinNow": "Join Now",
+    "goals": "Do you have big goals? We have courses to match you",
+    "subscribe": "Subscribe to our newsletter",
+    "subscribeDescription": "Trainers from all over the world teach millions of learners on Elmy. We provide the tools and skills needed to teach what you love."
+  },
+  "navbar": {
+    "home": "Home",
+    "aboutUs": "About Us",
+    "howItWorks": "How It Works",
+    "registerAsInstructor": "Register as Instructor",
+    "contactUs": "Contact Us",
+    "categories": "Course Categories",
+    "language": "AR",
+    "login": "Login",
+    "logout": "Logout"
+  },
+  "footer": {
+    "newsLetterSection": {
+      "title": "Subscribe to our newsletter",
+      "description": "Trainers from all over the world teach millions of learners on Elmy. We provide the tools and resources needed to teach what you love.",
+      "placeholder": "Enter your email",
+      "button": "Subscribe",
+      "buttonLoading": "Subscribing...",
+      "success": "Successfully subscribed",
+      "error": "An error occurred while subscribing",
+      "emptyEmail": "Please enter your email"
+    },
+    "text": "To simulate the ideal training environment that everyone is looking for, the technical support team at Elmy integrates with the rest of its departments to represent integrated cooperation and the best service. We are available around the clock to hear your inquiries and suggestions and find effective solutions to any problem you may face with openness and happiness, because we believe that effective communication with our success partners and trainees is the best way to become the leading training platform in the Arab world. Do not hesitate to contact us through all available means of communication around the clock:",
+    "importantLinks": "Important Links",
+    "supportAndPolicies": "Support and Policies",
+    "contactDirectly": "Contact Directly",
+    "whatsapp": "WhatsApp: 966597431779",
+    "email": "Email: support@elmyacademy.com",
+    "subscribe": "Subscribe to our newsletter",
+    "subscribeDescription": "Trainers from all over the world teach millions of learners on Elmy. We provide the tools and skills needed to teach what you love.",
+    "subscribeButton": "Subscribe Now",
+    "importantLinksList": {
+      "home": "Home",
+      "aboutUs": "About Us",
+      "howItWorks": "How It Works",
+      "registerAsInstructor": "Register as Instructor",
+      "nationalAddress": "National Address"
+    },
+    "supportAndPoliciesList": {
+      "contactUs": "Contact Us",
+      "termsAndConditions": "Terms and Conditions",
+      "usageAndReturnPolicy": "Usage and Return Policy",
+      "privacyPolicy": "Privacy Policy",
+      "supportAndHelp": "Support and Help"
+    },
+    "allRightsReserved": "All rights reserved © 2025"
+  },
+  "courses": {
+    "mostPopular": "Most Popular",
+    "beginnerFavorites": "Beginner Favorites",
+    "latest": "Latest",
+    "enrollNow": "Enroll Now",
+    "learnMore": "Learn More"
+  },
+  "testimonials": {
+    "title": "How do learners achieve mastery?",
+    "description": "Whether you want to learn or share what you know, you've come to the right place. As a global learning destination",
+    "certifiedTrainers": "Certified Trainers",
+    "trainees": "Trainees"
+  },
+  "callToAction": {
+    "title": "Register as a Trainer Now and Gain More Fame",
+    "description": "Be part of the learning community and help others acquire new skills.",
+    "button": "Register Now"
+  },
+  "newsletter": {
+    "title": "Subscribe to our newsletters",
+    "description": "Be the first to know about the latest courses and educational articles directly in your email.",
+    "placeholder": "Enter your email",
+    "button": "Subscribe"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "main": "Main",
+    "sidebar": {
+      "greeting": "Hello",
+      "username": "Ahmed Abdullah",
+      "dashboard": "Dashboard",
+      "myCourses": "My Courses",
+      "favorites": "Favorites",
+      "accountSettings": "Account Settings",
+      "logout": "Logout",
+      "courses": "Courses",
+      "certificate": "Certificate",
+      "signed": "Signed",
+      "trainer": {
+        "dashboard": "Dashboard",
+        "courses": "Courses",
+        "ordersProfits": "Orders and Profits",
+        "accountSettings": "Account Settings",
+        "logout": "Logout"
+      }
+    },
+    "greetingSection": {
+      "greeting": "Hello",
+      "message": "Subscribe now whether you want to learn or share what you know, you've come to the right place",
+      "link": "View Courses"
+    },
+    "mainSection": {
+      "registeredCourses": "Registered Courses",
+      "completedCourses": "Completed Courses",
+      "unCompletedCourses": "Uncompleted Courses",
+      "trainer": {
+        "totalProfits": "Total Profits",
+        "activeCourses": "Active Courses",
+        "studentsNumber": "Number of Students"
+      }
+    },
+    "myCoursesSection": {
+      "all": "All",
+      "completed": "Completed Courses",
+      "unCompleted": "Uncompleted Courses"
+    },
+    "trainerPagesTitle": {
+      "dashboard": "Dashboard",
+      "courses": "My Courses List",
+      "addCourse": "Add New Course",
+      "ordersProfits": "Orders and Profits",
+      "accountSettings": "Settings",
+      "logout": "Logout"
+    },
+    "trainerCoursesTable": {
+      "courseName": "Course Name",
+      "courseDuration": "Course Duration",
+      "studentsNumber": "Number of Students",
+      "courseRating": "Rating",
+      "courseControl": "Control",
+      "addCourse": "Add New Course",
+      "getProfits": "Withdraw Profits"
+    },
+    "trainerProfitsSection": {
+      "totalProfits": "Total Profits",
+      "pendingProfits": "Pending Profits",
+      "profitsCouldWithdraw": "Profits Could Withdraw",
+      "withdraw": "Withdraw Profits",
+      "courseName": "Course Name",
+      "studentName": "Student Name",
+      "price": "Price",
+      "paidStatus": "Paid Status",
+      "date": "Date"
+    }
+  },
+  "loading": "Loading",
+  "loadingError": "Error loading",
+  "user": "User",
+  "cart": "Cart",
+  "notifications": "Notifications",
+  "searchPlaceholder": "Search here...",
+  "searchButton": "Search"
+}
