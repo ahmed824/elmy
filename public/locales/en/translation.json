@@ -153,5 +153,97 @@
   "cart": "Cart",
   "notifications": "Notifications",
   "searchPlaceholder": "Search here...",
-  "searchButton": "Search"
+  "searchButton": "Search",
+  "login": {
+    "title": "Log In",
+    "phoneLabel": "Phone Number",
+    "phonePlaceholder": "Enter your phone number",
+    "phoneRequired": "Please enter your phone number",
+    "phoneInvalid": "Invalid phone number",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "passwordRequired": "Please enter your password",
+    "passwordMin": "Password must be at least 8 characters",
+    "rememberMe": "Remember Me",
+    "forgotPassword": "Forgot Password?",
+    "submit": "Log In",
+    "loading": "Logging in...",
+    "noAccount": "Don't have an account?",
+    "register": "Register",
+    "successMessage": "Logged in successfully",
+    "errorMessage": "An error occurred while logging in"
+  },
+  "whySection": {
+    "whyElmy": "Why Elmy?",
+    "whyElmyDescription": "Elmy is an online educational platform offering comprehensive courses in various scientific fields, with a selection of Arab academic experts to develop skills and achieve personal goals.",
+    "flexibleTraining": "Flexible Training Materials",
+    "flexibleTrainingDescription": "Elmy offers flexible courses in various fields such as programming and marketing, with comprehensive explanations and practical exercises, prepared by specialized experts and modern technologies, in addition to discussion groups to support learning.",
+    "learnAnywhere": "Learn from Anywhere",
+    "learnAnywhereDescription": "With Elmy, learn wherever you are with complete flexibility via computer or phone with diverse teaching methods that suit your schedule and lifestyle. Join today and expand your knowledge without limits."
+  },
+  "trainer": {
+    "achieveFame": "Achieve greater fame",
+    "developSkills": "Develop your skills",
+    "shareExperience": "Share your experience",
+    "startJourney": "Start your educational journey",
+    "registerNow": "Register as a trainer now and",
+    "description": "Trainers from all over the world teach millions of learners on Elmy. We provide the tools and skills needed to teach what you love.",
+    "registerNowButton": "Register as a Trainer Now"
+  },
+  "showOff": {
+    "whyChooseElmy": "Why Choose Elmy?",
+    "trainerExperience": "Trainer Experience",
+    "competitivePrices": "Competitive Prices",
+    "wideRangeCourses": "Wide Range of Courses",
+    "flexibleTimePlace": "Flexible Time and Place"
+  },
+  "opinion": {
+    "learnAnywhere": "Learn Anywhere",
+    "achieveGoals": "How learners like you achieve their goals",
+    "description": "Whether you want to learn or share what you know, you've come to the right place. You can achieve high-quality learning.",
+    "studentsCount": "Students",
+    "instructorsCount": "Certified Trainers",
+    "loading": "Loading...",
+    "error": "An error occurred while fetching reviews"
+  },
+  "notify": {
+    "bigGoals": "Do you have big goals? We have courses to match you",
+    "subscribeNow": "Subscribe Now"
+  },
+  "moreWatch": {
+    "mostWatchedCourses": "Most Watched Courses",
+    "videos": "Videos",
+    "lessons": "Lessons",
+    "ratings": "Ratings",
+    "price": "SAR",
+    "learnMore": "Learn More",
+    "loading": "Loading popular courses...",
+    "error": "An error occurred while fetching popular courses"
+  },
+  "moreSearch": {
+    "mostSearchedCategories": "Most Searched Categories on Elmy",
+    "loading": "Loading most searched categories...",
+    "error": "An error occurred while fetching most searched categories"
+  },
+  "headerSlider": {
+    "defaultTitle": "Make your life better by making yourself better",
+    "defaultDescription": "Your ideal environment to develop your skills with elite experts and the strongest educational content.",
+    "registerNow": "Register Now"
+  },
+  "buttons": {
+    "knowMore": "Know More"
+  },
+  "filter": {
+    "new": "New",
+    "popular": "Popular",
+    "best": "Best",
+    "loading": "Loading courses...",
+    "error": "An error occurred while fetching courses"
+  },
+  "breadCramp": {
+    "home": "Home"
+  },
+  "socialShare": {
+    "shareCourse": "Share the course on"
+  }
 }

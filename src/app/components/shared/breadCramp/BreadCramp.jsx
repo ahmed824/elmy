@@ -1,8 +1,11 @@
 import Link from "next/link";
 import React from "react";
 import { FaChevronLeft } from "react-icons/fa";
+import { useTranslation } from 'react-i18next';
 
 export default function BreadCramp({ title }) {
+  const { t } = useTranslation();
+
   return (
     <div
       className="relative flex justify-center items-center min-h-[300px] -top-[110px] -z-10"
@@ -14,7 +17,7 @@ export default function BreadCramp({ title }) {
       <div className="text-center mt-20">
        <h1 className="text-[30px] font-medium">{title}</h1>
         <p className="text-[#6B7385] font-medium flex items-center justify-center gap-1 mt-4">
-          الرئيسية <FaChevronLeft className="text-[14px]" />{" "}
+          {t('breadCramp.home')} <FaChevronLeft className="text-[14px]" />{" "}
           <span className="text-[#6B7385] text-[14px] font-medium">{title}</span>
         </p>
       </div>

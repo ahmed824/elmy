@@ -1,11 +1,13 @@
-"use client"
-import Link from 'next/link'
-import React, { useState, useEffect } from 'react'
-import { FaArrowLeft } from "react-icons/fa6";
+"use client";
+import Link from 'next/link';
+import React, { useState } from 'react';
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
+import { useTranslation } from 'react-i18next';
 
 export default function Notify() {
-    const [isVisible, setIsVisible] = useState(true)
-    const [isFadingOut, setIsFadingOut] = useState(false)
+    const { t, i18n } = useTranslation();
+    const [isVisible, setIsVisible] = useState(true);
+    const [isFadingOut, setIsFadingOut] = useState(false);
 
     return (
         <div className={`bg-gradient-to-r from-[#A239F0] via-[#B15EF5] to-[#C384FA] rounded-[50px] shadow-md w-[90%] md:w-[80%] top-2 left-[5%] md:left-36 fixed transition-all duration-300 z-50 ${
@@ -13,21 +15,21 @@ export default function Notify() {
         }`}>
             <div className="flex flex-col md:flex-row items-center justify-center text-white p-2 md:p-1">
                 <p className="text-[12px] md:text-[14px] font-[500] text-white text-center md:text-right ml-3">
-                    هل لديك أهداف كبيرة؟ لدينا دورات لتتناسبك
-                <span className="wave-hand  md:text-2xl">👋</span>
+                    {t('notify.bigGoals')}
+                    <span className="wave-hand md:text-2xl">👋</span>
                 </p>
                 <Link
                     href='/subscribe'
                     className="text-white px-2 py-1 md:px-3 md:py-2 rounded-lg hover:scale-110 transition-all flex items-center gap-1 md:gap-2 text-[12px] md:text-[14px] font-[500]"
                 >
-                    إشترك الآن
-                    <FaArrowLeft />
+                    {t('notify.subscribeNow')}
+                    {i18n.language === 'ar' ? <FaArrowLeft /> : <FaArrowRight />}
                 </Link>
 
                 <button
                     onClick={() => {
-                        setIsFadingOut(true)
-                        setTimeout(() => setIsVisible(false), 300)
+                        setIsFadingOut(true);
+                        setTimeout(() => setIsVisible(false), 300);
                     }}
                     className="absolute top-5 sm:top-3 left-2 text-white hover:text-gray-200 transition-colors"
                 >
@@ -46,5 +48,5 @@ export default function Notify() {
                 </button>
             </div>
         </div>
-    )
+    );
 }

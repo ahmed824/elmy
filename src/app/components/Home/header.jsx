@@ -3,17 +3,23 @@ import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay, Navigation } from "swiper/modules";
 import Image from "next/image";
-import { useSlider } from "@/app/customKooks/useSlider";  
+import { useSlider } from "@/app/customKooks/useSlider";
 import KnowMoreButton from "../shared/btns/KnowMoreButton";
 import PurpleButton from "../shared/btns/PurpleButton";
-import HeaderSliderSkeleton from "../shared/HeaderSliderSkeleton";  
+import HeaderSliderSkeleton from "../shared/HeaderSliderSkeleton";
+import { useTranslation } from "react-i18next";
 
 export default function HeaderSlider() {
+  const { t } = useTranslation();
   // Use the custom hook to fetch sliders with Arabic language ('ar')
-  const { data: sliders, error, isLoading } = useSlider('ar');
+  const { data: sliders, error, isLoading } = useSlider("ar");
 
   if (error) {
-    return <div className="w-full bg-white py-10 text-center text-red-600">حدث خطأ: {error.message}</div>;
+    return (
+      <div className="w-full bg-white py-10 text-center text-red-600">
+        حدث خطأ: {error.message}
+      </div>
+    );
   }
 
   // Ensure sliders.data exists and is an array
@@ -40,17 +46,28 @@ export default function HeaderSlider() {
           bulletClass: "swiper-pagination-bullet",
         }}
         navigation={{
-          prevEl: '.swiper-button-prev',
-          nextEl: '.swiper-button-next',
+          prevEl: ".swiper-button-prev",
+          nextEl: ".swiper-button-next",
         }}
         autoplay={{ delay: 5000 }}
         loop
-        dir="ltr"
         className="w-full relative z-10"
       >
         {sliderData.map((slide, index) => (
           <SwiperSlide key={slide.id}>
             <div className="flex flex-col md:flex-row items-center justify-between gap-8 px-4 sm:px-6 lg:px-8">
+              <div className="w-full md:w-1/2 " data-aos="fade-up">
+                <h1 className="text-3xl md:text-4xl font-normal text-purple-600">
+                  {slide.title || t("headerSlider.defaultTitle")}
+                </h1>
+                <p className="mt-4 text-lg text-gray-600 leading-relaxed">
+                  {slide.description || t("headerSlider.defaultDescription")}
+                </p>
+                <div className="mt-6 flex gap-4 ">
+                  <KnowMoreButton />
+                  <PurpleButton label={t("headerSlider.registerNow")} />
+                </div>
+              </div>
               <div className="w-full md:w-1/2">
                 <Image
                   src={slide.image || HeaderImage} // Use API image or fallback to HeaderImage
@@ -60,19 +77,6 @@ export default function HeaderSlider() {
                   height={300} // Add height for Next.js Image optimization
                   loading="eager" // Load image eagerly for better performance in sliders
                 />
-              </div>
-
-              <div className="w-full md:w-1/2 text-right" data-aos="fade-up">
-                <h1 className="text-3xl md:text-4xl font-normal text-purple-600">
-                  {slide.title || "أجعل حياتك أفضل بجعل نفسك أفضل"}
-                </h1>
-                <p className="mt-4 text-lg text-gray-600 leading-relaxed">
-                  {slide.description || "بيئتك المثالية لتطوير مهاراتك مع نخبة الخبراء وأقوى المحتويات التعليمية."}
-                </p>
-                <div className="mt-6 flex gap-4 justify-end">
-                  <KnowMoreButton />
-                  <PurpleButton label={"سجل الآن"} />
-                </div>
               </div>
             </div>
           </SwiperSlide>

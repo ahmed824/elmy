@@ -34,7 +34,7 @@ export default function SearchModal({ isOpen, onClose }) {
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-gray-600 hover:text-gray-900"
+          className="size-3 absolute top-4 right-4 text-gray-600 hover:text-gray-900"
         >
           &times;
         </button>

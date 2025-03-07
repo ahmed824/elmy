@@ -6,18 +6,20 @@ import KnowMoreButton from '../shared/btns/KnowMoreButton';
 import img from "@/images/siber.svg";
 import useMostSearchedCategories from '@/app/customKooks/most-searchedCat';
 import { useRouter } from 'next/navigation';
+import { useTranslation } from 'react-i18next';
 
 export default function MoreSearch() {
+    const { t } = useTranslation();
     const router = useRouter();
 
     const { data, isLoading, isError } = useMostSearchedCategories({ lang: 'ar', limit: 4 });
 
     if (isLoading) {
-        return <div className="text-center py-10">Loading most searched categories...</div>;
+        return <div className="text-center py-10">{t('moreSearch.loading')}</div>;
     }
 
     if (isError) {
-        return <div className="text-center py-10 text-red-500">Error fetching most searched categories</div>;
+        return <div className="text-center py-10 text-red-500">{t('moreSearch.error')}</div>;
     }
 
     const categories = data?.data || [];
@@ -29,7 +31,7 @@ export default function MoreSearch() {
     return (
         <section className="py-10 px-5 text-center">
             <h2 className="text-2xl md:text-3xl font-bold text-purple-600 mb-4">
-                أكثر الفئات بحثاً في علمي
+                {t('moreSearch.mostSearchedCategories')}
             </h2>
             <div className="border-b-2 border-purple-600 w-32 mx-auto mb-8"></div>
 

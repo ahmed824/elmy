@@ -30,7 +30,7 @@ export default function NewsletterSection() {
   return (
     <div className="absolute bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl p-6 md:p-10 text-white flex flex-col md:flex-row items-center justify-between w-[90%] max-w-6xl mx-auto top-[-145px] sm:-top-[108px] left-1/2 transform -translate-x-1/2">
       {/* Text Section */}
-      <div className="md:w-1/2 text-center md:text-right mb-6 md:mb-0">
+      <div className="md:w-1/2   mb-6 md:mb-0">
         <h2 className="text-lg md:text-3xl font-semibold">
           {t("footer.newsLetterSection.title")}
         </h2>
@@ -50,7 +50,7 @@ export default function NewsletterSection() {
             placeholder={t("footer.newsLetterSection.placeholder")}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="flex-1 px-4 py-2 text-gray-700 bg-transparent focus:outline-none text-right text-sm md:text-base"
+            className="flex-1 px-4 py-2 text-gray-700 bg-transparent focus:outline-none text-sm md:text-base"
           />
           <button
             onClick={handleSubscribe}
