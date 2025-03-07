@@ -5,16 +5,16 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import ScrollToTop from "./components/Home/ScrollToTop";
-import 'react-toastify/dist/ReactToastify.css'
-import 'react-phone-input-2/lib/style.css'
-import 'react-phone-number-input/style.css'
+import "react-toastify/dist/ReactToastify.css";
+import "react-phone-input-2/lib/style.css";
+import "react-phone-number-input/style.css";
 // import Nav from "./components/nav/nav";
 // import Footer from "./components/footer/Footer";
-const Nav = dynamic(() => import("./components/nav/nav") );
-const Footer = dynamic(() => import("./components/footer/Footer") );
-
+const Nav = dynamic(() => import("./components/nav/nav"));
+const Footer = dynamic(() => import("./components/footer/Footer"));
 
 import AosProvider from "./components/shared/AosProvider";
+import TranslationProvider from "./components/shared/TranslationProvider";
 import Providers from "./QueryClientProvider";
 import dynamic from "next/dynamic";
 import { ToastContainer } from "react-toastify";
@@ -44,13 +44,15 @@ export default function RootLayout({ children }) {
       <body className="font-sans antialiased">
         <Providers>
           <AosProvider>
-            <Nav />
-            <ToastContainer />
+            <TranslationProvider>
+              <Nav />
+              <ToastContainer />
 
-            {children}
-            <ScrollToTop />
-            <MobileFooterNav />
-            <Footer />
+              {children}
+              <ScrollToTop />
+              <MobileFooterNav />
+              <Footer />
+            </TranslationProvider>
           </AosProvider>
         </Providers>
       </body>

@@ -6,11 +6,12 @@ import { FaPlay, FaBook, FaMoneyBillWave, FaStar } from 'react-icons/fa'; // Add
 import { LuBookmark } from "react-icons/lu";
 import { useCourses } from "@/app/customKooks/useCourses";
 import { useRouter } from "next/navigation";
+import { useTranslation } from 'react-i18next';
 
 const filterButtons = [
-  { id: 1, label: "الأحدث", filter: "new" },
-  { id: 2, label: "الأكثر شعبية", filter: "popular" },
-  { id: 3, label: "المفضلة للمبتدئين", filter: "best" },
+  { id: 1, label: "filter.new", filter: "new" },
+  { id: 2, label: "filter.popular", filter: "popular" },
+  { id: 3, label: "filter.best", filter: "best" },
 ];
 
 // Rating Stars Component
@@ -36,6 +37,7 @@ const RatingStars = ({ rating }) => {
 };
 
 export default function Filter() {
+  const { t } = useTranslation();
   const [activeFilter, setActiveFilter] = useState("new");
   const { data, isLoading, isError } = useCourses({ lang: "ar", filter: activeFilter });
   const router = useRouter();
@@ -60,7 +62,7 @@ export default function Filter() {
                 : "border-2 border-[#601596] text-[#601596]"
               }`}
           >
-            <span className="relative z-10 text-sm sm:text-base">{button.label}</span>
+            <span className="relative z-10 text-sm sm:text-base">{t(button.label)}</span>
             {activeFilter === button.filter && (
               <div className="absolute inset-0 bg-gradient-to-r from-[#601596] via-[#A436F0] via-white/20 via-[#A436F0] to-[#601596] opacity-80 hover:opacity-90 transition-opacity" />
             )}
@@ -91,7 +93,7 @@ export default function Filter() {
           ))
         ) : isError ? (
           // Error state for Courses Grid
-          <div className="col-span-3 text-red-600">Error fetching courses. Please try again later.</div>
+          <div className="col-span-3 text-red-600">{t('filter.error')}</div>
         ) : (
           // Display courses
           courses.map((course) => (
@@ -111,7 +113,7 @@ export default function Filter() {
                 ) : (
                   // Default image or text if no image is available
                   <div className="flex items-center justify-center h-full bg-gray-100 text-gray-500">
-                    غير متوفر صورة
+                    {t('filter.noImage')}
                   </div>
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -126,30 +128,30 @@ export default function Filter() {
                   <div className="flex items-center justify-start gap-2 text-gray-600 text-right">
                     <span className="flex items-center gap-2">
                       <FaPlay className="text-purple-600" />
-                      <span className="text-purple-600"> فيديوهات:<span className="text-black"> {course.videos || 0}</span></span>
+                      <span className="text-purple-600"> {t('filter.videos')}:<span className="text-black"> {course.videos || 0}</span></span>
                     </span>
                     <span className="flex items-center gap-2">
                       <FaBook className="text-purple-600" />
-                      <span className="text-purple-600">دروس:<span className="text-black"> {course.lessons || 0}</span> </span>
+                      <span className="text-purple-600">{t('filter.lessons')}:<span className="text-black"> {course.lessons || 0}</span> </span>
                     </span>
                   </div>
 
                   {/* Rating Stars */}
                   <div className="flex items-center justify-between gap-2 mb-4">
                     <RatingStars rating={course.rating} />
-                    <span className="text-gray-600">({course.enrollments} تقييمات)</span>
+                    <span className="text-gray-600">({course.enrollments} {t('filter.ratings')})</span>
                   </div>
 
                   <div className="flex items-center justify-between mt-2">
                     <div className="flex items-center gap-2 text-purple-700 font-bold">
                       <FaMoneyBillWave className="text-purple-600" />
-                      <span>{course.price} <span className="text-[#121D2F]">ريال</span></span>
+                      <span>{course.price} <span className="text-[#121D2F]">{t('filter.price')}</span></span>
                     </div>
                   </div>
                 </div>
 
                 <div className="flex justify-between items-center mt-6">
-                  <PurpleButton label="معرفة المزيد" onClick={() => handleCourseClick(course.id, course.name)} />
+                  <PurpleButton label={t('courses.learnMore')} onClick={() => handleCourseClick(course.id, course.name)} />
                   <button className="p-2 group hover:bg-purple-100 border-2 border-mainColor rounded-full transition-colors duration-300">
                     <LuBookmark className="text-mainColor text-2xl group-hover:scale-110 transition-transform" />
                   </button>

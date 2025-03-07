@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import Link from 'next/link';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
+import { useTranslation } from 'react-i18next';
 
 // Custom component to integrate PhoneInput with Formik
 const PhoneNumberInput = ({ field, form, ...props }) => {
@@ -32,7 +33,7 @@ const PhoneNumberInput = ({ field, form, ...props }) => {
         containerClass={`mt-1 border rounded-3xl flex flex-row-reverse focus:outline-none focus:ring-2 focus:ring-purple-500 ${
           error ? 'border-red-500' : 'border-gray-300'
         }`}
-        placeholder="رقم الجوال"
+        placeholder={props.placeholder}
         enableSearch
         countryCodeEditable={false}
         {...props}
@@ -45,6 +46,7 @@ const PhoneNumberInput = ({ field, form, ...props }) => {
 export default function LogIn() {
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const { t } = useTranslation();
 
   const initialValues = {
     phone: '',
@@ -54,20 +56,20 @@ export default function LogIn() {
 
   const validationSchema = Yup.object({
     phone: Yup.string()
-      .required('يرجى إدخال رقم الجوال')
-      .matches(/^\+?\d+$/, 'رقم الجوال غير صالح'),
+      .required(t('login.phoneRequired'))
+      .matches(/^\+?\d+$/, t('login.phoneInvalid')),
     password: Yup.string()
-      .min(8, 'كلمة المرور يجب أن تتكون من 8 أحرف على الأقل')
-      .required('يرجى إدخال كلمة المرور'),
+      .min(8, t('login.passwordMin'))
+      .required(t('login.passwordRequired')),
   });
 
   const submitForm = async (values, callbacks) => {
     try {
       setIsLoading(true);
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      callbacks.onSuccess({ message: 'تم تسجيل الدخول بنجاح', phone: values.phone });
+      callbacks.onSuccess({ message: t('login.successMessage'), phone: values.phone });
     } catch (error) {
-      callbacks.onError({ message: 'حدث خطأ أثناء تسجيل الدخول' });
+      callbacks.onError({ message: t('login.errorMessage') });
     } finally {
       setIsLoading(false);
     }
@@ -76,18 +78,18 @@ export default function LogIn() {
   const handleSubmit = (values, { resetForm }) => {
     submitForm(values, {
       onSuccess: (data) => {
-        toast.success(data.message || 'تم تسجيل الدخول بنجاح');
+        toast.success(data.message || t('login.successMessage'));
         resetForm();
       },
       onError: (error) => {
-        toast.error(error.message || 'حدث خطأ أثناء تسجيل الدخول');
+        toast.error(error.message || t('login.errorMessage'));
       },
     });
   };
 
   return (
     <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-2xl">
-      <h2 className="text-[38px] font-medium text-center text-[#121D2F] mb-6">تسجيل الدخول</h2>
+      <h2 className="text-[38px] font-medium text-center text-[#121D2F] mb-6">{t('login.title')}</h2>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -97,20 +99,20 @@ export default function LogIn() {
           <Form className="space-y-6">
             {/* Phone Number Field */}
             <div className="flex flex-col">
-              <label className="text-[#121D2F] font-medium text-lg">رقم الجوال *</label>
-              <Field name="phone" component={PhoneNumberInput} />
+              <label className="text-[#121D2F] font-medium text-lg">{t('login.phoneLabel')} *</label>
+              <Field name="phone" component={PhoneNumberInput} placeholder={t('login.phonePlaceholder')} />
             </div>
 
             {/* Password Field with Eye Icon */}
             <div className="flex flex-col relative">
-              <label className="text-[#121D2F] font-medium text-lg">كلمة المرور *</label>
+              <label className="text-[#121D2F] font-medium text-lg">{t('login.passwordLabel')} *</label>
               <Field
                 type={showPassword ? 'text' : 'password'}
                 name="password"
                 className={`mt-1 p-3 border bg-[#F4F4F4] rounded-3xl focus:outline-none focus:ring-2 focus:ring-purple-500 ${
                   errors.password && touched.password ? 'border-red-500' : 'border-gray-300'
                 }`}
-                placeholder="كلمة المرور"
+                placeholder={t('login.passwordPlaceholder')}
               />
               <button
                 type="button"
@@ -133,12 +135,12 @@ export default function LogIn() {
                     className="w-4 h-4 text-purple-600 border-gray-300 rounded focus:ring-purple-500"
                   />
                   <label htmlFor="rememberMe" className="text-[#6B7385] mr-2">
-                    تذكرني
+                    {t('login.rememberMe')}
                   </label>
                 </div>
               </div>
               <Link href="/forgot-password" className="text-purple-600 hover:underline">
-                نسيت كلمة المرور!
+                {t('login.forgotPassword')}
               </Link>
             </div>
 
@@ -149,16 +151,16 @@ export default function LogIn() {
                 disabled={isLoading}
                 className="bg-gradient-to-r from-purple-500 via-blue-500 to-purple-500 text-white px-6 py-3 rounded-full flex items-center gap-2 shadow-md hover:scale-105 transition-transform w-full justify-center"
               >
-                <span>{isLoading ? 'جاري التسجيل...' : 'تسجيل الدخول'}</span>
+                <span>{isLoading ? t('login.loading') : t('login.submit')}</span>
                 <FaArrowLeft className="text-sm" />
               </button>
             </div>
 
             {/* Forgot Password Link */}
             <div className="text-center text-[#121D2F] mt-4">
-              ليس لديك حساب؟{' '}
+              {t('login.noAccount')} {' '}
               <Link href="/register" className="text-purple-600 hover:underline">
-                تسجيل جديد
+                {t('login.register')}
               </Link>
             </div>
           </Form>

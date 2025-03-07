@@ -1,8 +1,10 @@
 "use client";
 import React, { useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function SearchModal({ isOpen, onClose }) {
   const modalRef = useRef(null);
+  const { t } = useTranslation();
 
   // Close modal when clicking outside
   useEffect(() => {
@@ -32,7 +34,7 @@ export default function SearchModal({ isOpen, onClose }) {
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-gray-600 hover:text-gray-900"
+          className="size-3 absolute top-4 right-4 text-gray-600 hover:text-gray-900"
         >
           &times;
         </button>
@@ -41,11 +43,11 @@ export default function SearchModal({ isOpen, onClose }) {
         <div className="flex items-center gap-2">
           <input
             type="text"
-            placeholder="ابحث هنا..."
+            placeholder={t("searchPlaceholder")}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600"
           />
           <button className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors">
-            بحث
+            {t("searchButton")}
           </button>
         </div>
       </div>

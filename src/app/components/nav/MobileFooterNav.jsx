@@ -2,18 +2,20 @@
 import React from "react";
 import Link from "next/link";
 import { FaHome, FaList, FaEnvelope, FaUser, FaSearch } from "react-icons/fa"; // Icons for navigation
-import { usePathname } from 'next/navigation';
+import { usePathname } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
 export default function MobileFooterNav() {
   const pathname = usePathname();
+  const { t } = useTranslation();
 
   const navLinks = [
-    { href: "/", label: "الرئيسية", icon: FaHome },
-    { href: "/categories", label: "التصنيفات", icon: FaList }, // Assuming a categories page
-    { href: "/contact", label: "تواصل معنا", icon: FaEnvelope },
-    { href: "/register", label: "تسجيل دخول", icon: FaUser },
+    { href: "/", label: t("navbar.home"), icon: FaHome },
+    { href: "/categories", label: t("navbar.categories"), icon: FaList }, // Assuming a categories page
+    { href: "/contact", label: t("navbar.contactUs"), icon: FaEnvelope },
+    { href: "/register", label: t("navbar.login"), icon: FaUser },
     // Optionally add search if you want a search icon in the footer
-    // { href: "#", label: "بحث", icon: FaSearch },
+    // { href: "#", label: t("navbar.search"), icon: FaSearch },
   ];
 
   const isActiveLink = (path) => {
@@ -35,7 +37,7 @@ export default function MobileFooterNav() {
               aria-label={link.label}
             >
               <link.icon className="text-xl mb-1" />
-              <span className="text-xs">{link.label}</span>
+              <span className="text-xs text-center">{link.label}</span>
             </Link>
           </li>
         ))}
