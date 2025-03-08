@@ -35,6 +35,7 @@ export default function Page() {
                     paddingTop: "170px",
                 }}
             >
+                <div className="max-w-3xl">
                 <p className="text-sm text-[#6B7385] flex items-center gap-1">
                     {course?.description} <FaChevronLeft className="text-xs" />
                     <span className="text-gray-500">{course?.title || courseName}</span>
@@ -65,9 +66,10 @@ export default function Page() {
                         alt="Instructor"
                     />
                     <span className="text-[#6B7385] text-sm">بواسطة محمد ناصر</span>
-                    <Link href="/courses" className="text-mainColor text-sm cursor-pointer z-20">
+                    <Link href="/courseDetails" className="text-mainColor text-sm cursor-pointer z-20">
                         مشاهدة كل الدورات
                     </Link>
+                </div>
                 </div>
             </div>
 
@@ -77,7 +79,7 @@ export default function Page() {
                     <CourseDetailsClient course={course} />
                 </div>
                 <div className='-mt-72'>
-                    <CardDetails />
+                    <CardDetails courseId={courseId} course={course} />
                 </div>
             </div>
         </div>

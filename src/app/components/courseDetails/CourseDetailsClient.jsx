@@ -61,11 +61,11 @@ export default function CourseDetailsClient({ course }) {
                             </p>
                         </div>
 
-                        <div className="mt-4 text-right">
+                        {/* <div className="mt-4 text-right">
                             <a href="#" className="text-purple-500 font-semibold">
                                 أظهر المزيد
                             </a>
-                        </div>
+                        </div> */}
                     </div>
 
                     <div className="my-4">
@@ -85,20 +85,20 @@ export default function CourseDetailsClient({ course }) {
                     </div>
 
                     <div className="my-4">
-                        <ReviewForm />
+                        <ReviewForm courseId={course.id} />
                     </div>
                 </>
             )}
 
             {/* Individual Sections Based on Selected Tab */}
-            {activeTab === "محتوى الدورة" && <CourseContent />}
+            {activeTab === "محتوى الدورة" && <CourseContent data={course} />}
             {activeTab === "تفاصيل" && <Requirements />}
             {activeTab === "المدرب" && <TrainerCard />}
             {activeTab === "التقييمات" && (
                 <>
                     <Ratings />
                     <div className="my-4">
-                        <ReviewForm />
+                        <ReviewForm courseId={course.id} />
                     </div>
                 </>
             )}

@@ -487,3 +487,15 @@ ul.country-list.text-right {
 .react-tel-input .selected-flag:hover, .react-tel-input .selected-flag:focus {
   background-color: #cacaca !important;
 }
+
+@keyframes bounceSlow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+.animate-bounce-slow {
+  animation: bounceSlow 2s infinite ease-in-out;
+}

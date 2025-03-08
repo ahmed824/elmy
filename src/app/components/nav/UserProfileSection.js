@@ -15,10 +15,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"; // Import shadcn/ui dropdown components
 import { IoIosArrowDown } from "react-icons/io";
+import { useGetCart } from "@/app/customKooks/getCart";
 
 export default function UserProfileSection({ userData, isLoading, isError }) {
   const router = useRouter();
-
+  const { data, isLoading: isCartLoading } = useGetCart("en");
+  const totalItems = data?.data?.total_items || 0;
   // Handle logout
   const handleLogout = () => {
     Cookies.remove("elmy_token"); // Remove the token
@@ -28,13 +30,27 @@ export default function UserProfileSection({ userData, isLoading, isError }) {
   return (
     <div className="hidden lg:flex items-center gap-4 relative">
       {/* Cart Icon */}
-      <Link href="/cart" className="text-black hover:text-purple-600 transition-colors">
-        <CgShoppingCart  className="text-lg" />
-        
+      <Link
+        href="/cart"
+        className="text-black hover:text-purple-600 transition-colors relative"
+      >
+        <CgShoppingCart className="text-lg" />
+        {isCartLoading ? (
+          <span className="absolute -top-2 -right-2 w-4 h-4 flex items-center justify-center text-xs text-white bg-mainColor rounded-full animate-pulse">
+            ...
+          </span>
+        ) : totalItems > 0 ? (
+          <span className="absolute -top-2 -right-2 w-4 h-4 flex items-center justify-center text-xs text-white bg-mainColor rounded-full">
+            {totalItems}
+          </span>
+        ) : null}
       </Link>
 
       {/* Notification Bell Icon */}
-      <Link href="/notifications" className="text-black hover:text-purple-600 transition-colors">
+      <Link
+        href="/notifications"
+        className="text-black hover:text-purple-600 transition-colors"
+      >
         <FaRegBell className="text-lg" />
       </Link>
 
@@ -48,7 +64,11 @@ export default function UserProfileSection({ userData, isLoading, isError }) {
           <DropdownMenuTrigger asChild>
             <button className="flex items-center gap-2 hover:text-purple-600 transition-colors">
               <Image
-                src={userData?.data?.user?.image ? userData.data.user.image : profile}
+                src={
+                  userData?.data?.user?.image
+                    ? userData.data.user.image
+                    : profile
+                }
                 alt="Profile"
                 width={32}
                 height={32}

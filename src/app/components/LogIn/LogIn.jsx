@@ -3,19 +3,34 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import React, { useState } from 'react';
 import { FaArrowLeft, FaEye, FaEyeSlash } from 'react-icons/fa';
-import { toast } from 'react-toastify';  
+import { toast } from 'react-toastify';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
+import axiosInstance from '@/app/customKooks/token';
+import Cookies from 'js-cookie';
 
-// Custom component to integrate PhoneInput with Formik
+// Custom PhoneInput Component
 const PhoneNumberInput = ({ field, form, ...props }) => {
   const { name, value } = field;
   const { touched, errors, setFieldValue } = form;
   const error = touched[name] && errors[name];
 
-  const handleChange = (phone) => {
-    setFieldValue(name, phone || '');
+  const handleChange = (phone, countryData) => {
+    const countryCode = `+${countryData.dialCode}`; // e.g., "+966"
+    let phoneNumber = phone;
+
+    // Remove the country code from phoneNumber
+    if (phoneNumber.startsWith(countryCode)) {
+      phoneNumber = phoneNumber.slice(countryCode.length); // e.g., "123123333"
+    } else if (phoneNumber.startsWith(countryData.dialCode)) {
+      phoneNumber = phoneNumber.slice(countryData.dialCode.length); // Handle case without "+"
+    }
+
+    setFieldValue(name, phone || ''); // Full phone number for display/validation
+    setFieldValue('phone_country_code', countryCode); // e.g., "+966"
+    setFieldValue('phone_number', phoneNumber); // e.g., "123123333"
   };
 
   return (
@@ -45,9 +60,12 @@ const PhoneNumberInput = ({ field, form, ...props }) => {
 export default function LogIn() {
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter();
 
   const initialValues = {
     phone: '',
+    phone_country_code: '',
+    phone_number: '',
     password: '',
     rememberMe: false,
   };
@@ -61,28 +79,35 @@ export default function LogIn() {
       .required('يرجى إدخال كلمة المرور'),
   });
 
-  const submitForm = async (values, callbacks) => {
+  const handleSubmit = async (values, { resetForm }) => {
+    setIsLoading(true);
     try {
-      setIsLoading(true);
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      callbacks.onSuccess({ message: 'تم تسجيل الدخول بنجاح', phone: values.phone });
+      // Prepare payload with separated phone_country_code and phone_number
+      const payload = {
+        phone_country_code: values.phone_country_code, // e.g., "+966"
+        phone_number: values.phone_number,             // e.g., "123123333"
+        password: values.password,
+      };
+
+      console.log('Payload:', payload); // Debugging: Check the payload
+
+      const response = await axiosInstance.post('auth/login', payload);
+      const message = response.data;
+      const token = response.data.data.token;
+      // Store token in cookies
+      Cookies.set('elmy_token', token, { expires: 7 });
+
+      toast.success(message || 'تم تسجيل الدخول بنجاح');
+
+      // Redirect to home page
+      router.push('/');
+
+      resetForm();
     } catch (error) {
-      callbacks.onError({ message: 'حدث خطأ أثناء تسجيل الدخول' });
+      toast.error(error.response?.data?.message || 'حدث خطأ أثناء تسجيل الدخول');
     } finally {
       setIsLoading(false);
     }
-  };
-
-  const handleSubmit = (values, { resetForm }) => {
-    submitForm(values, {
-      onSuccess: (data) => {
-        toast.success(data.message || 'تم تسجيل الدخول بنجاح');
-        resetForm();
-      },
-      onError: (error) => {
-        toast.error(error.message || 'حدث خطأ أثناء تسجيل الدخول');
-      },
-    });
   };
 
   return (
@@ -99,6 +124,9 @@ export default function LogIn() {
             <div className="flex flex-col">
               <label className="text-[#121D2F] font-medium text-lg">رقم الجوال *</label>
               <Field name="phone" component={PhoneNumberInput} />
+              {/* Hidden fields for country code and phone number */}
+              <Field name="phone_country_code" type="hidden" />
+              <Field name="phone_number" type="hidden" />
             </div>
 
             {/* Password Field with Eye Icon */}
@@ -154,7 +182,7 @@ export default function LogIn() {
               </button>
             </div>
 
-            {/* Forgot Password Link */}
+            {/* Register Link */}
             <div className="text-center text-[#121D2F] mt-4">
               ليس لديك حساب؟{' '}
               <Link href="/register" className="text-purple-600 hover:underline">

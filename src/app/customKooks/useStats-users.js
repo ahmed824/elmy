@@ -3,7 +3,7 @@ import { baseUrl } from '../baseUrl';
 
 // Fetch user statistics from the API
 const fetchStatsUsers = async ({ lang = 'ar' }) => {
-  const response = await fetch(`${baseUrl}stats-users?lang=${lang}`);
+  const response = await fetch(`${baseUrl}home/stats-users?lang=${lang}`);
   if (!response.ok) {
     throw new Error('Network response was not ok');
   }

@@ -1,6 +1,6 @@
 // @/app/customKooks/authProfile.js
 import { useQuery } from '@tanstack/react-query';
-import axiosInstance from './token'; // Adjust path if needed
+import axiosInstance from  '@/app/customKooks/token';
 import Cookies from 'js-cookie';
 
 const fetchUserProfile = async () => {

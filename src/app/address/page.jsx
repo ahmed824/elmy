@@ -1,5 +1,5 @@
 import React from 'react'
-import BreadCramp from '../components/shared/coursesBC/CoursesBreadC'
+import BreadCramp from '../components/shared/breadCramp/BreadCramp'  
 
 export default function page() {
     return (
