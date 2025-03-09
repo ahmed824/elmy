@@ -2,8 +2,11 @@ import React from 'react';
 import Image from 'next/image';
 import backGround from "@/images/backGround2.jpg";
 import man from "@/images/man-2.png";
+import { useTranslation } from 'react-i18next';
 
 export default function WhySection() {
+  const { t } = useTranslation();
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image */}
@@ -33,34 +36,31 @@ export default function WhySection() {
       {/* Text Containers */}
       <div className="absolute z-20 w-full max-w-6xl mx-auto px-4">
         {/* Left Text Container */}
-        <div className="max-w-full lg:max-w-[35%] mb-8 lg:ml-auto lg:mr-16" data-aos="fade-left" >
+        <div className="max-w-full lg:max-w-[35%] mb-2 lg:ml-auto lg:mr-16" data-aos="fade-left">
           <div className="backdrop-blur-md p-4 sm:p-6 rounded-lg shadow-lg border border-white/50">
-            <h3 className="text-2xl sm:text-3xl font-medium text-white mb-4">لماذا منصة علمي ؟</h3>
+            <h3 className="text-2xl sm:text-3xl font-medium text-white mb-4">{t('whySection.whyElmy')}</h3>
             <p className="text-white text-sm sm:text-base">
-              منصة علمي هي منصة تعليمية إلكترونية تقدم مساقات ودورات متكاملة في مختلف المجالات
-              العلمية، مع نخبة من الخبراء الأكاديميين العرب لتطوير المهارات وتحقيق الأهداف الشخصية.
+              {t('whySection.whyElmyDescription')}
             </p>
           </div>
         </div>
 
         {/* Right Text Container */}
-        <div className="max-w-full lg:max-w-[35%] mb-8 lg:mr-auto lg:ml-16" data-aos="fade-right">
+        <div className="max-w-full lg:max-w-[40%] mb-2 lg:mr-auto lg:ml-16" data-aos="fade-right">
           <div className="backdrop-blur-md p-4 sm:p-6 rounded-lg shadow-lg border border-white/50">
-            <h3 className="text-2xl sm:text-3xl font-medium text-white mb-4">مواد تدريبية مرنة</h3>
+            <h3 className="text-2xl sm:text-3xl font-medium text-white mb-4">{t('whySection.flexibleTraining')}</h3>
             <p className="text-white text-sm sm:text-base">
-              منصة علمي تقدم دورات مرنة في مجالات متعددة مثل البرمجة والتسويق، مع شروحات شاملة
-              وتمارين عملية، بإعداد خبراء متخصصين وتقنيات حديثة، إضافة إلى مجموعات نقاش لدعم التعلم.
+              {t('whySection.flexibleTrainingDescription')}
             </p>
           </div>
         </div>
 
         {/* Left Text Container */}
-        <div className="max-w-full lg:max-w-[35%] mb-8 lg:ml-auto lg:mr-16" data-aos="fade-left">
+        <div className="max-w-full lg:max-w-[35%] mb-2 lg:ml-auto lg:mr-16" data-aos="fade-left">
           <div className="backdrop-blur-md p-4 sm:p-6 rounded-lg shadow-lg border border-white/50">
-            <h3 className="text-2xl sm:text-3xl font-medium text-white mb-4">تعلم من أي مكان</h3>
+            <h3 className="text-2xl sm:text-3xl font-medium text-white mb-4">{t('whySection.learnAnywhere')}</h3>
             <p className="text-white text-sm sm:text-base">
-              مع منصة علمي، تعلم أينما كنت وبمرونة تامة عبر الحاسوب أو الهاتف بطرق تعليم متنوعة
-              تناسب جدولك وأسلوب حياتك. انضم اليوم ووسع معارفك بلا حدود.
+              {t('whySection.learnAnywhereDescription')}
             </p>
           </div>
         </div>

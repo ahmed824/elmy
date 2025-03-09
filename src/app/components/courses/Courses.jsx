@@ -9,23 +9,32 @@ import { LuBookmark } from "react-icons/lu";
 import PurpleButton from "../shared/btns/PurpleButton";
 import { RatingStars } from "../shared/RatingStars";
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu";
-import { useCourses } from "@/app/customKooks/getCourses";  
+import { useCourses } from "@/app/customKooks/getCourses";
 
-export default function Courses() {
+export default function Courses({id , name}) {
+    
     const router = useRouter();
     const [isListView, setIsListView] = useState(false);
     const [sortOption, setSortOption] = useState("الاحدث");
     const [filters, setFilters] = useState({
         lang: 'ar',
-        category_id: '',
+        category_id: id,
         level: '',
-        per_page: 10,
+        per_page: 9, // Adjust this based on your API's default or desired value
         min_price: '',
         max_price: '',
         min_rating: '',
         search: '',
-        sort_by: 'latest' // Default sort
+        sort_by: 'latest',
+        page: 1 // Add page to filters
     });
+
+    const handleResetCategory = () => {
+        setFilters(prevFilters => ({
+            ...prevFilters,
+            category_id: 5
+        }));
+    };
 
     const sortMapping = {
         "الاحدث": "latest",
@@ -51,35 +60,118 @@ export default function Courses() {
     const handleFilterChange = (newFilters) => {
         setFilters(prev => ({
             ...prev,
-            ...newFilters
+            ...newFilters,
+            page: 1 // Reset to page 1 when filters change
+        }));
+    };
+
+    const handlePageChange = (page) => {
+        setFilters(prev => ({
+            ...prev,
+            page
         }));
     };
 
     const courses = coursesQuery?.data?.data || [];
+    const pagination = coursesQuery?.data?.pagination || {
+        current_page: 1,
+        last_page: 1,
+        per_page: 10,
+        total: 0
+    };
+
+    // Generate pagination buttons
+    const renderPagination = () => {
+        const { current_page, last_page } = pagination;
+        const pageButtons = [];
+        const maxVisiblePages = 5; // Limit the number of visible page buttons
+
+        let startPage = Math.max(1, current_page - Math.floor(maxVisiblePages / 2));
+        let endPage = Math.min(last_page, startPage + maxVisiblePages - 1);
+
+        if (endPage - startPage + 1 < maxVisiblePages) {
+            startPage = Math.max(1, endPage - maxVisiblePages + 1);
+        }
+
+        // Previous Button
+        pageButtons.push(
+            <button
+                key="prev"
+                onClick={() => handlePageChange(current_page - 1)}
+                disabled={current_page === 1}
+                className={`w-10 h-10 rounded-full flex items-center justify-center ${current_page === 1 ? "bg-gray-200 text-gray-400 cursor-not-allowed" : "bg-purple-100 text-purple-600 hover:bg-purple-200"}`}
+            >
+                &lt;
+            </button>
+        );
+
+        // Page Numbers
+        for (let i = startPage; i <= endPage; i++) {
+            pageButtons.push(
+                <button
+                    key={i}
+                    onClick={() => handlePageChange(i)}
+                    className={`w-10 h-10 rounded-full flex items-center justify-center ${i === current_page ? "bg-purple-600 text-white" : "bg-gray-200 text-gray-700 hover:bg-purple-100"}`}
+                >
+                    {i}
+                </button>
+            );
+        }
+
+        // Next Button
+        pageButtons.push(
+            <button
+                key="next"
+                onClick={() => handlePageChange(current_page + 1)}
+                disabled={current_page === last_page}
+                className={`w-10 h-10 rounded-full flex items-center justify-center ${current_page === last_page ? "bg-gray-200 text-gray-400 cursor-not-allowed" : "bg-purple-100 text-purple-600 hover:bg-purple-200"}`}
+            >
+                &gt;
+            </button>
+        );
+
+        return pageButtons;
+    };
 
     return (
         <>
+            {/* Breadcrumb & Header Section */}
+            <div
+                className="flex justify-center flex-col items-right min-h-[400px] px-6 py-8 md:px-12 md:py-16 -mt-[116px]"
+                style={{
+                    background: "linear-gradient(75deg, rgba(162, 57, 240, 0.4), #ffffff, rgba(248, 246, 207, 0.5))",
+                    padding: "20px 100px",
+                }}
+            >
+                <div className="w-full mt-20">
+                    <h1 className="text-[30px] text-center font-medium text-[#121D2F]">{name}</h1>
+
+                    <p className="text-[#121D2F] text-[16px] mt-12 font-medium">
+                        {name}
+                    </p>
+
+                </div>
+            </div>
             <div className="flex items-center justify-between container mt-8 m-auto">
                 <div>
                     <span className="bg-purple-100 text-purple-600 px-3 py-1 text-xs rounded-full whitespace-nowrap">
                         تعلم أينما كنت
                     </span>
                     <h2 className="text-gray-900 text-lg font-bold text-center flex-1 mt-6">
-                        فئات مرتبطه بـ دورات مايكروسوفت ويندوز اوفيس
+                        فئات مرتبطه بـ {name}
                     </h2>
                 </div>
-                <button className="bg-gradient-to-r from-[#A436F0] via-[#637FEA] to-[#A436F0] 
+                {/* <button onClick={handleResetCategory} className="bg-gradient-to-r from-[#A436F0] via-[#637FEA] to-[#A436F0] 
                     text-white px-4 md:px-6 py-2 rounded-full 
                     flex items-center gap-2 -mr-14 
                     shadow-lg transition-all duration-300 
                     hover:opacity-90 hover:scale-105 
                     hover:bg-gradient-to-r hover:from-[#7A2CD4] hover:via-[#4C6EDB] hover:to-[#7A2CD4]">
                     كل الفئات <FaArrowLeft className="text-white text-xs" />
-                </button>
+                </button> */}
             </div>
 
             <div className="container m-auto mt-10 flex flex-col md:flex-row">
-                {/* Sidebar Filter - Always Rendered */}
                 <div className="w-full md:w-1/4 mb-6 md:mb-0">
                     <SidebarFilter
                         filters={filters}
@@ -87,15 +179,14 @@ export default function Courses() {
                     />
                 </div>
 
-                {/* Main Content - Conditional Rendering */}
                 <div className="w-full md:w-3/4 md:pl-6">
                     {isLoading ? (
-                        <div className="text-center py-16">
+                        <div className="text-center flex items-center content-center flex-col py-16">
                             <div className="w-16 h-16 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
                             <p className="mt-4 text-gray-600">جاري تحميل الدورات...</p>
                         </div>
                     ) : isError ? (
-                        <div className="text-center py-16">
+                        <div className="text-center flex items-center content-center flex-col py-16">
                             <p className="text-red-500">حدث خطأ أثناء تحميل الدورات. الرجاء المحاولة مرة أخرى.</p>
                         </div>
                     ) : (
@@ -124,7 +215,7 @@ export default function Courses() {
                             </div>
 
                             <div className="mb-4 text-gray-600">
-                                {courses.length} دورة متاحة
+                                {pagination.total} دورة متاحة
                             </div>
 
                             {courses.length === 0 ? (
@@ -198,13 +289,10 @@ export default function Courses() {
                                 </div>
                             )}
 
-                            {courses.length > 0 && (
+                            {pagination.total > 0 && (
                                 <div className="flex justify-center mt-10">
                                     <div className="flex gap-2">
-                                        <button className="w-10 h-10 rounded-full bg-purple-600 text-white flex items-center justify-center">1</button>
-                                        <button className="w-10 h-10 rounded-full bg-gray-200 text-gray-700 flex items-center justify-center hover:bg-purple-100">2</button>
-                                        <button className="w-10 h-10 rounded-full bg-gray-200 text-gray-700 flex items-center justify-center hover:bg-purple-100">3</button>
-                                        <button className="w-10 h-10 rounded-full bg-gray-200 text-gray-700 flex items-center justify-center hover:bg-purple-100">...</button>
+                                        {renderPagination()}
                                     </div>
                                 </div>
                             )}

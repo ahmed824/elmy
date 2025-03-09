@@ -7,11 +7,13 @@ import { usePathname } from "next/navigation";
 import Logo from "@/images/logo.svg";
 import Cookies from "js-cookie"; // Import js-cookie to check token
 import { useAuthProfile } from "@/app/customKooks/authProfile"; // Import useAuthProfile
+import { useTranslation } from "react-i18next";
 
 export default function MobileNav({ isOpen, onClose }) {
   const pathname = usePathname();
   const token = Cookies.get("elmy_token"); // Check if user is logged in
   const isLoggedIn = !!token; // Boolean to determine login status
+  const { t } = useTranslation();
 
   // Fetch user data using useAuthProfile
   const { data: userData, isLoading } = useAuthProfile();
@@ -51,7 +53,7 @@ export default function MobileNav({ isOpen, onClose }) {
           {isLoggedIn && (
             <div className="mb-6 border-b pb-4">
               {isLoading ? (
-                <span className="text-black">جاري التحميل...</span>
+                <span className="text-black">{t("loading")}</span>
               ) : (
                 <Link
                   href="/profile"
@@ -68,7 +70,7 @@ export default function MobileNav({ isOpen, onClose }) {
                     />
                   )}
                   <span className="text-[16px] font-medium">
-                    {userData?.data?.name || "المستخدم"}
+                    {userData?.data?.name || t("user")}
                   </span>
                 </Link>
               )}
@@ -78,11 +80,14 @@ export default function MobileNav({ isOpen, onClose }) {
           {/* Navigation Links */}
           <ul className="flex flex-col items-start gap-6 text-black text-[16px] font-medium">
             {[
-              { href: "/", label: "الرئيسية" },
-              { href: "/how-we-work", label: "كيف نعمل" },
-              { href: "/register-trainer", label: "التسجيل كمدرب" },
-              { href: "/contact", label: "تواصل معنا" },
-              { href: "/categories", label: "فئات الدورات" },
+              { href: "/", label: t("navbar.home") },
+              { href: "/how-we-work", label: t("navbar.howItWorks") },
+              {
+                href: "/register-trainer",
+                label: t("navbar.registerAsInstructor"),
+              },
+              { href: "/contact", label: t("navbar.contactUs") },
+              { href: "/categories", label: t("navbar.categories") },
             ].map((link) => (
               <li key={link.href} className="w-full">
                 <Link
@@ -108,7 +113,7 @@ export default function MobileNav({ isOpen, onClose }) {
                     onClick={onClose}
                     className="flex items-center gap-2 w-full hover:text-purple-600 hover:bg-purple-100 px-4 py-2 rounded-lg transition-all"
                   >
-                    <FaShoppingCart /> السلة
+                    <FaShoppingCart /> {t("cart")}
                   </Link>
                 </li>
                 <li className="w-full">
@@ -117,7 +122,7 @@ export default function MobileNav({ isOpen, onClose }) {
                     onClick={onClose}
                     className="flex items-center gap-2 w-full hover:text-purple-600 hover:bg-purple-100 px-4 py-2 rounded-lg transition-all"
                   >
-                    <FaBell /> الإشعارات
+                    <FaBell /> {t("notifications")}
                   </Link>
                 </li>
               </>
@@ -128,7 +133,7 @@ export default function MobileNav({ isOpen, onClose }) {
                   onClick={onClose}
                   className="block w-full hover:text-purple-600 hover:bg-purple-100 px-4 py-2 rounded-lg transition-all"
                 >
-                  تسجيل دخول
+                  {t("navbar.login")}
                 </Link>
               </li>
             )}

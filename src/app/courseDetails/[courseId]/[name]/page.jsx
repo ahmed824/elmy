@@ -4,7 +4,7 @@ import { useCourse } from '@/app/customKooks/useCourseDet';
 import CourseDetailsClient from '@/app/components/courseDetails/CourseDetailsClient';
 import { FaChevronLeft } from 'react-icons/fa';
 import Image from 'next/image';
-import teacher from "@/images/teacher.svg";
+import Avatar from "@/images/profile.svg";
 import { CiGlobe } from "react-icons/ci";
 import { LuCalendar } from 'react-icons/lu';
 import CardDetails from '@/app/components/courseDetails/CardDetails';
@@ -59,13 +59,13 @@ export default function Page() {
                 {/* Author Info */}
                 <div className="flex items-center gap-2 mt-4">
                     <Image
-                        src={teacher}
+                        src={course?.instructor?.avatar || Avatar}
                         width={30}
                         height={30}
                         className="rounded-full"
-                        alt="Instructor"
+                        alt={course?.instructor?.name}
                     />
-                    <span className="text-[#6B7385] text-sm">بواسطة محمد ناصر</span>
+                    <span className="text-[#6B7385] text-sm">بواسطة {course?.instructor?.name}</span>
                     <Link href="/courseDetails" className="text-mainColor text-sm cursor-pointer z-20">
                         مشاهدة كل الدورات
                     </Link>

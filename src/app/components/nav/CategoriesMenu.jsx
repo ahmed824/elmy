@@ -9,15 +9,17 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu"; // Import shadcn/ui dropdown components
+import { useTranslation } from "react-i18next";
 
 const CategoriesMenu = () => {
   const [hoveredCategory, setHoveredCategory] = useState(null);
   const { data, error, isLoading } = useCat();
+  const { t } = useTranslation();
 
   if (isLoading) {
     return <DotsLoader />;
   }
-  if (error) return <p>Error loading categories</p>;
+  if (error) return <p>{t("errorLoadingCategories")}</p>;
 
   const categories = data?.data || [];
 
@@ -31,7 +33,7 @@ const CategoriesMenu = () => {
                        transition-all duration-300 ease-in-out cursor-pointer hover:bg-purple-100"
           >
             <p className="hidden sm:block font-medium transition-colors duration-300 ease-in-out group-hover:text-mainColor">
-              فئات الدورات
+              {t("navbar.categories")}
             </p>
             <span className="grid place-items-center w-6 h-6 rounded transition-all duration-300 ease-in-out">
               <AiFillAppstore className="text-white text-xl transition-colors duration-300 ease-in-out group-hover:text-mainColor" />
@@ -44,15 +46,20 @@ const CategoriesMenu = () => {
           className="w-[600px] bg-white shadow-lg rounded-lg z-50 p-0"
           align="end" // Align dropdown to the right
         >
-          <div className="flex w-full flex-row-reverse"> {/* Reverse the flex direction */}
+          <div className="flex w-full flex-row-reverse">
+            {" "}
+            {/* Reverse the flex direction */}
             {/* Categories Section */}
-            <div className="w-1/2 border-l"> {/* Changed border to left */}
+            <div className="w-1/2 border-l">
+              {" "}
+              {/* Changed border to left */}
               <ul className="py-2">
                 {categories.map((category) => (
                   <DropdownMenuItem
                     key={category.id}
-                    className={`px-4 py-2 flex justify-end text-right hover:bg-purple-50 cursor-pointer ${hoveredCategory === category.id ? "bg-purple-50" : ""
-                      }`}
+                    className={`px-4 py-2 flex justify-end text-right hover:bg-purple-50 cursor-pointer ${
+                      hoveredCategory === category.id ? "bg-purple-50" : ""
+                    }`}
                     onMouseEnter={() => setHoveredCategory(category.id)}
                   >
                     {category.name}
@@ -60,7 +67,6 @@ const CategoriesMenu = () => {
                 ))}
               </ul>
             </div>
-
             {/* SubCategories Section */}
             <div className="w-1/2">
               <ul className="py-2">

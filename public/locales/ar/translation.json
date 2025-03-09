@@ -1,0 +1,249 @@
+{
+  "header": {
+    "joinNow": "اشترك الآن",
+    "goals": "هل لديك أهداف كبيرة؟ لدينا دورات لتتناسبك",
+    "subscribe": "اشترك في نشرتنا البريدية",
+    "subscribeDescription": "يقوم المدربون من جميع أنحاء العالم بتعليم ملايين المتعلمين على علمي. نحن نقدم الأدوات والمهارات اللازمة لتعليم ما تحب."
+  },
+  "navbar": {
+    "home": "الرئيسية",
+    "aboutUs": "من نحن",
+    "howItWorks": "كيف نعمل",
+    "registerAsInstructor": "التسجيل كمدرب",
+    "contactUs": "تواصل معنا",
+    "categories": "فئات الدورات",
+    "language": "EN",
+    "login": "تسجيل دخول",
+    "logout": "تسجيل خروج"
+  },
+  "footer": {
+    "newsLetterSection": {
+      "title": "اشترك في نشرتنا البريدية",
+      "description": "يقوم المدربون من جميع أنحاء العالم بتعليم ملايين المتعلمين على علمي.نحن نقدم الأدوات والموارد اللازمة لتعليم ما تحب.",
+      "placeholder": "أدخل بريدك الإلكتروني",
+      "button": "اشتراك",
+      "buttonLoading": "...جاري الاشتراك",
+      "success": "تم الاشتراك بنجاح",
+      "error": "حدث خطأ أثناء الاشتراك",
+      "emptyEmail": "الرجاء إدخال البريد الاكتروني الخاص بك"
+    },
+    "text": "حرصاً على محاكاة البيئة التدريبية المثالية التي يبحث عنهاالجميع، يتكامل فريق الدعم الفني في علمي مع بقية أقسامهلتمثيل التعاون المتكامل والخدمة الأفضل، حيث نتواجد علىمدار الساعة لسماع استفساراتكم واقتراحاتكم وإيجاد الحلولالفعالة لأي مشكلةٍ قد تواجهكم برحابةٍ وسعادة، لأننا مؤمنونأن التواصل الفعال مع شركاء نجاحنا ومتدربينا هو السبيلالأفضل لنصبح المنصة التدريبية الأولى في الوطن العربي، لاتتردد في مراسلتنا عبر جميع وسائل الاتصال المتاحة على مدارالساعة:",
+    "importantLinks": "روابط هامة",
+    "supportAndPolicies": "الدعم و السياسات",
+    "contactDirectly": "تواصل مباشرة",
+    "whatsapp": "واتساب :966597431779",
+    "email": "البريد الالكتروني:support@elmyacademy.com",
+    "subscribe": "اشترك في نشرتنا البريدية",
+    "subscribeDescription": "يقوم المدربون من جميع أنحاء العالم بتعليم ملايين المتعلمين على علمي. نحن نقدم الأدوات والمهارات اللازمة لتعليم ما تحب.",
+    "subscribeButton": "اشترك الآن",
+    "importantLinksList": {
+      "home": "الرئيسية",
+      "aboutUs": "من نحن",
+      "howItWorks": "كيف نعمل",
+      "registerAsInstructor": "التسجيل كمدرب",
+      "nationalAddress": "العنوان الوطني"
+    },
+    "supportAndPoliciesList": {
+      "contactUs": "تواصل معنا",
+      "termsAndConditions": "الشروط و الأحكام",
+      "usageAndReturnPolicy": "سياسة الاستخدام والاسترجاع",
+      "privacyPolicy": "سياسة الخصوصية",
+      "supportAndHelp": "الدعم و المساعدة"
+    },
+    "allRightsReserved": "جميع الحقوق محفوظة © 2025"
+  },
+  "courses": {
+    "mostPopular": "الأكثر شعبية",
+    "beginnerFavorites": "المفضلة للمبتدئين",
+    "latest": "الأحدث",
+    "enrollNow": "سجل الآن",
+    "learnMore": "معرفة المزيد"
+  },
+  "testimonials": {
+    "title": "كيف يحقق المتعلمون ملكة الفهم؟",
+    "description": "سواء كنت ترغب في التعلم أو مشاركة ما تعرفه، فقد وصلت إلى المكان الصحيح. باعتبارنا وجهة عالمية للتعلم",
+    "certifiedTrainers": "مدرب مُعتمد",
+    "trainees": "مـتدرب"
+  },
+  "callToAction": {
+    "title": "سجل كمدرب الآن وحقق شهرة أكبر",
+    "description": "كن جزءًا من مجتمع التعلم وساعد الآخرين في اكتساب مهارات جديدة.",
+    "button": "سجل الآن"
+  },
+  "newsletter": {
+    "title": "اشترك في نشراتنا الدورية",
+    "description": "كن أول من يعرف عن أحدث الدورات والمقالات التعليمية مباشرة في بريدك الإلكتروني.",
+    "placeholder": "أدخل بريدك الإلكتروني",
+    "button": "اشتراك"
+  },
+  "dashboard": {
+    "title": "لوحة التحكم",
+    "main": "الرئيسية",
+    "sidebar": {
+      "greeting": "أهلا",
+      "username": "أحمد عبدالله",
+      "dashboard": "لوحة تحكم",
+      "myCourses": "دوراتي",
+      "favorites": "المفضلة",
+      "accountSettings": "إعدادات الحساب",
+      "logout": "تسجيل خروج",
+      "courses": "دورات",
+      "certificate": "شهاده",
+      "signed": "تم التسجيل",
+      "trainer": {
+        "dashboard": "لوحة التحكم",
+        "courses": "الدورات",
+        "ordersProfits": "الطلبات والأرباح",
+        "accountSettings": "إعدادات الحساب",
+        "logout": "تسجيل خروج"
+      }
+    },
+    "greetingSection": {
+      "greeting": "أهلا",
+      "message": "إشترك الآن سواء كنت ترغب في التعلم أو مشاركة ما تعرفه، فقد وصلت إلى المكان الصحيح ",
+      "link": "شاهد الدورات"
+    },
+    "mainSection": {
+      "registeredCourses": "الكورسات المسجلة",
+      "completedCourses": "الكورسات المكتملة",
+      "unCompletedCourses": "الكورسات الغير مكتملة",
+      "trainer": {
+        "totalProfits": "جميع الأرباح",
+        "activeCourses": "الدورات النشطة",
+        "studentsNumber": "عدد الطلاب"
+      }
+    },
+    "myCoursesSection": {
+      "all": "الكل",
+      "completed": "الدورات المكتملة",
+      "unCompleted": "الدورات غير مكتملة"
+    },
+    "trainerPagesTitle": {
+      "dashboard": "لوحة التحكم",
+      "courses": "قائمة دوراتي",
+      "addCourse": "إضافة دورة جديدة",
+      "ordersProfits": "الطلبات والأرباح",
+      "accountSettings": "الاعدادات",
+      "logout": "تسجيل خروج"
+    },
+    "trainerCoursesTable": {
+      "courseName": "اسم الكورس",
+      "courseDuration": "مدة الكورس",
+      "studentsNumber": "عدد الطلاب",
+      "courseRating": "التقييم",
+      "courseControl": "التحكم",
+      "addCourse": "إضافة دورة جديدة",
+      "getProfits": "سحب الأرباح"
+    },
+    "trainerProfitsSection": {
+      "totalProfits": "جميع الأرباح",
+      "pendingProfits": "الأرباح المعلقة",
+      "profitsCouldWithdraw": "أرباح يمكن سحبها",
+      "withdraw": "سحب الأرباح",
+      "courseName": "اسم الكورس",
+      "studentName": "اسم الطالب",
+      "price": "السعر",
+      "paidStatus": "حالة الدفع",
+      "date": "التاريخ"
+    }
+  },
+  "loading": "جاري التحميل",
+  "loadingError": "خطأ في التحميل",
+  "user": "المستخدم",
+  "cart": "عربة التسوق",
+  "notifications": "الإشعارات",
+  "searchPlaceholder": "ابحث هنا...",
+  "searchButton": "بحث",
+  "login": {
+    "title": "تسجيل الدخول",
+    "phoneLabel": "رقم الهاتف",
+    "phonePlaceholder": "أدخل رقم هاتفك",
+    "phoneRequired": "يرجى إدخال رقم هاتفك",
+    "phoneInvalid": "رقم الهاتف غير صالح",
+    "passwordLabel": "كلمة المرور",
+    "passwordPlaceholder": "أدخل كلمة المرور",
+    "passwordRequired": "يرجى إدخال كلمة المرور",
+    "passwordMin": "يجب أن تكون كلمة المرور مكونة من 8 أحرف على الأقل",
+    "rememberMe": "تذكرني",
+    "forgotPassword": "هل نسيت كلمة المرور؟",
+    "submit": "تسجيل الدخول",
+    "loading": "جاري تسجيل الدخول...",
+    "noAccount": "ليس لديك حساب؟",
+    "register": "سجل",
+    "successMessage": "تم تسجيل الدخول بنجاح",
+    "errorMessage": "حدث خطأ أثناء تسجيل الدخول"
+  },
+  "whySection": {
+    "whyElmy": "لماذا علمي؟",
+    "whyElmyDescription": "علمي هي منصة تعليمية عبر الإنترنت تقدم دورات شاملة في مختلف المجالات العلمية، مع مجموعة مختارة من الخبراء الأكاديميين العرب لتطوير المهارات وتحقيق الأهداف الشخصية.",
+    "flexibleTraining": "مواد تدريبية مرنة",
+    "flexibleTrainingDescription": "تقدم علمي دورات مرنة في مختلف المجالات مثل البرمجة والتسويق، مع شروحات شاملة وتمارين عملية، أعدها خبراء متخصصون وتقنيات حديثة، بالإضافة إلى مجموعات نقاش لدعم التعلم.",
+    "learnAnywhere": "تعلم من أي مكان",
+    "learnAnywhereDescription": "مع علمي، تعلم أينما كنت بمرونة كاملة عبر الكمبيوتر أو الهاتف مع طرق تدريس متنوعة تناسب جدولك الزمني وأسلوب حياتك. انضم اليوم ووسع معرفتك بلا حدود."
+  },
+  "trainer": {
+    "achieveFame": "حقق شهرة أكبر",
+    "developSkills": "طور مهاراتك",
+    "shareExperience": "شارك خبرتك",
+    "startJourney": "ابدأ رحلتك التعليمية",
+    "registerNow": "سجل كمدرب الآن و",
+    "description": "يقوم المدربون من جميع أنحاء العالم بتعليم ملايين المتعلمين على علمي. نحن نقدم الأدوات والمهارات اللازمة لتعليم ما تحب.",
+    "registerNowButton": "سجل كمدرب الآن"
+  },
+  "showOff": {
+    "whyChooseElmy": "لماذا تختار علمي؟",
+    "trainerExperience": "خبرة المدربين",
+    "competitivePrices": "أسعار منافسة",
+    "wideRangeCourses": "تشكيلة واسعة من الدورات",
+    "flexibleTimePlace": "مرونة الوقت والمكان"
+  },
+  "opinion": {
+    "learnAnywhere": "تعلم أينما كنت",
+    "achieveGoals": "كيف يحقق المتعلمون مثلك أهدافهم",
+    "description": "سواء كنت ترغب في التعلم أو مشاركة ما تعرفه، فقد وصلت إلى المكان الصحيح. بإمكانك جودة عالية للتعلم.",
+    "studentsCount": "متدرب",
+    "instructorsCount": "مدرب معتمد",
+    "loading": "جاري التحميل...",
+    "error": "حدث خطأ أثناء جلب المراجعات"
+  },
+  "notify": {
+    "bigGoals": "هل لديك أهداف كبيرة؟ لدينا دورات لتتناسبك",
+    "subscribeNow": "اشترك الآن"
+  },
+  "moreWatch": {
+    "mostWatchedCourses": "أكثر الدورات مشاهدة",
+    "videos": "فيديوهات",
+    "lessons": "دروس",
+    "ratings": "تقييمات",
+    "price": "ريال",
+    "learnMore": "معرفة المزيد",
+    "loading": "جاري تحميل الدورات الشعبية...",
+    "error": "حدث خطأ أثناء جلب الدورات الشعبية"
+  },
+  "moreSearch": {
+    "mostSearchedCategories": "أكثر الفئات بحثاً في علمي",
+    "loading": "جاري تحميل الفئات الأكثر بحثاً...",
+    "error": "حدث خطأ أثناء جلب الفئات الأكثر بحثاً"
+  },
+  "headerSlider": {
+    "defaultTitle": "أجعل حياتك أفضل بجعل نفسك أفضل",
+    "defaultDescription": "بيئتك المثالية لتطوير مهاراتك مع نخبة الخبراء وأقوى المحتويات التعليمية.",
+    "registerNow": "سجل الآن"
+  },
+  "buttons": {
+    "knowMore": "معرفة المزيد"
+  },
+  "filter": {
+    "new": "الأحدث",
+    "popular": "الأكثر شعبية",
+    "best": "المفضلة للمبتدئين",
+    "loading": "جاري تحميل الدورات...",
+    "error": "حدث خطأ أثناء جلب الدورات"
+  },
+  "breadCramp": {
+    "home": "الرئيسية"
+  },
+  "socialShare": {
+    "shareCourse": "شارك الدورة على"
+  }
+}

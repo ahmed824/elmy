@@ -1,8 +1,11 @@
 "use client";
 
 import { FaArrowLeft } from "react-icons/fa";
+import { useTranslation } from 'react-i18next';
 
 export default function KnowMoreButton({ onClick }) {
+  const { t } = useTranslation();
+
   return (
     <button
       onClick={onClick} // Use the onClick prop
@@ -11,7 +14,7 @@ export default function KnowMoreButton({ onClick }) {
       <span className="flex items-center justify-center w-6 h-6 border-2 bg-white border-purple-600 rounded-full transition-colors group-hover:bg-purple-50">
         <FaArrowLeft className="text-sm text-purple-600" />
       </span>
-      معرفة المزيد
+      {t('buttons.knowMore')}
     </button>
   );
 }

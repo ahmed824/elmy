@@ -25,8 +25,9 @@ export default function CardDetails({ courseId, course }) {
 
     // Construct absolute URL for video
     const videoUrl = course.video_intro
-        ? `${baseUrl}${course.video_intro}`
+        ? `${course.video_intro}`
         : '';
+
 
     const handleAddToCart = () => {
         addToCart(
@@ -117,7 +118,18 @@ export default function CardDetails({ courseId, course }) {
 
             {/* Rest of the component remains the same as previous code */}
             <p className="text-right text-xl font-semibold text-purple-600 mt-3 transform transition-transform duration-200 hover:scale-105">
-                {course.price} ريال
+                {course.discount_price !== null ? (
+                    <>
+                        <span className="text-purple-600">
+                            {course.discount_price} ريال
+                        </span>
+                        <span className="text-gray-500 line-through mx-2">
+                            {course.price} ريال
+                        </span>
+                    </>
+                ) : (
+                    `${course.price} ريال`
+                )}
             </p>
 
             <button

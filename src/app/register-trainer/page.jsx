@@ -3,6 +3,7 @@ import trainerSign from "@/images/trainerSign.svg";
 import Image from 'next/image';
 import { FaArrowLeft } from 'react-icons/fa';
 import BreadCramp from '../components/shared/breadCramp/BreadCramp';
+import Link from 'next/link';
 export default function page() {
     return (
         <div className="min-h-screen">
@@ -29,10 +30,10 @@ export default function page() {
                     </p>
                     {/* Button */}
                     <div className="mt-8">
-                        <button className="bg-gradient-to-r from-[#A436F0] via-[#637FEA] to-[#A436F0] text-white px-4 md:px-6 py-2 rounded-full flex items-center gap-2 mr-1">
+                        <Link href='/register-instructor' className="w-fit bg-gradient-to-r from-[#A436F0] via-[#637FEA] to-[#A436F0] text-white px-4 md:px-6 py-2 rounded-full flex items-center gap-2 mr-1">
                             <span>التسجيل كمدرب</span>
                             <FaArrowLeft className="text-sm text-white" />
-                        </button>
+                        </Link>
                     </div>
                 </div>
                 <div className="w-full md:w-1/2 flex justify-center">

@@ -7,22 +7,22 @@ import { LuBookmark } from 'react-icons/lu';
 import PurpleButton from '../shared/btns/PurpleButton';
 import { FaBook, FaMoneyBillWave, FaPlay, FaStar } from 'react-icons/fa';
 import { useCourses } from '@/app/customKooks/useCourses';
-
-
+import { useTranslation } from 'react-i18next';
 import { useRouter } from 'next/navigation';
 import { RatingStars } from '../shared/RatingStars';
 
 
 export default function MoreWatch() {
+    const { t } = useTranslation();
     const router = useRouter();
     const { data, isLoading, isError } = useCourses({ lang: 'ar', filter: 'popular' });
 
     if (isLoading) {
-        return <div className="text-center py-10">Loading popular courses...</div>;
+        return <div className="text-center py-10">{t('moreWatch.loading')}</div>;
     }
 
     if (isError) {
-        return <div className="text-center py-10 text-red-500">Error fetching popular courses</div>;
+        return <div className="text-center py-10 text-red-500">{t('moreWatch.error')}</div>;
     }
 
     const courses = data?.data || [];
@@ -35,7 +35,7 @@ export default function MoreWatch() {
         <section className="container mx-auto px-4 my-10 overflow-hidden">
             <div className="text-center">
                 <h2 className="text-2xl md:text-3xl font-bold text-purple-600 mb-4">
-                    أكثر الدورات مشاهدة
+                    {t('moreWatch.mostWatchedCourses')}
                 </h2>
                 <div className="border-b-2 border-purple-600 w-32 mx-auto mb-8"></div>
             </div>
@@ -67,7 +67,7 @@ export default function MoreWatch() {
                                 <div className="relative h-52 group overflow-hidden">
                                     <Image
                                         src={course.image}
-                                        alt={course.name || " صورة كورس"}
+                                        alt={course.name || t('moreWatch.courseImage')}
                                         layout="fill"
                                         objectFit="cover"
                                         className="transition-transform duration-300 group-hover:scale-110"
@@ -85,31 +85,31 @@ export default function MoreWatch() {
                                             <div className="flex items-center justify-start gap-2 text-gray-600 text-right">
                                                 <span className="flex items-center gap-2">
                                                     <FaPlay className="text-purple-600" />
-                                                    <span className="text-purple-600">فيديوهات: <span className="text-black">22</span></span>
+                                                    <span className="text-purple-600">{t('moreWatch.videos')}: <span className="text-black">22</span></span>
                                                 </span>
                                                 <span className="flex items-center gap-2">
                                                     <FaBook className="text-purple-600" />
-                                                    <span className="text-purple-600">دروس: <span className="text-black">22</span></span>
+                                                    <span className="text-purple-600">{t('moreWatch.lessons')}: <span className="text-black">22</span></span>
                                                 </span>
                                             </div>
 
                                             {/* Rating Stars */}
                                             <div className="flex items-center justify-between gap-2 mb-4">
                                                 <RatingStars rating={course.rating} />
-                                                <span className="text-gray-600">({course.enrollments} تقييمات)</span>
+                                                <span className="text-gray-600">({course.enrollments} {t('moreWatch.ratings')})</span>
                                             </div>
 
                                             <div className="flex items-center justify-between mt-2">
                                                 <div className="flex items-center gap-2 text-purple-700 font-bold">
                                                     <FaMoneyBillWave className="text-purple-600" />
-                                                    <span>{course.price} <span className='text-[#121D2F] '>ريال</span></span>
+                                                    <span>{course.price} <span className='text-[#121D2F] '>{t('moreWatch.price')}</span></span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div className="flex justify-between items-center mt-6">
-                                        <PurpleButton label="معرفة المزيد" onClick={() => handleCourseClick(course.id, course.name)} />
+                                        <PurpleButton label={t('moreWatch.learnMore')} onClick={() => handleCourseClick(course.id, course.name)} />
                                         <button className="p-2 group hover:bg-purple-100 border-2 border-mainColor rounded-full transition-colors duration-300">
                                             <LuBookmark className="text-mainColor text-2xl group-hover:scale-110 transition-transform" />
                                         </button>

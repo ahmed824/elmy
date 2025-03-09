@@ -1,7 +1,10 @@
 "use client";
 import { FiFacebook, FiInstagram, FiLinkedin } from 'react-icons/fi';
+import { useTranslation } from 'react-i18next';
 
 export default function SocialShare() {
+  const { t } = useTranslation();
+
   const handleShare = (platform) => {
     const url = window.location.href; // Current page URL
     const shareUrls = {
@@ -14,7 +17,7 @@ export default function SocialShare() {
 
   return (
     <>
-      <h5 className="text-[#6B7385] text-[18px] text-center">شارك الدورة على</h5>
+      <h5 className="text-[#6B7385] text-[18px] text-center">{t('socialShare.shareCourse')}</h5>
       <div className="flex justify-center gap-4 mt-4">
         {/* Facebook Icon */}
         <div
