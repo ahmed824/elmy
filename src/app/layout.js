@@ -19,6 +19,7 @@ import Providers from "./QueryClientProvider";
 import dynamic from "next/dynamic";
 import { ToastContainer } from "react-toastify";
 import MobileFooterNav from "./components/nav/MobileFooterNav";
+import { LayoutProvider } from "./providers/LayoutContext";
 
 const somarSans = localFont({
   src: [
@@ -44,15 +45,16 @@ export default function RootLayout({ children }) {
       <body className="font-sans antialiased">
         <Providers>
           <AosProvider>
-            <TranslationProvider>
-              <Nav />
-              <ToastContainer />
-
-              {children}
-              <ScrollToTop />
-              <MobileFooterNav />
-              <Footer />
-            </TranslationProvider>
+            <LayoutProvider>
+              <TranslationProvider>
+                <Nav />
+                <ToastContainer />
+                {children}
+                <ScrollToTop />
+                <MobileFooterNav />
+                <Footer />
+              </TranslationProvider>
+            </LayoutProvider>
           </AosProvider>
         </Providers>
       </body>

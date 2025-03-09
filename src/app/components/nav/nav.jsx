@@ -14,7 +14,7 @@ import { useLogo } from "@/app/customKooks/logo";
 import Cookies from "js-cookie";
 import { useAuthProfile } from "@/app/customKooks/authProfile";
 import UserProfileSection from "./UserProfileSection"; // Import the new component
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 import LanguageSwitcher from "./LanguageSwithcer";
 
 export default function Nav() {
@@ -53,7 +53,7 @@ export default function Nav() {
     }
   }, [userData]);
 
-  console.log(t("navbar.home"));
+  // console.log(t("navbar.home"));
 
   if (!isClient) {
     return (
