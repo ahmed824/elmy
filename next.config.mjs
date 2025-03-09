@@ -1,11 +1,13 @@
-import { i18n } from "./next-i18next.config.mjs";
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
     domains: ["sci.com.sa"],
   },
-  i18n, // Add i18n settings
+  i18n: {
+    locales: ["en", "ar"],
+    defaultLocale: "ar",
+    localeDetection: false,
+  },
 };
 
-export default nextConfig; // Use ES Modules export
+export default nextConfig;

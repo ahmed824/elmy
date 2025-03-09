@@ -45,7 +45,7 @@ export default function Filter() {
   const courses = data?.data.slice(0, 3) || [];
 
   const handleCourseClick = (courseId, name) => {
-    router.push(`/course/${courseId}/${name.replace(/\s+/g, "-")}`);
+    router.push(`/courseDetails/${courseId}/${name.replace(/\s+/g, "-")}`);
   };
 
   return (

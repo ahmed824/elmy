@@ -440,6 +440,12 @@ button:focus-visible {
     ;
 }
 }
+
+.react-tel-input {
+  display: flex !important;
+  flex-direction: row-reverse !important;
+}
+
 /* Override react-phone-input-2 styles */
 .react-tel-input .form-control {
   position: relative;
@@ -491,4 +497,16 @@ ul.country-list.text-right {
 
 .react-tel-input .selected-flag:hover, .react-tel-input .selected-flag:focus {
   background-color: #cacaca !important;
+}
+
+@keyframes bounceSlow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+.animate-bounce-slow {
+  animation: bounceSlow 2s infinite ease-in-out;
 }

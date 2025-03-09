@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { baseUrl } from '../baseUrl';
 
 const fetchReviews = async ({ lang = 'ar', limit = 5 }) => {
-  const response = await fetch(`${baseUrl}reviews/home?lang=${lang}&limit=${limit}`);
+  const response = await fetch(`${baseUrl}home/reviews?lang=${lang}&limit=${limit}`);
   if (!response.ok) {
     throw new Error('Network response was not ok');
   }

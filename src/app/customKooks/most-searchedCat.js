@@ -3,7 +3,7 @@ import { baseUrl } from '../baseUrl';
 
 // Fetch most searched categories from the API
 const fetchMostSearchedCategories = async ({ lang = 'ar', limit = 5 }) => {
-  const response = await fetch(`${baseUrl}most-searched-categories?lang=${lang}&limit=${limit}`);
+  const response = await fetch(`${baseUrl}home/most-searched-categories?lang=${lang}&limit=${limit}`);
   if (!response.ok) {
     throw new Error('Network response was not ok');
   }

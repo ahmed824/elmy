@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { AiFillAppstore } from "react-icons/ai";
 import { useCat } from "@/app/customKooks/useCat";
 import DotsLoader from "../shared/DotsLoader";
+import Link from "next/link";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -47,22 +48,18 @@ const CategoriesMenu = () => {
           align="end" // Align dropdown to the right
         >
           <div className="flex w-full flex-row-reverse">
-            {" "}
-            {/* Reverse the flex direction */}
             {/* Categories Section */}
             <div className="w-1/2 border-l">
-              {" "}
-              {/* Changed border to left */}
               <ul className="py-2">
                 {categories.map((category) => (
                   <DropdownMenuItem
                     key={category.id}
-                    className={`px-4 py-2 flex justify-end text-right hover:bg-purple-50 cursor-pointer ${
-                      hoveredCategory === category.id ? "bg-purple-50" : ""
-                    }`}
+                    className={`px-4 py-2 flex justify-end text-right hover:bg-purple-50 cursor-pointer ${hoveredCategory === category.id ? "bg-purple-50" : ""}`}
                     onMouseEnter={() => setHoveredCategory(category.id)}
                   >
-                    {category.name}
+                    <Link href={`/courses/${category.id}/${category.name.replace(/\s+/g, "-")}`}>
+                      {category.name}
+                    </Link>
                   </DropdownMenuItem>
                 ))}
               </ul>
@@ -78,7 +75,9 @@ const CategoriesMenu = () => {
                         key={course.id}
                         className="px-4 py-2 text-right hover:bg-purple-50 cursor-pointer flex justify-end"
                       >
-                        {course.title}
+                        <Link href={`/courseDetails/${course.id}/${course.title.replace(/\s+/g, "-")}`}>
+                          {course.title}
+                        </Link>
                       </DropdownMenuItem>
                     ))}
               </ul>
