@@ -70,7 +70,7 @@ export default function CardDetails({ courseId, course }) {
             <Dialog open={isVideoDialogOpen} onOpenChange={setIsVideoDialogOpen}>
                 <div className="relative group">
                     <Image
-                        src={excel}
+                        src={videoUrl ? `${videoUrl}?preview=true` : excel} 
                         alt="Course Preview"
                         width={300}
                         height={180}
@@ -100,7 +100,7 @@ export default function CardDetails({ courseId, course }) {
 
                 <DialogContent className="sm:max-w-[625px]">
                     <DialogHeader>
-                        <DialogTitle>{course.title} - معاينة الدورة</DialogTitle>
+                        <DialogTitle className="text-white">{course.title} - معاينة الدورة</DialogTitle>
                     </DialogHeader>
                     <div className="w-full">
                         {videoUrl && (

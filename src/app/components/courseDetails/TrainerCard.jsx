@@ -2,10 +2,10 @@
 import React from "react";
 import Image from "next/image";
 import { IoVideocamOutline } from "react-icons/io5";
-import teacher from "@/images/teacher.svg";
+import teacher from "@/images/profile.svg";
 import { MdPeopleOutline } from "react-icons/md";
 
-export default function TrainerCard() {
+export default function TrainerCard({ data }) {
     return (
         <div className="bg-white shadow-md rounded-lg p-6 w-full  ">
             {/* Title */}
@@ -20,8 +20,8 @@ export default function TrainerCard() {
                 {/* Trainer Image */}
                 <div className="w-20 h-20 rounded-full overflow-hidden shadow-lg">
                     <Image
-                        src={teacher}
-                        alt="Trainer"
+                        src={data?.avatar || teacher}
+                        alt={data.name}
                         width={120}
                         height={120}
                         className="object-cover"
@@ -29,7 +29,7 @@ export default function TrainerCard() {
                 </div>
                 {/* Trainer Details */}
                 <div className="text-right">
-                    <h4 className="text-lg font-semibold text-gray-800">محمد ماهر</h4>
+                    <h4 className="text-lg font-semibold text-gray-800">{data.name}</h4>
                     <div className="flex justify-end items-center text-gray-600 text-sm mt-1 space-x-2 rtl:space-x-reverse">
                         <IoVideocamOutline className="text-xl font-bold" />
                         <span>دورة</span>

@@ -46,12 +46,12 @@ export default function CourseDetailsClient({ course }) {
                             ماذا ستتعلم في الدورة
                         </h2>
                         <p className="text-gray-600">
-                            مع دورتنا الشاملة المصممة لجميع مستويات المهارة، بنهاية هذه الدورة،
+                            {course?.instructions}
                         </p>
 
                         <div className="mt-4">
                             <p className="text-gray-700 font-semibold">ستتمكن من:</p>
-                            <p className="text-gray-600 mt-1">Excel</p>
+                            <p className="text-gray-600 mt-1">{course?.what_you_learn}</p>
                         </div>
 
                         <div className="mt-4">
@@ -73,15 +73,15 @@ export default function CourseDetailsClient({ course }) {
                     </div>
 
                     <div className="my-4">
-                        <Requirements />
+                        <Requirements course={course} />
                     </div>
 
                     <div className="my-4">
-                        <TrainerCard />
+                        <TrainerCard data={course?.instructor} />
                     </div>
 
                     <div className="my-4">
-                        <Ratings />
+                        <Ratings data={course.rating} />
                     </div>
 
                     <div className="my-4">
@@ -92,11 +92,11 @@ export default function CourseDetailsClient({ course }) {
 
             {/* Individual Sections Based on Selected Tab */}
             {activeTab === "محتوى الدورة" && <CourseContent data={course} />}
-            {activeTab === "تفاصيل" && <Requirements />}
-            {activeTab === "المدرب" && <TrainerCard />}
+            {activeTab === "تفاصيل" && <Requirements course={course} />}
+            {activeTab === "المدرب" && <TrainerCard data={course?.instructor} />}
             {activeTab === "التقييمات" && (
                 <>
-                    <Ratings />
+                    <Ratings data={course.rating} />
                     <div className="my-4">
                         <ReviewForm courseId={course.id} />
                     </div>

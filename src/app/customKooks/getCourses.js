@@ -12,7 +12,7 @@ export const useCourses = (filters) => {
     return useQuery({
         queryKey: ['courses', filters],
         queryFn: () => fetchCourses(filters),
-        staleTime: 1000 * 60 * 5, // 5 minutes
+        staleTime: 1000 * 60 * 5, // 5 minutes,
     });
 };
 

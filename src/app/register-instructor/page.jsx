@@ -1,5 +1,7 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 import { useRegisterInstructor } from "../customKooks/authInstructor";
 import StepWizard from "react-step-wizard";
 import PhoneInput from "react-phone-input-2";
@@ -8,11 +10,19 @@ import Image from "next/image";
 import { useLogo } from "../customKooks/logo";
 import logo from "@/images/logo.svg";
 import loginImage from "@/images/login-visual.svg";
+import Link from "next/link";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Cookies from "js-cookie";
+import { Input } from "@/components/ui/input";
+import { useRouter } from "next/navigation";
 
 const RegisterInstructor = () => {
   const { data: logoData } = useLogo();
-  const { mutate, isPending, isError, error } = useRegisterInstructor();
-  const [formData, setFormData] = useState({
+  const { mutate, isPending } = useRegisterInstructor();
+  const [currentStep, setCurrentStep] = React.useState(1);
+
+  const initialValues = {
     name: "",
     email: "",
     phone_country_code: "",
@@ -29,90 +39,134 @@ const RegisterInstructor = () => {
     gender: "",
     address: "",
     agree_terms: false,
+  };
+
+  const validationSchema = Yup.object({
+    name: Yup.string().required("الاسم مطلوب"),
+    email: Yup.string().email("بريد إلكتروني غير صالح").required("البريد الإلكتروني مطلوب"),
+    phone_number: Yup.string().required("رقم الجوال مطلوب"),
+    password: Yup.string()
+      .min(8, "كلمة المرور يجب أن تكون 8 أحرف على الأقل")
+      .required("كلمة المرور مطلوبة"),
+    password_confirmation: Yup.string()
+      .oneOf([Yup.ref("password"), null], "كلمات المرور يجب أن تتطابق")
+      .required("تأكيد كلمة المرور مطلوب"),
+    cv: Yup.mixed().required("السيرة الذاتية مطلوبة"),
+    certificate: Yup.mixed().required("الشهادة مطلوبة"),
+    bio: Yup.string().required("النبذة مطلوبة"),
+    specialization: Yup.string().required("التخصص مطلوب"),
+    agree_terms: Yup.boolean().oneOf([true], "يجب الموافقة على الشروط"),
   });
 
-  const [currentStep, setCurrentStep] = useState(1); // Track the current step
+  const router = useRouter(); 
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (values) => {
+    // Create FormData object to handle file uploads
+    const formData = new FormData();
+    for (const key in values) {
+      if (key === "cv" || key === "certificate") {
+        // Append files if they exist
+        if (values[key]) {
+          formData.append(key, values[key]);
+        }
+      } else {
+        // Append other fields as strings
+        formData.append(key, values[key]);
+      }
+    }
+
     mutate(formData, {
       onSuccess: (data) => {
-        console.log("Registration successful:", data);
-        alert("Instructor registered successfully!");
+        // Store token in cookies
+        Cookies.set("elmy_token", data.data.token, { expires: 7 });
+    
+        // Show success toast
+        toast.success("تم تسجيل المدرب بنجاح!", {
+          position: "top-right",
+          autoClose: 3000,
+        });
+    
+        // Redirect to home page after a short delay
+        setTimeout(() => {
+          router.push("/"); // Navigate to home page
+        }, 1000); // Matches toast autoClose duration
       },
       onError: (error) => {
-        console.error("Registration failed:", error.message);
+        toast.error(error.message || "فشل التسجيل", {
+          position: "top-right",
+          autoClose: 3000,
+        });
       },
     });
   };
 
-  const handleFileChange = (e, field) => {
-    const file = e.target.files[0];
-    if (file) {
-      if (field === "cv" && file.type !== "application/pdf") {
-        alert("CV must be a PDF file.");
-        return;
-      }
-      if (
-        field === "certificate" &&
-        !["image/jpeg", "image/png", "image/jpg", "application/pdf"].includes(file.type)
-      ) {
-        alert("Certificate must be PDF, JPG, JPEG, or PNG.");
-        return;
-      }
-      setFormData({ ...formData, [field]: file });
-    }
+  const PhoneNumberInput = ({ field, form }) => {
+    const { name, value } = field;
+    const { touched, errors, setFieldValue } = form;
+    const error = touched[name] && errors[name];
+
+    const handleChange = (phone, country) => {
+      setFieldValue(name, phone || "");
+      setFieldValue("phone_country_code", country ? `+${country.dialCode}` : "");
+    };
+
+    return (
+      <div className="flex flex-col">
+        <PhoneInput
+          country="sa"
+          value={value}
+          onChange={handleChange}
+          inputClass="w-full px-3 py-3 bg-[#F4F4F4] text-[#121D2F] rounded-[50px] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
+          buttonClass="!bg-[#F4F4F4] !border-none"
+          dropdownClass="!text-left !rounded-lg shadow-lg"
+          containerClass={`relative mt-1 border rounded-[50px] flex focus:outline-none focus:ring-2 focus:ring-purple-500 ${
+            error ? "border-red-500" : "border-gray-300"
+          }`}
+          placeholder="رقم الجوال"
+          enableSearch
+          countryCodeEditable={false}
+        />
+        {error && <div className="text-red-500 text-sm mt-1">{error}</div>}
+      </div>
+    );
   };
 
   const Step1 = ({ nextStep }) => (
     <div className="p-6">
       <h2 className="text-2xl font-bold text-center mb-4">سجل كمدرب الآن</h2>
-      <p className="text-center text-gray-600 mb-6">
-        يرجى ملء البيانات التالية لتسجيل حسابك كمدرب
-      </p>
       <div className="space-y-4">
         <div>
           <label className="block text-gray-700">الاسم الكامل</label>
-          <input
-            type="text"
-            value={formData.name}
-            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            className="w-full p-2 border rounded-lg"
+          <Field
+            name="name"
+            className="w-full p-3 bg-[#F4F4F4] rounded-[50px] border-none focus:ring-2 focus:ring-purple-500"
             placeholder="الاسم الكامل"
           />
+          <ErrorMessage name="name" component="div" className="text-red-500 text-sm mt-1" />
         </div>
         <div>
           <label className="block text-gray-700">البريد الإلكتروني</label>
-          <input
+          <Field
+            name="email"
             type="email"
-            value={formData.email}
-            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-            className="w-full p-2 border rounded-lg"
+            className="w-full p-3 bg-[#F4F4F4] rounded-[50px] border-none focus:ring-2 focus:ring-purple-500"
             placeholder="البريد الإلكتروني"
           />
+          <ErrorMessage name="email" component="div" className="text-red-500 text-sm mt-1" />
         </div>
         <div>
-          <label className="block text-gray-700">رقم الهاتف</label>
-          <PhoneInput
-            country={"sa"}
-            value={formData.phone_country_code + formData.phone_number}
-            onChange={(phone, country) =>
-              setFormData({
-                ...formData,
-                phone_country_code: `+${country.dialCode}`,
-                phone_number: phone.replace(`+${country.dialCode}`, ""),
-              })
-            }
-            inputClass="w-full p-2 border rounded-lg"
-          />
+          <label className="block text-gray-700">رقم الجوال</label>
+          <Field name="phone_number" component={PhoneNumberInput} />
+          <Field type="hidden" name="phone_country_code" />
         </div>
+        <button
+          type="button"
+          onClick={nextStep}
+          className="mt-6 w-full bg-purple-600 text-white p-3 rounded-lg"
+        >
+          التالي
+        </button>
       </div>
-      <button
-        onClick={nextStep}
-        className="mt-6 w-full bg-purple-600 text-white p-2 rounded-lg"
-      >
-        التالي
-      </button>
     </div>
   );
 
@@ -122,51 +176,60 @@ const RegisterInstructor = () => {
       <div className="space-y-4">
         <div>
           <label className="block text-gray-700">كلمة المرور</label>
-          <input
+          <Field
+            name="password"
             type="password"
-            value={formData.password}
-            onChange={(e) =>
-              setFormData({ ...formData, password: e.target.value })
-            }
-            className="w-full p-2 border rounded-lg"
+            className="w-full p-3 bg-[#F4F4F4] rounded-[50px] border-none focus:ring-2 focus:ring-purple-500"
             placeholder="كلمة المرور"
           />
+          <ErrorMessage name="password" component="div" className="text-red-500 text-sm mt-1" />
         </div>
         <div>
           <label className="block text-gray-700">تأكيد كلمة المرور</label>
-          <input
+          <Field
+            name="password_confirmation"
             type="password"
-            value={formData.password_confirmation}
-            onChange={(e) =>
-              setFormData({ ...formData, password_confirmation: e.target.value })
-            }
-            className="w-full p-2 border rounded-lg"
+            className="w-full p-3 bg-[#F4F4F4] rounded-[50px] border-none focus:ring-2 focus:ring-purple-500"
             placeholder="تأكيد كلمة المرور"
+          />
+          <ErrorMessage
+            name="password_confirmation"
+            component="div"
+            className="text-red-500 text-sm mt-1"
           />
         </div>
         <div>
           <label className="block text-gray-700">السيرة الذاتية (PDF)</label>
-          <input
-            type="file"
-            accept="application/pdf"
-            onChange={(e) => handleFileChange(e, "cv")}
-            className="w-full p-2 border rounded-lg"
-          />
+          <Field name="cv">
+            {({ form }) => (
+              <Input
+                type="file"
+                accept="application/pdf"
+                className="w-full bg-[#F4F4F4] rounded-[50px] border-none file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100"
+                onChange={(event) => {
+                  form.setFieldValue("cv", event.currentTarget.files[0]);
+                }}
+              />
+            )}
+          </Field>
+          <ErrorMessage name="cv" component="div" className="text-red-500 text-sm mt-1" />
         </div>
-      </div>
-      <div className="flex justify-between mt-6">
-        <button
-          onClick={previousStep}
-          className="bg-gray-300 text-gray-700 p-2 rounded-lg"
-        >
-          السابق
-        </button>
-        <button
-          onClick={nextStep}
-          className="bg-purple-600 text-white p-2 rounded-lg"
-        >
-          التالي
-        </button>
+        <div className="flex justify-between mt-6">
+          <button
+            type="button"
+            onClick={previousStep}
+            className="bg-gray-300 text-gray-700 p-3 rounded-lg"
+          >
+            السابق
+          </button>
+          <button
+            type="button"
+            onClick={nextStep}
+            className="bg-purple-600 text-white p-3 rounded-lg"
+          >
+            التالي
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -177,48 +240,55 @@ const RegisterInstructor = () => {
       <div className="space-y-4">
         <div>
           <label className="block text-gray-700">الشهادة</label>
-          <input
-            type="file"
-            accept="application/pdf,image/jpeg,image/png,image/jpg"
-            onChange={(e) => handleFileChange(e, "certificate")}
-            className="w-full p-2 border rounded-lg"
-          />
+          <Field name="certificate">
+            {({ form }) => (
+              <Input
+                type="file"
+                accept="application/pdf,image/jpeg,image/png,image/jpg"
+                className="w-full bg-[#F4F4F4] rounded-[50px] border-none file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100"
+                onChange={(event) => {
+                  form.setFieldValue("certificate", event.currentTarget.files[0]);
+                }}
+              />
+            )}
+          </Field>
+          <ErrorMessage name="certificate" component="div" className="text-red-500 text-sm mt-1" />
         </div>
         <div>
           <label className="block text-gray-700">نبذة عنك</label>
-          <textarea
-            value={formData.bio}
-            onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
-            className="w-full p-2 border rounded-lg"
+          <Field
+            name="bio"
+            as="textarea"
+            className="w-full p-3 bg-[#F4F4F4] rounded-[50px] border-none focus:ring-2 focus:ring-purple-500"
             placeholder="نبذة عنك"
           />
+          <ErrorMessage name="bio" component="div" className="text-red-500 text-sm mt-1" />
         </div>
         <div>
           <label className="block text-gray-700">التخصص</label>
-          <input
-            type="text"
-            value={formData.specialization}
-            onChange={(e) =>
-              setFormData({ ...formData, specialization: e.target.value })
-            }
-            className="w-full p-2 border rounded-lg"
+          <Field
+            name="specialization"
+            className="w-full p-3 bg-[#F4F4F4] rounded-[50px] border-none focus:ring-2 focus:ring-purple-500"
             placeholder="التخصص"
           />
+          <ErrorMessage name="specialization" component="div" className="text-red-500 text-sm mt-1" />
         </div>
-      </div>
-      <div className="flex justify-between mt-6">
-        <button
-          onClick={previousStep}
-          className="bg-gray-300 text-gray-700 p-2 rounded-lg"
-        >
-          السابق
-        </button>
-        <button
-          onClick={nextStep}
-          className="bg-purple-600 text-white p-2 rounded-lg"
-        >
-          التالي
-        </button>
+        <div className="flex justify-between mt-6">
+          <button
+            type="button"
+            onClick={previousStep}
+            className="bg-gray-300 text-gray-700 p-3 rounded-lg"
+          >
+            السابق
+          </button>
+          <button
+            type="button"
+            onClick={nextStep}
+            className="bg-purple-600 text-white p-3 rounded-lg"
+          >
+            التالي
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -229,97 +299,73 @@ const RegisterInstructor = () => {
       <div className="space-y-4">
         <div>
           <label className="block text-gray-700">الجامعة</label>
-          <input
-            type="text"
-            value={formData.university}
-            onChange={(e) =>
-              setFormData({ ...formData, university: e.target.value })
-            }
-            className="w-full p-2 border rounded-lg"
+          <Field
+            name="university"
+            className="w-full p-3 bg-[#F4F4F4] rounded-[50px] border-none focus:ring-2 focus:ring-purple-500"
             placeholder="الجامعة"
           />
         </div>
         <div>
           <label className="block text-gray-700">القسم</label>
-          <input
-            type="text"
-            value={formData.department}
-            onChange={(e) =>
-              setFormData({ ...formData, department: e.target.value })
-            }
-            className="w-full p-2 border rounded-lg"
+          <Field
+            name="department"
+            className="w-full p-3 bg-[#F4F4F4] rounded-[50px] border-none focus:ring-2 focus:ring-purple-500"
             placeholder="القسم"
           />
         </div>
         <div>
           <label className="block text-gray-700">الجنسية</label>
-          <input
-            type="text"
-            value={formData.nationality}
-            onChange={(e) =>
-              setFormData({ ...formData, nationality: e.target.value })
-            }
-            className="w-full p-2 border rounded-lg"
+          <Field
+            name="nationality"
+            className="w-full p-3 bg-[#F4F4F4] rounded-[50px] border-none focus:ring-2 focus:ring-purple-500"
             placeholder="الجنسية"
           />
         </div>
         <div>
           <label className="block text-gray-700">الجنس</label>
-          <select
-            value={formData.gender}
-            onChange={(e) =>
-              setFormData({ ...formData, gender: e.target.value })
-            }
-            className="w-full p-2 border rounded-lg"
+          <Field
+            as="select"
+            name="gender"
+            className="w-full p-3 bg-[#F4F4F4] rounded-[50px] border-none focus:ring-2 focus:ring-purple-500"
           >
             <option value="">اختر الجنس</option>
             <option value="male">ذكر</option>
             <option value="female">أنثى</option>
-          </select>
+          </Field>
         </div>
         <div>
           <label className="block text-gray-700">العنوان</label>
-          <input
-            type="text"
-            value={formData.address}
-            onChange={(e) =>
-              setFormData({ ...formData, address: e.target.value })
-            }
-            className="w-full p-2 border rounded-lg"
+          <Field
+            name="address"
+            className="w-full p-3 bg-[#F4F4F4] rounded-[50px] border-none focus:ring-2 focus:ring-purple-500"
             placeholder="العنوان"
           />
         </div>
         <div>
-          <label className="block text-gray-700">
-            <input
-              type="checkbox"
-              checked={formData.agree_terms}
-              onChange={(e) =>
-                setFormData({ ...formData, agree_terms: e.target.checked })
-              }
-            />{" "}
+          <label className="flex items-center text-gray-700">
+            <Field type="checkbox" name="agree_terms" className="mr-2" />
             أوافق على الشروط والأحكام
           </label>
+          <ErrorMessage name="agree_terms" component="div" className="text-red-500 text-sm mt-1" />
         </div>
+        <button
+          type="submit"
+          disabled={isPending}
+          className="mt-6 w-full bg-purple-600 text-white p-3 rounded-lg disabled:opacity-50"
+        >
+          {isPending ? "جاري التسجيل..." : "تسجيل"}
+        </button>
+        <button
+          type="button"
+          onClick={previousStep}
+          className="mt-2 bg-gray-300 text-gray-700 p-3 rounded-lg"
+        >
+          السابق
+        </button>
       </div>
-      <button
-        onClick={handleSubmit}
-        disabled={isPending || !formData.agree_terms}
-        className="mt-6 w-full bg-purple-600 text-white p-2 rounded-lg disabled:opacity-50"
-      >
-        {isPending ? "جاري التسجيل..." : "تسجيل"}
-      </button>
-      {isError && <p className="text-red-500 mt-2">{error.message}</p>}
-      <button
-        onClick={previousStep}
-        className="mt-2 bg-gray-300 text-gray-700 p-2 rounded-lg"
-      >
-        السابق
-      </button>
     </div>
   );
 
-  // Step names with numbers
   const stepNames = [
     { number: 1, name: "المعلومات الشخصية" },
     { number: 2, name: "كلمة المرور" },
@@ -329,90 +375,82 @@ const RegisterInstructor = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center overflow-hidden">
-      <div className="w-full max-w-4xl bg-white rounded-lg shadow-lg relative">
-        <div className="flex">
-          {/* Left Sidebar */}
-          <div className="w-1/4 flex p-6 flex-col justify-between bg-gray-100">
-            {/* Logo Section at the Top */}
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
+      >
+        {({ setFieldValue }) => (
+          <Form className="w-full max-w-4xl bg-white rounded-lg shadow-lg relative">
+            <ToastContainer />
             <div className="flex">
-              {/* Second Logo with Purple Text */}
-              <div className="text-purple-600">
-                <Image
-                  src={logo}
-                  alt="Secondary Logo"
-                  width={100} // Set appropriate width
-                  height={50} // Set appropriate height
-                />
-              </div>
-              {/* First Logo */}
-              {logoData?.data?.logo && (
-                <Image
-                  src={logoData.data.logo}
-                  alt="Logo"
-                  width={100} // Set appropriate width
-                  height={50} // Set appropriate height
-                />
-              )}
-            </div>
-
-            {/* Step Names with Numbers */}
-            <div className="mt-4 space-y-2">
-              {stepNames.map((step, index) => (
-                <div
-                  key={index}
-                  className={`flex items-center space-x-2 ${
-                    currentStep === step.number
-                      ? "text-purple-600 font-bold"
-                      : "text-gray-500"
-                  }`}
-                >
-                  {/* Circle with Number */}
-                  <div
-                    className={`w-6 h-6 flex items-center justify-center rounded-full border ${
-                      currentStep === step.number
-                        ? "border-purple-600 bg-purple-600 text-white"
-                        : "border-gray-500"
-                    }`}
-                  >
-                    {step.number}
+              <div className="w-1/4 flex p-6 flex-col justify-between bg-gray-100">
+                <div className="flex">
+                  <div className="text-purple-600">
+                    <Image src={logo} alt="Secondary Logo" width={100} height={50} />
                   </div>
-                  {/* Step Name */}
-                  <div>{step.name}</div>
+                  {logoData?.data?.logo && (
+                    <Image
+                      src={logoData.data.logo}
+                      alt="Logo"
+                      width={100}
+                      height={50}
+                    />
+                  )}
                 </div>
-              ))}
+                <div className="mt-4 space-y-2">
+                  {stepNames.map((step) => (
+                    <div
+                      key={step.number}
+                      className={`flex items-center space-x-2 whitespace-nowrap ${
+                        currentStep === step.number
+                          ? "text-purple-600 font-bold"
+                          : "text-gray-500"
+                      }`}
+                    >
+                      <div
+                        className={`w-8 h-8 flex items-center justify-center rounded-full border ${
+                          currentStep === step.number
+                            ? "border-[#ECE0F4] bg-[#ECE0F4] text-mainColor ml-1"
+                            : "bg-[#EBEBEB] text-[#3F4254] ml-1"
+                        }`}
+                      >
+                        {step.number}
+                      </div>
+                      <div>{step.name}</div>
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-auto">
+                  <Image
+                    src={loginImage}
+                    alt="Illustration"
+                    className="w-full h-auto"
+                    width={400}
+                    height={300}
+                  />
+                </div>
+              </div>
+              <div className="w-3/4">
+                <StepWizard
+                  onStepChange={({ activeStep }) => setCurrentStep(activeStep)}
+                >
+                  <Step1 />
+                  <Step2 />
+                  <Step3 />
+                  <Step4 />
+                </StepWizard>
+                <div className="text-center text-gray-500 my-4">
+                  هل لديك حساب بالفعل؟{" "}
+                  <Link href="/login" className="text-purple-600">
+                    سجل الدخول
+                  </Link>
+                </div>
+              </div>
             </div>
-
-            {/* Illustration Image at the Bottom */}
-            <div className="mt-auto">
-              <Image
-                src={loginImage}
-                alt="Illustration"
-                className="w-full h-auto"
-                width={400} // Set appropriate width
-                height={300} // Set appropriate height
-              />
-            </div>
-          </div>
-
-          {/* Right Content */}
-          <div className="w-3/4">
-            <StepWizard
-              onStepChange={({ activeStep }) => setCurrentStep(activeStep)} // Track active step
-            >
-              <Step1 />
-              <Step2 />
-              <Step3 />
-              <Step4 />
-            </StepWizard>
-            <div className="text-center text-gray-500 my-4">
-              هل لديك حساب بالفعل؟{" "}
-              <Link href="/login" className="text-purple-600">
-                سجل الدخول
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
+          </Form>
+        )}
+      </Formik>
     </div>
   );
 };

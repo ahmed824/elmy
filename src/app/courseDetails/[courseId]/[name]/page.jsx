@@ -36,40 +36,43 @@ export default function Page() {
                 }}
             >
                 <div className="max-w-3xl">
-                <p className="text-sm text-[#6B7385] flex items-center gap-1">
-                    {course?.description} <FaChevronLeft className="text-xs" />
-                    <span className="text-gray-500">{course?.title || courseName}</span>
-                </p>
+                    <p className="text-sm text-[#6B7385] flex items-center gap-1">
+                        {course?.description} <FaChevronLeft className="text-xs" />
+                        <span className="text-gray-500">{course?.title || courseName}</span>
+                    </p>
 
-                <h1 className="text-[30px] font-medium mt-2 text-[#121D2F]">{course?.title || courseName}</h1>
+                    <h1 className="text-[30px] font-medium mt-2 text-[#121D2F]">{course?.title || courseName}</h1>
 
-                <p className="text-[#121D2F] text-[16px] mt-1 font-medium">
-                    {course?.description}
-                </p>
+                    <p className="text-[#121D2F] text-[16px] mt-1 font-medium">
+                        {course?.description}
+                    </p>
 
-                {/* Course Info Section */}
-                <div className="flex items-center gap-4 text-gray-600 text-sm mt-4">
-                    <span className="flex items-center">
-                        <span className="ml-1">0</span> ⭐⭐⭐⭐⭐
-                    </span>
-                    <span className='flex items-center gap-1'> <LuCalendar /> 02/06/2025</span>
-                    <span className='flex items-center gap-1'><CiGlobe /> {course?.language || "عربي"}</span>
-                </div>
+                    {/* Course Info Section */}
+                    <div className="flex items-center gap-4 text-gray-600 text-sm mt-4">
+                        <span className="flex items-center">
+                            <span className="ml-1">{course?.rating?.average}</span>
+                            {Array.from({ length: Math.round(course?.rating?.average || 0) }).map((_, i) => (
+                                <span key={i}>⭐</span>
+                            ))}
+                        </span>
+                        {/* <span className='flex items-center gap-1'> <LuCalendar /> 02/06/2025</span>
+                        <span className='flex items-center gap-1'><CiGlobe /> {course?.language || "عربي"}</span> */}
+                    </div>
 
-                {/* Author Info */}
-                <div className="flex items-center gap-2 mt-4">
-                    <Image
-                        src={course?.instructor?.avatar || Avatar}
-                        width={30}
-                        height={30}
-                        className="rounded-full"
-                        alt={course?.instructor?.name}
-                    />
-                    <span className="text-[#6B7385] text-sm">بواسطة {course?.instructor?.name}</span>
-                    <Link href="/courseDetails" className="text-mainColor text-sm cursor-pointer z-20">
-                        مشاهدة كل الدورات
-                    </Link>
-                </div>
+                    {/* Author Info */}
+                    <div className="flex items-center gap-2 mt-4">
+                        <Image
+                            src={course?.instructor?.avatar || Avatar}
+                            width={30}
+                            height={30}
+                            className="rounded-full"
+                            alt={course?.instructor?.name}
+                        />
+                        <span className="text-[#6B7385] text-sm">بواسطة {course?.instructor?.name}</span>
+                        {/* <Link href="/courseDetails" className="text-mainColor text-sm cursor-pointer z-20">
+                            مشاهدة كل الدورات
+                        </Link> */}
+                    </div>
                 </div>
             </div>
 

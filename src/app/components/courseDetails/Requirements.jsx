@@ -1,36 +1,56 @@
 import React from "react";
+import DotsLoader from "../shared/DotsLoader";
 
-export default function Requirements() {
-    return (
-        <div className="bg-white shadow-md rounded-lg p-6">
-            {/* Title */}
-            <h2 className="text-xl font-bold text-[#121D2F] mb-4">تفاصيل</h2>
+export default function Requirements({ course }) {
+  // Fallback in case course data is not provided
+  if (!course) {
+    return<DotsLoader />;
+  }
 
-            {/* Description */}
-            <p className="text-gray-600 leading-relaxed">
-                هل أنت مستعد لاكتشاف قوة برنامج <strong>Microsoft Excel</strong>؟ تم تصميم هذه الدورة الصديقة للمبتدئين لمساعدتك على بناء أساس قوي في Excel، سواء كنت طالبًا محترفًا أو ترغب ببساطة في استكشاف أداة الجداول الأكثر شعبية في العالم.
-            </p>
+  return (
+    <div className="bg-white shadow-md rounded-lg p-6">
+      {/* Title */}
+      <h2 className="text-xl font-bold text-[#121D2F] mb-4">تفاصيل</h2>
 
-            {/* Divider */}
-            <hr className="my-6 border-gray-300" />
+      {/* Description */}
+      <p className="text-gray-600 leading-relaxed">
+        {course.description}{" "}
+        <strong>{course.title}</strong> هي دورة مصممة لتزويدك بالمهارات الأساسية التي تحتاجها للبدء.
+      </p>
 
-            {/* Requirements Section */}
-            <h3 className="text-lg font-bold text-[#121D2F] mb-3">متطلبات</h3>
-            <ul className="text-gray-600 space-y-2">
-                <li><strong>القسم 1:</strong> مقدمة إلى Microsoft Excel</li>
-                <li><strong>المدة:</strong> 5 دقائق</li>
-                <div>
-                    <h4 className="text-md font-semibold text-[#121D2F] mb-2">
-                        مقدمة إلى Microsoft Excel
-                    </h4>
-                    <ul className="text-gray-600 space-y-2 list-disc pr-5">
-                        <li>مصطلحات Excel الأساسية</li>
-                        <li>قائمة Excel</li>
-                        <li>دليل الصفحات وأوراق العمل</li>
-                        <li>حفظ ملف Excel</li>
-                    </ul>
-                </div>
+      {/* Divider */}
+      <hr className="my-6 border-gray-300" />
+
+      {/* Requirements Section */}
+      <h3 className="text-lg font-bold text-[#121D2F] mb-3">متطلبات</h3>
+      <ul className="text-gray-600 space-y-2">
+        <li>
+          <strong>القسم 1:</strong> {course.modules[0]?.title || "غير متوفر"}
+        </li>
+        <li>
+          <strong>المدة:</strong> {course.duration}
+        </li>
+        <li>
+          <strong>المستوى:</strong> {course.level}
+        </li>
+        <li>
+          <strong>المتطلبات الأساسية:</strong> {course.requirements}
+        </li>
+
+        {/* Modules and Lessons */}
+        {course.modules && course.modules.length > 0 && (
+          <div>
+            <h4 className="text-md font-semibold text-[#121D2F] mb-2">
+              {course.modules[0].title}
+            </h4>
+            <ul className="text-gray-600 space-y-2 list-disc pr-5">
+              {course.modules[0].lessons.map((lesson) => (
+                <li key={lesson.id}>{lesson.title}</li>
+              ))}
             </ul>
-        </div>
-    );
+          </div>
+        )}
+      </ul>
+    </div>
+  );
 }
