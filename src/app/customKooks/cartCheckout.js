@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axiosInstance from "./token"; // Adjust path to your token.js
 import { baseUrl } from "../baseUrl";
 import { toast } from "react-toastify"; // For user feedback
+import { useRouter } from "next/navigation";
 
 // Function to perform cart checkout with coupon
 const checkoutCart = async ({ coupon }) => {
@@ -19,6 +20,7 @@ const checkoutCart = async ({ coupon }) => {
 // Custom hook to handle cart checkout
 export const useCheckout = () => {
   const queryClient = useQueryClient();
+  const router =useRouter();
 
   return useMutation({
     mutationFn: ({ coupon }) => checkoutCart({ coupon }), // Pass coupon to mutation function
@@ -27,6 +29,7 @@ export const useCheckout = () => {
       queryClient.invalidateQueries(["cart"]);
       // Provide user feedback
       toast.success(data.message || "تم إتمام عملية الدفع بنجاح");
+      router.push(data.data.payment_url)
     },
     onError: (error) => {
       // Log error to console for debugging

@@ -36,7 +36,7 @@ export default function Page() {
     };
 
     const handleCheckout = () => {
-        checkout({ coupon }); // Pass the coupon code to the checkout function
+        checkout({ coupon });
     };
 
     return (
