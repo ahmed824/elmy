@@ -99,8 +99,8 @@ export default function Course({
             className={`p-2 border rounded-full border-dark-purble cursor-pointer ${
               isBookmarked ? "bg-primary-purble" : ""
             }`}
-            width={24}
-            height={24}
+            width={40}
+            height={40}
             onClick={handleBookmark}
           />
         </p>

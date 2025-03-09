@@ -27,7 +27,7 @@ export default function TrainerMyCourses() {
         <div className="p-4 flex justify-between">
           <h2 className=" font-semibold text-lg">قائمة دوراتي</h2>
           <Link
-            href={"/dashboard/trainer/courses"}
+            href={"/dashboard/trainer/createCourse"}
             onClick={() => {
               //   setSecondDashboardTitle(t("dashboard.tranierPagesTitle.courses"));
               //   setDashBoardTitle(t("dashboard.traniderPagesTitle.courses"));

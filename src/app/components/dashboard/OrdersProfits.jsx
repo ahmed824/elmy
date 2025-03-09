@@ -43,7 +43,7 @@ export default function OrdersProfits() {
     <section className="m-5">
       <div className="p-4 flex justify-between">
         <h2 className="font-semibold text-lg">
-          {t(`dashboard.traniderPagesTitle.ordersProfits`)}
+          {t("dashboard.trainerPagesTitle.ordersProfits")}
         </h2>
         <Link
           href={""}

@@ -42,7 +42,7 @@ export default function StudentSideBar({
         ].map(({ item, img }) => (
           <li key={item} className="" onClick={() => handleClickLink(item)}>
             <Link
-              href={`${item === "dashboard" ? "main" : item}`}
+              href={`/dashboard/student/${item === "dashboard" ? "main" : item}`}
               className={`flex items-center gap-2 my-2 hover:text-primary-purble cursor-pointer font-semibold ${
                 isActive == item ? "text-primary-purble" : "text-gray-500"
               }`}

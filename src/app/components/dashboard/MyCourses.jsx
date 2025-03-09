@@ -5,14 +5,15 @@ import Course from "./Course";
 import { LayoutContext } from "../../providers/LayoutContext";
 import { useTranslation } from "react-i18next";
 
-const coursesCategories = [
-  t("dashboard.myCoursesSection.all"),
-  t("dashboard.myCoursesSection.unCompleted"),
-  t("dashboard.myCoursesSection.completed"),
-];
+
 
 export default function MyCourses() {
   const { t } = useTranslation();
+  const coursesCategories = [
+    t("dashboard.myCoursesSection.all"),
+    t("dashboard.myCoursesSection.unCompleted"),
+    t("dashboard.myCoursesSection.completed"),
+  ];
   const { courses } = useContext(LayoutContext);
   const [active, setActive] = useState(t("dashboard.myCoursesSection.all"));
 

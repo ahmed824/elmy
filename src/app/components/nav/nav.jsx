@@ -14,7 +14,7 @@ import { useLogo } from "@/app/customKooks/logo";
 import Cookies from "js-cookie";
 import { useAuthProfile } from "@/app/customKooks/authProfile";
 import UserProfileSection from "./UserProfileSection"; // Import the new component
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./LanguageSwithcer";
 
 export default function Nav() {
@@ -52,8 +52,6 @@ export default function Nav() {
       console.log("User Name:", userData?.data?.user?.name);
     }
   }, [userData]);
-
-  // console.log(t("navbar.home"));
 
   if (!isClient) {
     return (
@@ -194,7 +192,7 @@ export default function Nav() {
                   href="/login"
                   className="text-black hover:text-purple-600 transition-colors hidden lg:flex"
                 >
-                  تسجيل دخول
+                  {t("navbar.login")}
                 </Link>
               )}
 
