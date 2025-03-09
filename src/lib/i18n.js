@@ -21,6 +21,10 @@ i18n
       loadPath: "/locales/{{lng}}/translation.json", // Ensure this matches your folder structure
     },
     interpolation: { escapeValue: false },
+    react: {
+      useSuspense: false, // This is optional and can be set to false if you don't want to use suspense
+    },
+    debug: true, // Set to false in production
   });
 
 export default i18n;
