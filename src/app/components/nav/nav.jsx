@@ -53,8 +53,6 @@ export default function Nav() {
     }
   }, [userData]);
 
-  console.log(t("navbar.home"));
-
   if (!isClient) {
     return (
       <div className="w-full px-4 sm:px-6 lg:px-8 py-3 bg-transparent mt-8 sm:mt-11 overflow-hidden">
@@ -194,7 +192,7 @@ export default function Nav() {
                   href="/login"
                   className="text-black hover:text-purple-600 transition-colors hidden lg:flex"
                 >
-                  تسجيل دخول
+                  {t("navbar.login")}
                 </Link>
               )}
 

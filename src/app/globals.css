@@ -434,6 +434,12 @@ button:focus-visible {
     max-width: 1320px;
   }
 }
+@layer components{
+  .btn {
+    @apply bg-gradient-to-r from-primary-purble via-blue-700 to-primary-purble hover:from-blue-700 hover:via-primary-purble hover:to-blue-700 transition-all duration-200;
+    ;
+}
+}
 
 .react-tel-input {
   display: flex !important;
