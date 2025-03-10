@@ -4,7 +4,7 @@ import { FaCheckCircle, FaShoppingCart, FaHome } from "react-icons/fa";
 
 export default function ThankYouPage() {
   return (
-    <div className="min-h-screen -mb-48 bg-gradient-to-br from-purple-50 to-indigo-100 flex items-center justify-center p-6">
+    <div className="min-h-screen pb-8 -mb-48 bg-gradient-to-br from-purple-50 to-indigo-100 flex items-center justify-center p-6">
       <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-2xl w-full text-center">
         {/* Success Icon */}
         <div className="flex justify-center">
