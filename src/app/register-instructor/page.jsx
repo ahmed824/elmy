@@ -58,7 +58,7 @@ const RegisterInstructor = () => {
     agree_terms: Yup.boolean().oneOf([true], "يجب الموافقة على الشروط"),
   });
 
-  const router = useRouter(); 
+  const router = useRouter();
 
   const handleSubmit = (values) => {
     // Create FormData object to handle file uploads
@@ -79,13 +79,13 @@ const RegisterInstructor = () => {
       onSuccess: (data) => {
         // Store token in cookies
         Cookies.set("elmy_token", data.data.token, { expires: 7 });
-    
+
         // Show success toast
         toast.success("تم تسجيل المدرب بنجاح!", {
           position: "top-right",
           autoClose: 3000,
         });
-    
+
         // Redirect to home page after a short delay
         setTimeout(() => {
           router.push("/"); // Navigate to home page
@@ -119,9 +119,8 @@ const RegisterInstructor = () => {
           inputClass="w-full px-3 py-3 bg-[#F4F4F4] text-[#121D2F] rounded-[50px] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
           buttonClass="!bg-[#F4F4F4] !border-none"
           dropdownClass="!text-left !rounded-lg shadow-lg"
-          containerClass={`relative mt-1 border rounded-[50px] flex focus:outline-none focus:ring-2 focus:ring-purple-500 ${
-            error ? "border-red-500" : "border-gray-300"
-          }`}
+          containerClass={`relative mt-1 border rounded-[50px] flex focus:outline-none focus:ring-2 focus:ring-purple-500 ${error ? "border-red-500" : "border-gray-300"
+            }`}
           placeholder="رقم الجوال"
           enableSearch
           countryCodeEditable={false}
@@ -383,37 +382,33 @@ const RegisterInstructor = () => {
         {({ setFieldValue }) => (
           <Form className="w-full max-w-4xl bg-white rounded-lg shadow-lg relative">
             <ToastContainer />
-            <div className="flex">
-              <div className="w-1/4 flex p-6 flex-col justify-between bg-gray-100">
-                <div className="flex">
-                  <div className="text-purple-600">
-                    <Image src={logo} alt="Secondary Logo" width={100} height={50} />
-                  </div>
+            <div className="flex ">
+              <div className="w-1/4 flex p-5 flex-col justify-between bg-gray-100">
+                <div className="flex -mr-2">
+                  <Image src={logo} alt="Secondary Logo" width={100} height={50} />
                   {logoData?.data?.logo && (
                     <Image
-                      src={logoData.data.logo}
+                      src={logoData.data.logo || logo}
                       alt="Logo"
                       width={100}
                       height={50}
                     />
                   )}
                 </div>
-                <div className="mt-4 space-y-2">
+                <div className="mt-10 space-y-3">
                   {stepNames.map((step) => (
                     <div
                       key={step.number}
-                      className={`flex items-center space-x-2 whitespace-nowrap ${
-                        currentStep === step.number
-                          ? "text-purple-600 font-bold"
-                          : "text-gray-500"
-                      }`}
+                      className={`flex items-center space-x-2 whitespace-nowrap ${currentStep === step.number
+                        ? "text-purple-600 font-bold"
+                        : "text-gray-500"
+                        }`}
                     >
                       <div
-                        className={`w-8 h-8 flex items-center justify-center rounded-full border ${
-                          currentStep === step.number
-                            ? "border-[#ECE0F4] bg-[#ECE0F4] text-mainColor ml-1"
-                            : "bg-[#EBEBEB] text-[#3F4254] ml-1"
-                        }`}
+                        className={`w-8 h-8 flex items-center justify-center rounded-full border ${currentStep === step.number
+                          ? "border-[#ECE0F4] bg-[#ECE0F4] text-mainColor ml-1"
+                          : "bg-[#EBEBEB] text-[#3F4254] ml-1"
+                          }`}
                       >
                         {step.number}
                       </div>

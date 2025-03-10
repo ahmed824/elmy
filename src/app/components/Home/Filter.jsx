@@ -56,7 +56,7 @@ export default function Filter() {
           <button
             key={button.id}
             onClick={() => setActiveFilter(button.filter)}
-            className={`relative font-regular w-28 sm:w-24 md:w-28 py-1 sm:py-2 rounded-full shadow-lg hover:scale-105 transform transition-all duration-300 overflow-hidden
+            className={`relative font-regular w-36 sm:w-24 md:w-36 py-1 sm:py-2 rounded-full shadow-lg hover:scale-105 transform transition-all duration-300 overflow-hidden
               ${activeFilter === button.filter
                 ? "bg-gradient-to-r from-[#601596] via-[#A436F0] to-[#601596] text-white"
                 : "border-2 border-[#601596] text-[#601596]"

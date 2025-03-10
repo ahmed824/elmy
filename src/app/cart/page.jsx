@@ -114,7 +114,7 @@ export default function Page() {
                                     </div>
                                     <div className="w-24 h-16 relative overflow-hidden rounded-lg">
                                         <Image
-                                            src={item.course.image || "/image.png"}
+                                            src={item.course.image}
                                             alt={item.course.title}
                                             width={96}
                                             height={64}

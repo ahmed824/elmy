@@ -64,22 +64,22 @@ export default function Footer() {
           </h3>
           <ul className="space-y-2 text-sm md:text-base">
             <li>
-              <Link href="#" className="hover:text-mainColor">
+              <Link href="/" className="hover:text-mainColor">
                 {t("navbar.home")}
               </Link>
             </li>
-            <li>
+            {/* <li>
               <Link href="#" className="hover:text-mainColor">
                 {t("navbar.aboutUs")}
               </Link>
-            </li>
+            </li> */}
             <li>
-              <Link href="#" className="hover:text-mainColor">
+              <Link href="/how-we-work" className="hover:text-mainColor">
                 {t("navbar.howItWorks")}
               </Link>
             </li>
             <li>
-              <Link href="#" className="hover:text-mainColor">
+              <Link href="/register-trainer" className="hover:text-mainColor">
                 {t("navbar.registerAsInstructor")}
               </Link>
             </li>

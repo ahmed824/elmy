@@ -51,14 +51,14 @@ export default function Nav() {
             <Link href="/">
               <Image src={Logo} alt="Elmy Logo" width={122} height={50} />
             </Link>
-            {logoData?.data?.logo && (
+            {logoData?.data?.logo ? (
               <Image
                 src={logoData.data.logo}
                 alt="Logo"
                 width={122}
                 height={50}
               />
-            )}
+            ) : null}
             <CategoriesMenu />
           </div>
           <ul className="hidden lg:flex items-center gap-6 text-black text-[16px] font-medium">
@@ -74,11 +74,10 @@ export default function Nav() {
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className={`transition-all ${
-                    isActiveLink(link.href)
+                  className={`transition-all ${isActiveLink(link.href)
                       ? "text-purple-600 bg-purple-100 px-3 py-1 rounded-lg"
                       : "hover:text-purple-600 hover:bg-purple-100 px-3 py-1 rounded-lg"
-                  }`}
+                    }`}
                 >
                   {link.label}
                 </Link>
@@ -145,11 +144,10 @@ export default function Nav() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className={`transition-all ${
-                      isActiveLink(link.href)
+                    className={`transition-all ${isActiveLink(link.href)
                         ? "text-purple-600 bg-purple-100 px-3 py-1 rounded-lg"
                         : "hover:text-purple-600 hover:bg-purple-100 px-3 py-1 rounded-lg"
-                    }`}
+                      }`}
                   >
                     {link.label}
                   </Link>
