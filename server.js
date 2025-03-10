@@ -3,7 +3,7 @@ const { parse } = require('url');
 const next = require('next');
 
 const dev = process.env.NODE_ENV == 'production';
-// const hostname = process.env.NEXT_PUBLIC_HOSTNAME || 'faturti-mhr.com';
+const hostname = process.env.NEXT_PUBLIC_HOSTNAME || 'https://sci.com.sa';
 const port = process.env.PORT || 3016;
 const app = next({ dev, hostname, port });
 const handle = app.getRequestHandler();

@@ -1,1 +1,1 @@
-export const baseUrl = "https://sci.com.sa/elmy/public/api/v1/"
+export const baseUrl = "https://sci.com.sa/api/v1/"

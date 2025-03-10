@@ -23,11 +23,8 @@ export default function Nav() {
   const [isClient, setIsClient] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
-  console.log("Current Language:", i18n.language);
-  console.log("Available Languages:", i18n.languages);
-  console.log("Translation Output:", t("navbar.home"));
   const { data: logoData } = useLogo();
   const { data: userData, isLoading, isError } = useAuthProfile();
 
@@ -45,13 +42,6 @@ export default function Nav() {
     return pathname === path;
   };
 
-  // Debug user data
-  useEffect(() => {
-    if (userData) {
-      console.log("User Data:", userData);
-      console.log("User Name:", userData?.data?.user?.name);
-    }
-  }, [userData]);
 
   if (!isClient) {
     return (
