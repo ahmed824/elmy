@@ -3,7 +3,7 @@ const nextConfig = {
   distDir: '.next',
   
   images: {
-    domains: ["sci.com.sa"],
+    domains: ["app.sci.com.sa"],
   },
   i18n: {
     locales: ["en", "ar"],
