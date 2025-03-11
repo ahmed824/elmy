@@ -12,6 +12,7 @@ import "react-phone-number-input/style.css";
 // import Footer from "./components/footer/Footer";
 const Nav = dynamic(() => import("./components/nav/nav"));
 const Footer = dynamic(() => import("./components/footer/Footer"));
+const Notify = dynamic(() => import("@/app/components/Home/notify"));
 
 import AosProvider from "./components/shared/AosProvider";
 import TranslationProvider from "./components/shared/TranslationProvider";
@@ -47,6 +48,7 @@ export default function RootLayout({ children }) {
           <AosProvider>
             <LayoutProvider>
               <TranslationProvider>
+              <Notify />
                 <Nav />
                 <ToastContainer />
                 {children}

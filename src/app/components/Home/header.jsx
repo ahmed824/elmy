@@ -30,6 +30,11 @@ export default function HeaderSlider() {
     return <HeaderSliderSkeleton />;
   }
 
+  const handleCourseClick = (courseId, name) => {
+    router.push(`/courseDetails/${courseId}/${name.replace(/\s+/g, "-")}`);
+  };
+
+
   return (
     <div className="w-full bg-white py-10 relative overflow-hidden">
       {/* Colors */}
@@ -65,16 +70,19 @@ export default function HeaderSlider() {
                 </p>
                 <div className="mt-6 flex gap-4 ">
                   <KnowMoreButton />
-                  <PurpleButton label={t("headerSlider.registerNow")} />
+                  <PurpleButton
+                    onClick={() => handleCourseClick(slide.id, slide.title)}  
+                    label={t("headerSlider.registerNow")}
+                  />
                 </div>
               </div>
               <div className="w-full md:w-1/2">
                 <Image
-                  src={slide.image || HeaderImage} // Use API image or fallback to HeaderImage
+                  src={slide.image || HeaderImage} 
                   alt={slide.title || "Slider Image"}
                   className="w-full"
-                  width={500} // Add width for Next.js Image optimization
-                  height={300} // Add height for Next.js Image optimization
+                  width={500}  
+                  height={300}  
                   loading="eager" // Load image eagerly for better performance in sliders
                 />
               </div>

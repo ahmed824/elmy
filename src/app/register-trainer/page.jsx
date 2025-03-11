@@ -10,7 +10,7 @@ export default function page() {
             <BreadCramp title="التسجيل كمدرب" />
 
             <div className='container mx-auto px-4 md:px-10 lg:px-20 py-10 flex flex-col md:flex-row items-center'>
-                <div className='w-full md:w-1/2 mt-6 md:mt-0 text-right'>
+                <div className='w-full md:w-1/2 mt-6 md:mt-0 text-right' data-aos="fade-left">
                     <span className="text-sm text-mainColor bg-purple-200 px-3 py-1 rounded-full">
                         اهلا بكم في علمي
                     </span>
@@ -36,7 +36,7 @@ export default function page() {
                         </Link>
                     </div>
                 </div>
-                <div className="w-full md:w-1/2 flex justify-center">
+                <div className="w-full md:w-1/2 flex justify-center" data-aos="fade-right">
                     <Image src={trainerSign} alt="التسجيل كمدرب" width={500} height={500} />
                 </div>
             </div>

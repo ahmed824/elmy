@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import { FaHome, FaList, FaEnvelope, FaUser, FaSearch } from "react-icons/fa"; // Icons for navigation
+import { FaHome, FaList, FaEnvelope, FaUser, FaSignInAlt } from "react-icons/fa";
 import { usePathname } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
@@ -9,39 +9,63 @@ export default function MobileFooterNav() {
   const pathname = usePathname();
   const { t } = useTranslation();
 
-  const navLinks = [
-    { href: "/", label: t("navbar.home"), icon: FaHome },
-    { href: "/categories", label: t("navbar.categories"), icon: FaList }, // Assuming a categories page
+  const navLinksLeft = [
+    { href: "/categories", label: t("navbar.categories"), icon: FaList },
     { href: "/contact", label: t("navbar.contactUs"), icon: FaEnvelope },
-    { href: "/register", label: t("navbar.login"), icon: FaUser },
-    // Optionally add search if you want a search icon in the footer
-    // { href: "#", label: t("navbar.search"), icon: FaSearch },
   ];
 
-  const isActiveLink = (path) => {
-    return pathname === path;
-  };
+  const navLinksRight = [
+    { href: "/profile", label: t("navbar.profile"), icon: FaUser },
+    { href: "/signin", label: "تسجيل الدخول", icon: FaSignInAlt },
+  ];
+
+  const isActiveLink = (path) => pathname === path;
 
   return (
-    <nav className="fixed bottom-0 left-0 w-full bg-background text-white p-2 shadow-lg lg:hidden z-50">
-      <ul className="flex justify-around items-center">
-        {navLinks.map((link) => (
-          <li key={link.href} className="flex flex-col items-center">
+    <div className="flex md:hidden fixed bottom-4 left-1/2 transform -translate-x-1/2 w-[90%] bg-white/10 backdrop-blur-lg text-white py-2 shadow-xl rounded-2xl justify-between items-center z-[1000] border border-gray-300">
+      <div className="container mx-auto">
+        <div className="flex relative">
+          {/* Left Side Links */}
+          {navLinksLeft.map((link) => (
+            <div className="flex-1" key={link.href}>
+              <Link
+                href={link.href}
+                className={`flex flex-col items-center text-purple-800 transition-colors duration-300 hover:text-purple-400 ${
+                  isActiveLink(link.href) ? "text-purple-400" : ""
+                }`}
+              >
+                <link.icon className="text-xl mb-1" />
+                <span className="text-xs text-center">{link.label}</span>
+              </Link>
+            </div>
+          ))}
+
+          {/* Home Link (Centered & Elevated) */}
+          <div className="flex-1 relative flex justify-center">
             <Link
-              href={link.href}
-              className={`flex flex-col items-center p-2 rounded-lg transition-all ${
-                isActiveLink(link.href)
-                  ? "text-purple-600 bg-purple-100"
-                  : "text-gray-300 hover:text-purple-600 hover:bg-purple-100"
-              }`}
-              aria-label={link.label}
+              href="/"
+              className="absolute -top-6 bg-gradient-to-br from-purple-500 to-purple-700 w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:scale-105 transition-transform duration-300"
             >
-              <link.icon className="text-xl mb-1" />
-              <span className="text-xs text-center">{link.label}</span>
+              <FaHome className="text-white text-2xl" />
             </Link>
-          </li>
-        ))}
-      </ul>
-    </nav>
+          </div>
+
+          {/* Right Side Links */}
+          {navLinksRight.map((link) => (
+            <div className="flex-1" key={link.href}>
+              <Link
+                href={link.href}
+                className={`flex flex-col items-center text-purple-800 transition-colors duration-300 hover:text-purple-400 ${
+                  isActiveLink(link.href) ? "text-purple-400" : ""
+                }`}
+              >
+                <link.icon className="text-xl mb-1" />
+                <span className="text-xs text-center">{link.label}</span>
+              </Link>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 }

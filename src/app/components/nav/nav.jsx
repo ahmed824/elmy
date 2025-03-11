@@ -144,7 +144,7 @@ export default function Nav() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className={`transition-all ${isActiveLink(link.href)
+                    className={`transition-all font-medium text-base ${isActiveLink(link.href)
                         ? "text-purple-600 bg-purple-100 px-3 py-1 rounded-lg"
                         : "hover:text-purple-600 hover:bg-purple-100 px-3 py-1 rounded-lg"
                       }`}

@@ -14,7 +14,8 @@
     "categories": "فئات الدورات",
     "language": "EN",
     "login": "تسجيل دخول",
-    "logout": "تسجيل خروج"
+    "logout": "تسجيل خروج",
+    "profile":"حسابي"
   },
   "footer": {
     "newsLetterSection": {
