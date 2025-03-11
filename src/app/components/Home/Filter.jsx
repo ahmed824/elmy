@@ -56,13 +56,13 @@ export default function Filter() {
           <button
             key={button.id}
             onClick={() => setActiveFilter(button.filter)}
-            className={`relative font-regular w-20 sm:w-24 md:w-28 py-1 sm:py-2 rounded-full shadow-lg hover:scale-105 transform transition-all duration-300 overflow-hidden
+            className={`relative font-regular w-36 sm:w-24 md:w-36 py-1 sm:py-2 rounded-full shadow-lg hover:scale-105 transform transition-all duration-300 overflow-hidden
               ${activeFilter === button.filter
                 ? "bg-gradient-to-r from-[#601596] via-[#A436F0] to-[#601596] text-white"
                 : "border-2 border-[#601596] text-[#601596]"
               }`}
           >
-            <span className="relative z-10 text-sm sm:text-base">{t(button.label)}</span>
+            <span className="relative z-10 text-sm sm:text-base whitespace-nowrap">{t(button.label)}</span>
             {activeFilter === button.filter && (
               <div className="absolute inset-0 bg-gradient-to-r from-[#601596] via-[#A436F0] via-white/20 via-[#A436F0] to-[#601596] opacity-80 hover:opacity-90 transition-opacity" />
             )}

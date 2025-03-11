@@ -19,12 +19,26 @@ const PhoneNumberInput = ({ field, form, ...props }) => {
   const error = touched[name] && errors[name];
 
   const handleChange = (phone, countryData) => {
+    // Get the country code with + prefix
     const countryCode = `+${countryData.dialCode}`;
-    let phoneNumber = phone.startsWith(countryCode)
-      ? phone.slice(countryCode.length)
-      : phone;
-
+    
+    // Extract only the phone number part without the country code
+    // First, remove any non-digit characters
+    const cleanedPhone = phone.replace(/\D/g, '');
+    
+    // Remove the country code digits from the beginning of the phone number
+    const dialCode = countryData.dialCode;
+    let phoneNumber = cleanedPhone;
+    
+    // Check if the phone number starts with the dial code and remove it
+    if (cleanedPhone.startsWith(dialCode)) {
+      phoneNumber = cleanedPhone.substring(dialCode.length);
+    }
+    
+    // Set the full phone (with country code) for the library to display
     setFieldValue(name, phone || "");
+    
+    // Set the separated values for API submission
     setFieldValue("phone_country_code", countryCode);
     setFieldValue("phone_number", phoneNumber);
   };

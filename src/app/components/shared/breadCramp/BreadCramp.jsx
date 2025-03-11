@@ -8,7 +8,7 @@ export default function BreadCramp({ title }) {
 
   return (
     <div
-      className="relative flex justify-center items-center min-h-[300px] -top-[110px] -z-10"
+      className="relative flex justify-center items-center min-h-[300px] -top-[132px] -z-10"
       style={{
         background: "linear-gradient(75deg, rgba(162, 57, 240, 0.4), #ffffff, rgba(248, 246, 207, 0.5))",
       }}

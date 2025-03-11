@@ -23,11 +23,8 @@ export default function Nav() {
   const [isClient, setIsClient] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
-  console.log("Current Language:", i18n.language);
-  console.log("Available Languages:", i18n.languages);
-  console.log("Translation Output:", t("navbar.home"));
   const { data: logoData } = useLogo();
   const { data: userData, isLoading, isError } = useAuthProfile();
 
@@ -45,13 +42,6 @@ export default function Nav() {
     return pathname === path;
   };
 
-  // Debug user data
-  useEffect(() => {
-    if (userData) {
-      console.log("User Data:", userData);
-      console.log("User Name:", userData?.data?.user?.name);
-    }
-  }, [userData]);
 
   if (!isClient) {
     return (
@@ -61,14 +51,14 @@ export default function Nav() {
             <Link href="/">
               <Image src={Logo} alt="Elmy Logo" width={122} height={50} />
             </Link>
-            {logoData?.data?.logo && (
+            {logoData?.data?.logo ? (
               <Image
                 src={logoData.data.logo}
                 alt="Logo"
                 width={122}
                 height={50}
               />
-            )}
+            ) : null}
             <CategoriesMenu />
           </div>
           <ul className="hidden lg:flex items-center gap-4 text-black text-[16px] font-medium">
@@ -84,11 +74,10 @@ export default function Nav() {
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className={`transition-all ${
-                    isActiveLink(link.href)
+                  className={`transition-all ${isActiveLink(link.href)
                       ? "text-purple-600 bg-purple-100 px-3 py-1 rounded-lg"
                       : "hover:text-purple-600 hover:bg-purple-100 px-3 py-1 rounded-lg"
-                  }`}
+                    }`}
                 >
                   {link.label}
                 </Link>
@@ -176,6 +165,15 @@ export default function Nav() {
                       {link.label}
                     </Link>
                   )}
+                  <Link
+                    href={link.href}
+                    className={`transition-all ${isActiveLink(link.href)
+                        ? "text-purple-600 bg-purple-100 px-3 py-1 rounded-lg"
+                        : "hover:text-purple-600 hover:bg-purple-100 px-3 py-1 rounded-lg"
+                      }`}
+                  >
+                    {link.label}
+                  </Link>
                 </li>
               ))}
             </ul>

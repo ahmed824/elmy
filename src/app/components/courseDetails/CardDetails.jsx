@@ -15,8 +15,8 @@ import Table from './Table';
 import { useAddToCart } from '@/app/customKooks/addToCart';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
-import excel from "@/images/excel.svg";
-import { baseUrl } from '@/app/baseUrl';
+import AddToFav from '../shared/addToFav/AddToFav';
+
 
 export default function CardDetails({ courseId, course }) {
     const [isVideoDialogOpen, setIsVideoDialogOpen] = useState(false);
@@ -63,14 +63,12 @@ export default function CardDetails({ courseId, course }) {
     return (
         <div className="bg-white rounded-2xl shadow-lg p-4 max-w-sm mx-auto border-2 border-mainColor relative transform transition-transform duration-300 hover:scale-105 hover:shadow-xl">
             {/* Bookmark Icon */}
-            <div className="absolute top-3 left-3 bg-white p-2 rounded-full shadow-lg cursor-pointer transform transition-transform duration-200 hover:scale-110 z-50">
-                <FiBookmark className="text-purple-500 text-lg hover:text-purple-700" />
-            </div>
+            <AddToFav courseId={courseId} />
 
             <Dialog open={isVideoDialogOpen} onOpenChange={setIsVideoDialogOpen}>
                 <div className="relative group">
                     <Image
-                        src={videoUrl ? `${videoUrl}?preview=true` : excel} 
+                        src={course.image} 
                         alt="Course Preview"
                         width={300}
                         height={180}
@@ -144,7 +142,7 @@ export default function CardDetails({ courseId, course }) {
             <button
                 onClick={handleSubscribe}
                 disabled={isLoading}
-                className="border border-gray-300 text-gray-700 text-xl font-medium w-full py-2 rounded-full mt-2 flex items-center justify-center transform transition-transform duration-200 hover:scale-105 hover:bg-purple-500 disabled:opacity-50"
+                className="border border-gray-300 text-gray-700 text-xl font-medium w-full py-2 rounded-full mt-2 flex items-center justify-center transform transition-transform duration-200 hover:scale-105 hover:bg-purple-500 hover:text-white disabled:opacity-50"
             >
                 {isLoading ? "جاري الاشتراك..." : "إشترك الآن"}
             </button>

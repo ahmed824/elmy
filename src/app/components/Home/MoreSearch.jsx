@@ -24,9 +24,10 @@ export default function MoreSearch() {
 
     const categories = data?.data || [];
 
-    const handleClick = (id) => {
-        router.push(`/categories/${id}`);
-    };
+    const handleClick = (id, name) => {
+        const formattedName = name.replace(/\s+/g, "-");  
+        router.push(`/courses/${id}/${formattedName}`);
+      };
 
     return (
         <section className="py-10 px-5 text-center">
@@ -60,7 +61,7 @@ export default function MoreSearch() {
                             </h3>
                             <div className="flex justify-center">
                                 {/* Pass the handleClick function and category id to the KnowMoreButton */}
-                                <KnowMoreButton onClick={() => handleClick(category.id)} />
+                                <KnowMoreButton onClick={() => handleClick(category.id , category.name)} />
                             </div>
                         </div>
                     </div>

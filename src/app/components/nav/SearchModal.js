@@ -24,13 +24,12 @@ export default function SearchModal({ isOpen, onClose }) {
     sort_by: "",
   };
 
-  // Only fetch courses if searchQuery is not empty after trimming
-  const shouldFetchCourses = searchQuery.trim().length > 0;
+  // Always call the hook, but conditionally use its data
+  const { data, isLoading } = useCourses(filters);
 
-  // Conditionally call useCourses only when shouldFetchCourses is true
-  const { data, isLoading } = shouldFetchCourses
-    ? useCourses(filters)
-    : { data: null, isLoading: false };
+  // Only use the data if searchQuery is not empty after trimming
+  const shouldFetchCourses = searchQuery.trim().length > 0;
+  const courses = shouldFetchCourses ? data?.data?.data : [];
 
   // Close modal when clicking outside
   useEffect(() => {
@@ -87,21 +86,28 @@ export default function SearchModal({ isOpen, onClose }) {
             </p>
           ) : isLoading ? (
             <p className="text-center py-4 text-gray-600">{t("loading")}</p>
-          ) : data?.data?.data?.length > 0 ? (
+          ) : courses.length > 0 ? (
             <div className="space-y-4">
-              {data.data.data.map((course) => (
-                <div key={course.id} className="border border-gray-200 rounded-lg">
+              {courses.map((course) => (
+                <div
+                  key={course.id}
+                  className="border border-gray-200 rounded-lg"
+                >
                   {/* Accordion Header */}
                   <button
                     onClick={() =>
-                      setOpenAccordion(openAccordion === course.id ? null : course.id)
+                      setOpenAccordion(
+                        openAccordion === course.id ? null : course.id
+                      )
                     }
                     className="w-full flex items-center justify-between px-4 py-3 text-left bg-gray-100 hover:bg-gray-200 rounded-t-lg transition-all"
                   >
                     <div className="flex items-center gap-3">
                       {/* Course Image with Link */}
                       <Link
-                        href={`/courseDetails/${course.id}/${course.title.replace(/\s+/g, "-")}`}
+                        href={`/courseDetails/${
+                          course.id
+                        }/${course.title.replace(/\s+/g, "-")}`}
                         className="w-12 h-12 bg-gray-200 rounded-lg overflow-hidden"
                       >
                         {course.image ? (
@@ -120,7 +126,9 @@ export default function SearchModal({ isOpen, onClose }) {
                       </Link>
 
                       <div>
-                        <h3 className="text-sm font-semibold">{course.title}</h3>
+                        <h3 className="text-sm font-semibold">
+                          {course.title}
+                        </h3>
                         <p className="text-xs text-gray-600">{course.level}</p>
                       </div>
                     </div>
@@ -132,7 +140,9 @@ export default function SearchModal({ isOpen, onClose }) {
                   {/* Accordion Content */}
                   {openAccordion === course.id && (
                     <div className="p-4 space-y-2 border-t bg-white transition-all">
-                      <p className="text-sm text-gray-700">{course.description}</p>
+                      <p className="text-sm text-gray-700">
+                        {course.description}
+                      </p>
                       <p className="text-sm">
                         <strong>{t("Instructor")}:</strong>{" "}
                         {course.instructor?.name || "N/A"}
@@ -147,7 +157,9 @@ export default function SearchModal({ isOpen, onClose }) {
                         <strong>{t("Price")}:</strong>{" "}
                         {course.discount_price ? (
                           <>
-                            <span className="text-red-500">${course.discount_price}</span>
+                            <span className="text-red-500">
+                              ${course.discount_price}
+                            </span>
                             <span className="text-gray-500 line-through ml-2">
                               ${course.price}
                             </span>

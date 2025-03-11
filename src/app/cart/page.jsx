@@ -1,22 +1,25 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import BreadCramp from "../components/shared/breadCramp/BreadCramp";
 import Image from "next/image";
-import { FaTrashAlt, FaShoppingCart } from "react-icons/fa"; // Added FaShoppingCart
-import { IoPlayOutline } from "react-icons/io5";
-import { BiBookAlt } from "react-icons/bi";
+import { FaTrashAlt, FaShoppingCart } from "react-icons/fa";
+// import { IoPlayOutline } from "react-icons/io5";
+// import { BiBookAlt } from "react-icons/bi";
 import { useGetCart } from "@/app/customKooks/getCart"; // Adjust path
 import { useDeleteCourse } from "@/app/customKooks/deleteCourse"; // Adjust path
+import { useCheckout } from "../customKooks/cartCheckout";
 import { toast } from "react-toastify";
 import Link from "next/link";
 import DotsLoader from "../components/shared/DotsLoader";
 
 export default function Page() {
+    const [coupon, setCoupon] = useState(""); // State to hold the coupon code
     const { data, isLoading, isError } = useGetCart("ar");
     const cartData = data?.data || { items: [], total_items: 0, total_price: 0 };
     const { items, total_price } = cartData;
 
     const { mutate: deleteCourse, isLoading: isDeleting } = useDeleteCourse();
+    const { mutate: checkout, isLoading: isCheckingOut } = useCheckout();
 
     const handleRemoveItem = (cartItemId) => {
         deleteCourse(
@@ -30,6 +33,10 @@ export default function Page() {
                 },
             }
         );
+    };
+
+    const handleCheckout = () => {
+        checkout({ coupon });
     };
 
     return (
@@ -79,7 +86,6 @@ export default function Page() {
                                     key={item.id}
                                     className="flex items-center justify-between w-full p-4 bg-white hover:shadow-lg transition-shadow duration-300 border-b-2 border-gray-200 hover:border-purple-500 transform hover:-translate-y-1 transition-transform duration-300 flex-row-reverse"
                                 >
-                                    {/* Trash Icon */}
                                     <button
                                         onClick={() => handleRemoveItem(item.id)}
                                         disabled={isDeleting}
@@ -87,13 +93,11 @@ export default function Page() {
                                     >
                                         <FaTrashAlt />
                                     </button>
-
-                                    {/* Course Details */}
                                     <div className="flex-grow px-4 text-right">
                                         <h2 className="text-lg font-semibold text-gray-900 hover:text-purple-600 transition-colors duration-300">
                                             {item.course.title}
                                         </h2>
-                                        <div className="flex items-center text-sm text-gray-500 mt-2">
+                                        {/* <div className="flex items-center text-sm text-gray-500 mt-2">
                                             <IoPlayOutline className="text-mainColor ml-1" />
                                             <span className="ml-2 text-mainColor">
                                                 فيديوهات: <span className="text-gray-500">33</span>
@@ -103,16 +107,14 @@ export default function Page() {
                                             <span className="text-mainColor">
                                                 دروس: <span className="text-gray-500">14</span>
                                             </span>
-                                        </div>
+                                        </div> */}
                                         <p className="mt-2 text-purple-600 font-bold hover:text-purple-700 transition-colors duration-300">
                                             {item.course.price} ريال
                                         </p>
                                     </div>
-
-                                    {/* Course Image */}
                                     <div className="w-24 h-16 relative overflow-hidden rounded-lg">
                                         <Image
-                                            src="/image.png"
+                                            src={item.course.image}
                                             alt={item.course.title}
                                             width={96}
                                             height={64}
@@ -139,9 +141,14 @@ export default function Page() {
                                     <input
                                         type="text"
                                         placeholder="ادخل كود الخصم"
+                                        value={coupon}
+                                        onChange={(e) => setCoupon(e.target.value)} // Update coupon state
                                         className="bg-transparent flex-1 p-2 text-right text-gray-600 outline-none"
                                     />
-                                    <button className="bg-gradient-to-r from-[#A436F0] via-[#637FEA] to-[#A436F0] text-white px-4 py-1 rounded-full hover:opacity-90 transition-opacity duration-300">
+                                    <button
+                                        onClick={() => toast.info("تم تطبيق كود الخصم")} // Placeholder for applying coupon
+                                        className="bg-gradient-to-r from-[#A436F0] via-[#637FEA] to-[#A436F0] text-white px-4 py-1 rounded-full hover:opacity-90 transition-opacity duration-300"
+                                    >
                                         إرسال
                                     </button>
                                 </div>
@@ -152,8 +159,12 @@ export default function Page() {
                                 </div>
                             </div>
 
-                            <button className="w-full mt-4 bg-gradient-to-r from-[#A436F0] via-[#637FEA] to-[#A436F0] text-white text-lg font-semibold py-2 rounded-full hover:opacity-90 transition-opacity duration-300">
-                                تأكيد الشراء
+                            <button
+                                onClick={handleCheckout}
+                                disabled={isCheckingOut || isLoading || items.length === 0}
+                                className="w-full mt-4 bg-gradient-to-r from-[#A436F0] via-[#637FEA] to-[#A436F0] text-white text-lg font-semibold py-2 rounded-full hover:opacity-90 transition-opacity duration-300 disabled:opacity-50"
+                            >
+                                {isCheckingOut ? "جاري إتمام الشراء..." : "تأكيد الشراء"}
                             </button>
                         </div>
                     </div>
