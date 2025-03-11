@@ -16,7 +16,7 @@ export default function DashBoardSideBar() {
     setSecondDashboardSubTitle,
     setDashboardTitle
   } = useContext(LayoutContext);
-  const [trainer, setTrainer] = useState(true);
+  const [trainer, setTrainer] = useState(false);
 
   const [isActive, setIsActive] = useState(secondDashboardSubTitle);
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
