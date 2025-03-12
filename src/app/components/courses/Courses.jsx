@@ -84,7 +84,7 @@ export default function Courses({id , name}) {
     const renderPagination = () => {
         const { current_page, last_page } = pagination;
         const pageButtons = [];
-        const maxVisiblePages = 5; // Limit the number of visible page buttons
+        const maxVisiblePages = 4; // Limit the number of visible page buttons
 
         let startPage = Math.max(1, current_page - Math.floor(maxVisiblePages / 2));
         let endPage = Math.min(last_page, startPage + maxVisiblePages - 1);
@@ -137,7 +137,7 @@ export default function Courses({id , name}) {
         <>
             {/* Breadcrumb & Header Section */}
             <div
-                className="flex justify-center flex-col items-right min-h-[400px] px-6 py-8 md:px-12 md:py-16 -mt-[116px]"
+                className="flex justify-center flex-col pb-20 items-right min-h-[400px] px-6 py-8 md:px-12 md:py-16 -mt-[116px]"
                 style={{
                     background: "linear-gradient(75deg, rgba(162, 57, 240, 0.4), #ffffff, rgba(248, 246, 207, 0.5))",
                     padding: "20px 100px",

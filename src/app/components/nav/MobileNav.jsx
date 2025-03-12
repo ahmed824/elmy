@@ -26,17 +26,15 @@ export default function MobileNav({ isOpen, onClose }) {
     <>
       {/* Overlay */}
       <div
-        className={`fixed inset-0 bg-black/50 z-40 transition-opacity duration-300 lg:hidden ${
-          isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
-        }`}
+        className={`fixed inset-0 bg-black/50 z-40 transition-opacity duration-300 lg:hidden ${isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+          }`}
         onClick={onClose}
       />
 
       {/* Side Menu */}
       <div
-        className={`fixed top-0 right-0 h-full w-[80%] max-w-[400px] bg-white z-50 transform transition-transform duration-300 ease-in-out lg:hidden ${
-          isOpen ? "translate-x-0" : "translate-x-full"
-        }`}
+        className={`fixed top-0 right-0 h-full w-[80%] max-w-[400px] bg-white z-50 transform transition-transform duration-300 ease-in-out lg:hidden ${isOpen ? "translate-x-0" : "translate-x-full"
+          }`}
       >
         <div className="flex items-center justify-between p-4 border-b">
           <button
@@ -93,11 +91,10 @@ export default function MobileNav({ isOpen, onClose }) {
                 <Link
                   href={link.href}
                   onClick={onClose}
-                  className={`block w-full transition-all ${
-                    isActiveLink(link.href)
+                  className={`block w-full transition-all ${isActiveLink(link.href)
                       ? "text-purple-600 bg-purple-100 px-4 py-2 rounded-lg"
                       : "hover:text-purple-600 hover:bg-purple-100 px-4 py-2 rounded-lg"
-                  }`}
+                    }`}
                 >
                   {link.label}
                 </Link>

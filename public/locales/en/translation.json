@@ -33,7 +33,10 @@
     "supportAndPolicies": "Support and Policies",
     "contactDirectly": "Contact Directly",
     "whatsapp": "WhatsApp: 966597431779",
-    "email": "Email: support@elmyacademy.com",
+    "email": {
+      "label": "Email",
+      "email":"support@elmyacademy.com"
+    },
     "subscribe": "Subscribe to our newsletter",
     "subscribeDescription": "Trainers from all over the world teach millions of learners on Elmy. We provide the tools and skills needed to teach what you love.",
     "subscribeButton": "Subscribe Now",

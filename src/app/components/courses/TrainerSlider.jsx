@@ -7,16 +7,14 @@ import { RiBookShelfLine } from "react-icons/ri";
 import { IoIosPeople } from "react-icons/io";
 import Avatar from "@/images/profile.svg";
 import { useInstructors } from "@/app/customKooks/getInstructors";
+import DotsLoader from "../shared/DotsLoader";
 
 const TrainerCarousel = () => {
     const { data: instructorsData, isLoading, isError } = useInstructors(10, "ar");
 
     if (isLoading) {
         return (
-            <div className="py-12 container mx-auto px-4 text-center">
-                <div className="w-16 h-16 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
-                <p className="mt-4 text-gray-600">جاري تحميل المدربين...</p>
-            </div>
+            <DotsLoader />
         );
     }
 
@@ -38,7 +36,7 @@ const TrainerCarousel = () => {
     })) || [];
 
     return (
-        <div className="py-12 mt-12">
+        <div className="py-12 my-12 pb-28">
             <div className="container mx-auto px-4">
                 <div className="text-center mb-8">
                     <span className="bg-purple-100 text-purple-600 px-3 py-1 rounded-full text-sm">
@@ -67,7 +65,7 @@ const TrainerCarousel = () => {
                             slidesPerView: 3,
                         },
                     }}
-                    style={{ paddingBottom: "30px" }}
+                    style={{ paddingBottom: "14px" }}
                 >
                     {trainers.map((trainer) => (
                         <SwiperSlide key={trainer.id}>
