@@ -1,23 +1,82 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { baseUrl } from "../baseUrl";
-import axios from "axios";
+import axiosInstance from "./token";
 
-const fetchNotifications = async ({ lang = "ar" }) => {
-  const response = await axios.get(`${baseUrl}notifications?lang=${lang}`);
-  if (!response.ok) {
-    throw new Error("Network response was not ok");
+// Helper function to handle GET requests
+const fetchData = async (url, lang) => {
+  try {
+    const response = await axiosInstance.get(`${baseUrl}${url}?lang=${lang}`);
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response?.data?.message || "Network response was not ok");
   }
-  return response.json();
 };
 
-const useFetchNotifications = ({ lang = "ar" } = {}) => {
+// Helper function to handle POST requests
+const postData = async (url, data) => {
+  try {
+    const response = await axiosInstance.post(`${baseUrl}${url}`, data);
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response?.data?.message || "Network request failed");
+  }
+};
+
+// Fetch all notifications
+const fetchNotifications = async ({ lang = "ar" }) => fetchData("notifications", lang);
+
+// Fetch unread notifications
+const fetchNotNotifications = async ({ lang = "ar" }) => fetchData("notifications/unread", lang);
+
+// Fetch notification count
+const fetchCount = async ({ lang = "ar" }) => fetchData("notifications/count", lang);
+
+// Mark a single notification as read
+const markNotificationRead = async (id) => postData(`notifications/${id}/read`, {});
+
+// Mark all notifications as read
+const markAllNotificationsRead = async () => postData("notifications/mark-all-read", {});
+
+// Reusable query configuration
+const useNotificationQuery = (queryKey, queryFn, lang = "ar") => {
   return useQuery({
-    queryKey: ["notifications", lang], 
-    queryFn: () => fetchNotifications({ lang }),
-    staleTime: 1000 * 60 * 5, // Data is fresh for 5 minutes
-    cacheTime: 1000 * 60 * 10, // Cache data for 10 minutes
-    retry: 2, // Retry failed requests 2 times
+    queryKey: [queryKey, lang],
+    queryFn: () => queryFn({ lang }),
+    staleTime: 1000 * 60 * 5,
+    cacheTime: 1000 * 60 * 10,
+    retry: 2,
   });
 };
 
-export default useFetchNotifications;
+// Custom hooks for fetching notifications
+export const useFetchNotifications = ({ lang = "ar" } = {}) => 
+  useNotificationQuery("notifications", fetchNotifications, lang);
+
+export const useFetchNotNotifications = ({ lang = "ar" } = {}) => 
+  useNotificationQuery("unread-notifications", fetchNotNotifications, lang);
+
+export const useFetchCount = ({ lang = "ar" } = {}) => 
+  useNotificationQuery("notification-count", fetchCount, lang);
+
+// Custom hooks for marking notifications as read
+export const useMarkNotificationRead = () => {
+  const queryClient = useQueryClient();
+  return useMutation(markNotificationRead, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(["notifications"]);
+      queryClient.invalidateQueries(["unread-notifications"]);
+      queryClient.invalidateQueries(["notification-count"]);
+    },
+  });
+};
+
+export const useMarkAllNotificationsRead = () => {
+  const queryClient = useQueryClient();
+  return useMutation(markAllNotificationsRead, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(["notifications"]);
+      queryClient.invalidateQueries(["unread-notifications"]);
+      queryClient.invalidateQueries(["notification-count"]);
+    },
+  });
+};

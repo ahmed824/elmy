@@ -37,7 +37,7 @@ export default function Page() {
             <BreadCramp title="كيف نعمل" />
             <div className="container mx-auto px-4 md:px-10 lg:px-20 py-10 flex flex-col md:flex-row items-center">
                 {/* Right Side Content */}
-                <div className="w-full md:w-1/2 mt-6 md:mt-0 text-right">
+                <div className="w-full md:w-1/2 mt-6 md:mt-0 text-right" data-aos="fade-left">
                     <span className="text-sm text-mainColor bg-purple-200 px-3 py-1 rounded-full transition-all duration-300 hover:bg-purple-300">
                         تعلم أينما كنت
                     </span>
@@ -82,7 +82,7 @@ export default function Page() {
                 </div>
 
                 {/* Left Side Image */}
-                <div className="w-full md:w-1/2 flex justify-center mt-8 md:mt-0">
+                <div className="w-full md:w-1/2 flex justify-center mt-8 md:mt-0" data-aos="fade-right">
                     <div className="transition-all duration-300 hover:scale-105">
                         <Image 
                             src={howWork} 

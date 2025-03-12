@@ -18,10 +18,6 @@ const MoreWatch = dynamic(() => import("@/app/components/Home/MoreWatch"), {
   ssr: false,
 });
 
-const Notify = dynamic(() => import("@/app/components/Home/notify"), {
-  ssr: false,
-});
-
 const Opinion = dynamic(() => import("@/app/components/Home/Opinion"), {
   ssr: false,
 });
@@ -41,7 +37,6 @@ const Trainer = dynamic(() => import("@/app/components/Home/Trainer"), {
 export default function HomeMain() {
   return (
     <div className="min-h-screen">
-      <Notify />
       <Header />
       <Filter />
       <MoreSearch />

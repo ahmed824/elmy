@@ -8,7 +8,6 @@ import ReviewForm from "./ReviewForm";
 import TrainerCard from "./TrainerCard";
 
 export default function CourseDetailsClient({ course }) {
-    // const courseName = course.name;
     const [activeTab, setActiveTab] = useState("ملخص الدورة");
 
     const tabs = [
