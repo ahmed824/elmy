@@ -11,16 +11,13 @@ import Link from "next/link";
 import { useTranslation } from "react-i18next";
 
 export default function StudentSideBar({
-  setSecondDashboardSubTitle,
+
   isActive,
   handleActiveLink,
-  setDashBoardTitle,
+
 }) {
   const { t } = useTranslation();
-  function handleClickLink(item) {
-    setSecondDashboardSubTitle(t(`dashboard.sidebar.${item}`));
-    setDashBoardTitle(t(`dashboard.sidebar.${item}`));
-  }
+
   return (
     <div>
       <ul className="flex items-center justify-between text-xs text-gray-500 font-semibold">
@@ -37,10 +34,10 @@ export default function StudentSideBar({
           { item: "dashboard", img: homeIcon },
           { item: "myCourses", img: openBookIcon },
           { item: "favorites", img: bookMarkIcon },
-          { item: "accountSettings", img: userIcon },
+          { item: "profile", img: userIcon },
           { item: "logout", img: logoutIcon },
         ].map(({ item, img }) => (
-          <li key={item} className="" onClick={() => handleClickLink(item)}>
+          <li key={item+Math.random()} className="">
             <Link
               href={`/dashboard/student/${item === "dashboard" ? "main" : item}`}
               className={`flex items-center gap-2 my-2 hover:text-primary-purble cursor-pointer font-semibold ${

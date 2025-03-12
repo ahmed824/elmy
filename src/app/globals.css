@@ -5,7 +5,7 @@
 
 @font-face {
   font-family: "Somar Sans";
-  src: url("/fonts/SomarSans-Regular.ttf") ;
+  src: url("../../public/fonts/SomarSans-Regular.ttf") format("truetype");
 
 }
 

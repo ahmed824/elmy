@@ -9,6 +9,7 @@ import starIcon from "@/images/dashboard/star.png";
 import { useContext } from "react";
 import { LayoutContext } from "@/app/providers/LayoutContext";
 import Link from "next/link";
+import AddToFav from "../shared/addToFav/AddToFav";
 
 export default function Course({
   name,
@@ -86,23 +87,14 @@ export default function Course({
             {price}
           </span>
         </p>
-        <p className="flex items-center justify-between py-3 px-4">
+        <p className="relative flex items-center justify-between py-3 px-4">
           <Link
             href={""}
             className="py-2 px-3 bg-gradient-to-l from-dark-purble via-primary-purble to-dark-purble text-white rounded-full"
           >
             معرفة المزيد
           </Link>
-          <Image
-            src={isBookmarked ? whiteBookMarkIcon : bookMarkIcon}
-            alt="bookmark icon"
-            className={`p-2 border rounded-full border-dark-purble cursor-pointer ${
-              isBookmarked ? "bg-primary-purble" : ""
-            }`}
-            width={40}
-            height={40}
-            onClick={handleBookmark}
-          />
+          <AddToFav/>
         </p>
       </div>
     </div>

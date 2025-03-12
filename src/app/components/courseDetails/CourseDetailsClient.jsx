@@ -26,7 +26,7 @@ export default function CourseDetailsClient({ course }) {
                     <button
                         key={tab.id}
                         onClick={() => setActiveTab(tab.name)}
-                        className={`py-2 px-10 my-3 rounded-full transition-all ${activeTab === tab.name
+                        className={`whitespace-nowrap py-2 px-10 my-3 rounded-full transition-all ${activeTab === tab.name
                             ? "bg-purple-500 text-white"
                             : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                             }`}

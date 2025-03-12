@@ -32,7 +32,7 @@ export default function TrainerSideBar({
           { item: "dashboard", img: homeIcon },
           { item: "courses", img: openBookIcon },
           { item: "ordersProfits", img: checkIcon },
-          { item: "accountSettings", img: settingsIcon },
+          { item: "profile", img: settingsIcon },
           { item: "logout", img: logoutIcon },
         ].map(({ item, img }) => (
           <li key={item} className="" onClick={() => handleClickLink(item)}>

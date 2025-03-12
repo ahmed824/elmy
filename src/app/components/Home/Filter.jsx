@@ -5,7 +5,9 @@ import { FaPlay, FaBook, FaMoneyBillWave, FaStar } from 'react-icons/fa';
 import { LuBookmark } from "react-icons/lu";
 import { useCourses } from "@/app/customKooks/useCourses";
 import { useRouter } from "next/navigation";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
+import HomeCourse from "../shared/HomeCourse/HomeCourse";
+
 
 const filterButtons = [
   { id: 1, label: "filter.new", filter: "new" },
@@ -34,7 +36,10 @@ const RatingStars = ({ rating }) => {
 export default function Filter() {
   const { t } = useTranslation();
   const [activeFilter, setActiveFilter] = useState("new");
-  const { data, isLoading, isError } = useCourses({ lang: "ar", filter: activeFilter });
+  const { data, isLoading, isError } = useCourses({
+    lang: "ar",
+    filter: activeFilter,
+  });
   const router = useRouter();
   const courses = data?.data.slice(0, 3) || [];
 
@@ -58,9 +63,10 @@ export default function Filter() {
             key={button.id}
             onClick={() => setActiveFilter(button.filter)}
             className={`relative font-regular w-36 sm:w-24 md:w-36 py-1 sm:py-2 rounded-full shadow-lg hover:scale-105 transform transition-all duration-300 overflow-hidden
-              ${activeFilter === button.filter
-                ? "bg-gradient-to-r from-[#601596] via-[#A436F0] to-[#601596] text-white"
-                : "border-2 border-[#601596] text-[#601596]"
+              ${
+                activeFilter === button.filter
+                  ? "bg-gradient-to-r from-[#601596] via-[#A436F0] to-[#601596] text-white"
+                  : "border-2 border-[#601596] text-[#601596]"
               }`}
           >
             <span className="relative z-10 text-sm sm:text-base whitespace-nowrap">
