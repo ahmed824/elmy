@@ -24,7 +24,7 @@ import { LayoutProvider } from "./providers/LayoutContext";
 const somarSans = localFont({
   src: [
     {
-      path: "/fonts/SomarSans-Regular.ttf",
+      path: "../../public/fonts/SomarSans-Regular.ttf",
     },
   ],
   variable: "--font-somar-sans",

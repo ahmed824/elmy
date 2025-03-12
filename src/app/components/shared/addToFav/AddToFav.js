@@ -28,7 +28,7 @@ export default function AddToFav({ courseId }) {
 
   return (
     <div
-      className="absolute top-3 left-3 bg-white p-2 rounded-full shadow-lg cursor-pointer transform transition-transform duration-200 hover:scale-110 z-50"
+      className="absolute top-3 left-3 bg-white p-2 rounded-full shadow-lg cursor-pointer transform transition-transform duration-200 hover:scale-110 z-50 "
       onClick={handleAddToFavorites}
     >
       {isFavorited ? (

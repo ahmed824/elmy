@@ -42,7 +42,6 @@ export default function Nav() {
     return pathname === path;
   };
 
-
   if (!isClient) {
     return (
       <div className="w-full px-4 sm:px-6 lg:px-8 py-3 bg-transparent mt-8 sm:mt-11 overflow-hidden">
@@ -74,10 +73,11 @@ export default function Nav() {
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className={`transition-all ${isActiveLink(link.href)
+                  className={`transition-all ${
+                    isActiveLink(link.href)
                       ? "text-purple-600 bg-purple-100 px-3 py-1 rounded-lg"
                       : "hover:text-purple-600 hover:bg-purple-100 px-3 py-1 rounded-lg"
-                    }`}
+                  }`}
                 >
                   {link.label}
                 </Link>
@@ -131,7 +131,7 @@ export default function Nav() {
             </div>
 
             {/* Desktop Navigation */}
-            <ul className="hidden lg:flex items-center gap-6 text-black text-[16px] font-medium">
+            <ul className="hidden lg:flex items-center gap-4 text-black text-[16px] font-medium">
               {[
                 { href: "/", label: t("navbar.home") },
                 { href: "/how-we-work", label: t("navbar.howItWorks") },
@@ -140,23 +140,12 @@ export default function Nav() {
                   label: t("navbar.registerAsInstructor"),
                 },
                 { href: "/contact", label: t("navbar.contactUs") },
-                { href: "/dashboard", label: "لوحة التحكم" },
               ].map((link) => (
                 <li key={link.href}>
-                  {link.href === "/dashboard" && isLoggedIn ? (
+                  {
                     <Link
                       href={link.href}
-                      className={`transition-all ${isActiveLink(link.href)
-                      ? "text-purple-600 bg-purple-100 px-3 py-1 rounded-lg"
-                      : "hover:text-purple-600 hover:bg-purple-100 px-3 py-1 rounded-lg"
-                    }`}
-                    >
-                      {link.label}
-                    </Link>
-                  ) : (
-                    <Link
-                      href={link.href}
-                      className={`transition-all ${
+                      className={`whitespace-nowrap transition-all ${
                         isActiveLink(link.href)
                           ? "text-purple-600 bg-purple-100 px-3 py-1 rounded-lg"
                           : "hover:text-purple-600 hover:bg-purple-100 px-3 py-1 rounded-lg"
@@ -164,16 +153,7 @@ export default function Nav() {
                     >
                       {link.label}
                     </Link>
-                  )}
-                  <Link
-                    href={link.href}
-                    className={`transition-all ${isActiveLink(link.href)
-                        ? "text-purple-600 bg-purple-100 px-3 py-1 rounded-lg"
-                        : "hover:text-purple-600 hover:bg-purple-100 px-3 py-1 rounded-lg"
-                      }`}
-                  >
-                    {link.label}
-                  </Link>
+                  }
                 </li>
               ))}
             </ul>

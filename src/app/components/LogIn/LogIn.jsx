@@ -11,6 +11,7 @@ import "react-phone-input-2/lib/style.css";
 import axiosInstance from "@/app/customKooks/token";
 import Cookies from "js-cookie";
 import { useTranslation } from "react-i18next";
+import { baseUrl } from "@/app/baseUrl";
 
 // Custom Phone Input Component
 const PhoneNumberInput = ({ field, form, ...props }) => {
@@ -21,23 +22,23 @@ const PhoneNumberInput = ({ field, form, ...props }) => {
   const handleChange = (phone, countryData) => {
     // Get the country code with + prefix
     const countryCode = `+${countryData.dialCode}`;
-    
+
     // Extract only the phone number part without the country code
     // First, remove any non-digit characters
-    const cleanedPhone = phone.replace(/\D/g, '');
-    
+    const cleanedPhone = phone.replace(/\D/g, "");
+
     // Remove the country code digits from the beginning of the phone number
     const dialCode = countryData.dialCode;
     let phoneNumber = cleanedPhone;
-    
+
     // Check if the phone number starts with the dial code and remove it
     if (cleanedPhone.startsWith(dialCode)) {
       phoneNumber = cleanedPhone.substring(dialCode.length);
     }
-    
+
     // Set the full phone (with country code) for the library to display
     setFieldValue(name, phone || "");
-    
+
     // Set the separated values for API submission
     setFieldValue("phone_country_code", countryCode);
     setFieldValue("phone_number", phoneNumber);
@@ -98,7 +99,6 @@ export default function LogIn() {
         phone_number: values.phone_number,
         password: values.password,
       };
-
       const response = await axiosInstance.post("auth/login", payload);
       const token = response.data?.data?.token;
 
@@ -131,7 +131,11 @@ export default function LogIn() {
               <label className="text-[#121D2F] font-medium text-lg">
                 {t("login.phoneLabel")} *
               </label>
-              <Field name="phone" component={PhoneNumberInput} placeholder={t("login.phonePlaceholder")} />
+              <Field
+                name="phone"
+                component={PhoneNumberInput}
+                placeholder={t("login.phonePlaceholder")}
+              />
               <Field name="phone_country_code" type="hidden" />
               <Field name="phone_number" type="hidden" />
             </div>
@@ -145,7 +149,9 @@ export default function LogIn() {
                 type={showPassword ? "text" : "password"}
                 name="password"
                 className={`mt-1 p-3 border bg-[#F4F4F4] rounded-3xl focus:outline-none focus:ring-2 focus:ring-purple-500 ${
-                  errors.password && touched.password ? "border-red-500" : "border-gray-300"
+                  errors.password && touched.password
+                    ? "border-red-500"
+                    : "border-gray-300"
                 }`}
                 placeholder={t("login.passwordPlaceholder")}
               />
@@ -156,7 +162,11 @@ export default function LogIn() {
               >
                 {showPassword ? <FaEyeSlash /> : <FaEye />}
               </button>
-              <ErrorMessage name="password" component="div" className="text-red-500 text-sm mt-1" />
+              <ErrorMessage
+                name="password"
+                component="div"
+                className="text-red-500 text-sm mt-1"
+              />
             </div>
 
             {/* Remember Me Checkbox */}
@@ -172,7 +182,10 @@ export default function LogIn() {
                   {t("login.rememberMe")}
                 </label>
               </div>
-              <Link href="/forgot-password" className="text-purple-600 hover:underline">
+              <Link
+                href="/forgot-password"
+                className="text-purple-600 hover:underline"
+              >
                 {t("login.forgotPassword")}
               </Link>
             </div>
@@ -184,7 +197,9 @@ export default function LogIn() {
                 disabled={isLoading}
                 className="bg-gradient-to-r from-purple-500 via-blue-500 to-purple-500 text-white px-6 py-3 rounded-full flex items-center gap-2 shadow-md hover:scale-105 transition-transform w-full justify-center"
               >
-                <span>{isLoading ? t("login.loading") : t("login.submit")}</span>
+                <span>
+                  {isLoading ? t("login.loading") : t("login.submit")}
+                </span>
                 <FaArrowLeft className="text-sm" />
               </button>
             </div>
@@ -192,7 +207,10 @@ export default function LogIn() {
             {/* Register Link */}
             <div className="text-center text-[#121D2F] mt-4">
               {t("login.noAccount")}{" "}
-              <Link href="/register" className="text-purple-600 hover:underline">
+              <Link
+                href="/register"
+                className="text-purple-600 hover:underline"
+              >
                 {t("login.register")}
               </Link>
             </div>
