@@ -27,14 +27,12 @@ const PhoneNumberInput = React.memo(({ field, form, ...props }) => {
         country="sa"
         value={value}
         onChange={handleChange}
-        inputClass={`w-full px-3 py-3 bg-[#F4F4F4] text-[#121D2F] rounded-3xl placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 ${
-          error ? 'border-red-500' : 'border-gray-300'
-        }`}
+        inputClass={`w-full px-3 py-3 bg-[#F4F4F4] text-[#121D2F] rounded-3xl placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 ${error ? 'border-red-500' : 'border-gray-300'
+          }`}
         buttonClass="!bg-[#F4F4F4] !border-none"
         dropdownClass="!text-left !rounded-lg shadow-lg"
-        containerClass={`relative mt-1 border rounded-3xl flex focus:outline-none focus:ring-2 focus:ring-purple-500 ${
-          error ? 'border-red-500' : 'border-gray-300'
-        }`}
+        containerClass={`relative mt-1 border rounded-3xl flex focus:outline-none focus:ring-2 focus:ring-purple-500 ${error ? 'border-red-500' : 'border-gray-300'
+          }`}
         placeholder="رقم الجوال"
         enableSearch
         countryCodeEditable={false}
@@ -46,8 +44,7 @@ const PhoneNumberInput = React.memo(({ field, form, ...props }) => {
 });
 
 const inputClass = (hasError) =>
-  `mt-1 p-3 border bg-[#F4F4F4] rounded-3xl focus:outline-none focus:ring-2 focus:ring-purple-500 ${
-    hasError ? 'border-red-500' : 'border-gray-300'
+  `mt-1 p-3 border bg-[#F4F4F4] rounded-3xl focus:outline-none focus:ring-2 focus:ring-purple-500 ${hasError ? 'border-red-500' : 'border-gray-300'
   }`;
 
 export default function Register() {
@@ -114,19 +111,14 @@ export default function Register() {
       agree_terms: values.termsAgreed,
     };
 
-    // console.log("Registration payload:", payload);
 
     registerStudent(payload, {
       onSuccess: (response) => {
-        const token = response.data?.token; // Safely access token
-        if (token) {
-          Cookies.set('elmy_token', token, { expires: 7 });
-          toast.success('تم إنشاء الحساب بنجاح');
-          resetForm();
-          router.push('/');
-        } else {
-          toast.error('فشل في اتمام التسجيل');
-        }
+
+        toast.success(response?.message);
+        resetForm();
+        router.push('/otp');
+
       },
       onError: (error) => {
         // Handle API error response

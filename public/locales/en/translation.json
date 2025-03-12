@@ -14,7 +14,8 @@
     "categories": "Course Categories",
     "language": "AR",
     "login": "Login",
-    "logout": "Logout"
+    "logout": "Logout",
+    "profile":"account"
   },
   "footer": {
     "newsLetterSection": {

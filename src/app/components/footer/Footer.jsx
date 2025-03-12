@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next";
 export default function Footer() {
   const { t } = useTranslation();
   return (
-    <footer className="relative bg-[#141F30] text-white py-10 rounded-t-2xl  pt-28 mt-56 mb-16 sm:mb-0">
+    <footer className="relative bg-[#141F30] text-white py-10 rounded-t-2xl  pt-28 mt-56 sm:mb-0">
       {/* Toast Container at the top */}
       <ToastContainer
         position="top-center"
@@ -134,7 +134,7 @@ export default function Footer() {
           <p className="text-sm md:text-base">{t("footer.email")}</p>
         </div>
       </div>
-      <div className="text-center text-gray-500 mt-8 border-t border-gray-700 pt-4 text-sm md:text-base">
+      <div className="text-center text-gray-500 pb-28 md:pb-0 mt-8 border-t border-gray-700 pt-4 text-sm md:text-base">
         {t("footer.allRightsReserved")}
       </div>
     </footer>
