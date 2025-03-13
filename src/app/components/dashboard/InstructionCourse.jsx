@@ -14,7 +14,7 @@ const courseInfo = [
 
 export default function InstructionCourse() {
   return (
-    <div className="bg-gray-100 p-4 rounded-lg text-gray-500 font-semibold text-sm w-full md:w-1/3 h-fit mx-3">
+    <div className="bg-gray-100 p-4 rounded-lg text-gray-500 font-semibold text-sm w-full lg:w-1/3 h-fit mr-3">
       {courseInfo.map((info, index) => (
         <div key={index} className="flex items-center mb-4">
           <Image src={checkCircle} alt="check icon" className="w-6 h-6 mx-2" />
