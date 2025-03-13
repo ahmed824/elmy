@@ -6,7 +6,7 @@ export default function Page() {
         <div className="min-h-[50vh]">
             <BreadCramp title=" الشروط و الأحكام" />
 
-            <div className="text-[#121D2F] text-[18px] font-medium leading-relaxed mt-4 w-[60%] m-auto">
+            <div className="text-[#121D2F] text-[18px] font-medium leading-relaxed mt-4 w-[60%] m-auto pb-40">
                 إن استخدامك لمنصة علمي يعني أنك توافق على كافة الشروط والاحكام فيها، بدايةً من التسجيل فيها بحساب خاص، 
                 مروراً بملء استمارة التسجيل وانتهاءً بالحصول على المحتوى التدريبي الذي يطمح كل مشارك بالوصول إليه.
                 <br /><br />

@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next";
 export default function Footer() {
   const { t } = useTranslation();
   return (
-    <footer className="relative bg-[#141F30] text-white py-10 rounded-t-2xl  pt-28 mt-56 sm:mb-0">
+    <footer className="relative bg-[#141F30] text-white py-10 rounded-t-2xl pt-28 mt-10 sm:mb-0">
       {/* Toast Container at the top */}
       <ToastContainer
         position="top-center"
@@ -25,10 +25,14 @@ export default function Footer() {
         pauseOnHover
         className="absolute top-4 left-1/2 transform -translate-x-1/2 z-50" // Positioned at top center
       />
+
+      {/* Newsletter Section */}
       <NewsletterSection />
-      <div className="container mx-auto px-4 md:px-6 lg:px-8 flex flex-col md:flex-row justify-between gap-8">
+
+      {/* Footer Content */}
+      <div className="container mx-auto px-4 md:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
         {/* وصف الموقع */}
-        <div className="w-full md:w-1/3 flex flex-col items-center mb-8 md:mb-0">
+        <div className="flex flex-col items-center text-center md:text-left">
           <div className="flex justify-center">
             <Image
               src="/logo-w.svg"
@@ -58,7 +62,7 @@ export default function Footer() {
         </div>
 
         {/* روابط هامة */}
-        <div className="w-full md:w-1/4 flex flex-col mb-8 md:mb-0">
+        <div className="flex flex-col">
           <h3 className="text-lg font-semibold mb-3 text-[#6C74EB]">
             {t("footer.importantLinks")}
           </h3>
@@ -68,11 +72,6 @@ export default function Footer() {
                 {t("navbar.home")}
               </Link>
             </li>
-            {/* <li>
-              <Link href="#" className="hover:text-mainColor">
-                {t("navbar.aboutUs")}
-              </Link>
-            </li> */}
             <li>
               <Link href="/how-we-work" className="hover:text-mainColor">
                 {t("navbar.howItWorks")}
@@ -92,7 +91,7 @@ export default function Footer() {
         </div>
 
         {/* الدعم والسياسات */}
-        <div className="w-full md:w-1/4 flex flex-col mb-8 md:mb-0">
+        <div className="flex flex-col">
           <h3 className="text-lg font-semibold mb-3 text-[#6C74EB]">
             {t("footer.supportAndPolicies")}
           </h3>
@@ -126,14 +125,17 @@ export default function Footer() {
         </div>
 
         {/* تواصل مباشر */}
-        <div className="w-full md:w-1/4 flex flex-col">
+        <div className="flex flex-col">
           <h3 className="text-lg font-semibold mb-3 text-[#6C74EB]">
             {t("footer.contactDirectly")}
           </h3>
           <p className="text-sm md:text-base">{t("footer.whatsapp")}</p>
-          <p className="text-sm md:text-base">{t("footer.email")}</p>
+          <p className="text-sm md:text-base">{t("footer.email.label")}:</p>
+          <p className="text-sm break-words md:text-base  ">{t("footer.email.email")}</p>
         </div>
       </div>
+
+      {/* حقوق النشر */}
       <div className="text-center text-gray-500 pb-28 md:pb-0 mt-8 border-t border-gray-700 pt-4 text-sm md:text-base">
         {t("footer.allRightsReserved")}
       </div>

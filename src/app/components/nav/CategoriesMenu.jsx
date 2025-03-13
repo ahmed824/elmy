@@ -30,7 +30,7 @@ const CategoriesMenu = () => {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <div
-            className="flex group bg-mainColor text-white px-2 py-2 sm:px-4 rounded-lg items-center gap-2 
+            className="flex group bg-mainColor text-white p-1 sm:px-4 rounded-lg items-center gap-2 
                        transition-all duration-300 ease-in-out cursor-pointer hover:bg-purple-100"
           >
             <p className="hidden sm:block font-medium transition-colors duration-300 ease-in-out group-hover:text-mainColor">

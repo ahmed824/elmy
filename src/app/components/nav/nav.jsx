@@ -44,7 +44,7 @@ export default function Nav() {
 
   if (!isClient) {
     return (
-      <div className="w-full px-4 sm:px-6 lg:px-8 py-3 bg-transparent mt-8 sm:mt-11 overflow-hidden">
+      <div className="w-full px-4 sm:px-6 lg:px-8 py-3 bg-transparent mt-6 sm:mt-8 overflow-hidden">
         <div className="flex items-center justify-between max-w-[1400px] mx-auto">
           <div className="flex items-center sm:gap-4">
             <Link href="/">
@@ -73,11 +73,10 @@ export default function Nav() {
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className={`transition-all ${
-                    isActiveLink(link.href)
+                  className={`transition-all ${isActiveLink(link.href)
                       ? "text-purple-600 bg-purple-100 px-3 py-1 rounded-lg"
                       : "hover:text-purple-600 hover:bg-purple-100 px-3 py-1 rounded-lg"
-                  }`}
+                    }`}
                 >
                   {link.label}
                 </Link>
@@ -112,12 +111,12 @@ export default function Nav() {
   return (
     <>
       <div className={`${isSearchOpen ? "backdrop-blur-sm" : ""}`}>
-        <nav className="w-full px-4 sm:px-6 lg:px-8 py-3 bg-transparent mt-8 sm:mt-11">
+        <nav className="w-full px-4 sm:px-6 lg:px-8 py-3 bg-transparent mt-6 sm:mt-8">
           <div className="flex items-center justify-between max-w-[1400px] mx-auto">
             {/* Left Side: Logo and Vision */}
-            <div className="flex items-center sm:gap-4">
+            <div className="flex items-center gap-x-2 sm:gap-x-4">
               <Link href="/">
-                <Image src={Logo} alt="Elmy Logo" width={122} height={50} />
+                <Image src={Logo} alt="Elmy Logo" width={122} height={50} className="w-12 h-12 md:w-auto md:h-auto max-w-[122px]" />
               </Link>
               {logoData?.data?.logo && (
                 <Image
@@ -125,9 +124,12 @@ export default function Nav() {
                   alt="Logo"
                   width={122}
                   height={50}
+                  className="w-12 h-12 md:w-auto md:h-auto max-w-[122px]"
                 />
               )}
-              <CategoriesMenu />
+              <div className="w-full sm:w-auto">
+                <CategoriesMenu />
+              </div>
             </div>
 
             {/* Desktop Navigation */}
@@ -145,11 +147,10 @@ export default function Nav() {
                   {
                     <Link
                       href={link.href}
-                      className={`whitespace-nowrap transition-all ${
-                        isActiveLink(link.href)
+                      className={`whitespace-nowrap transition-all ${isActiveLink(link.href)
                           ? "text-purple-600 bg-purple-100 px-3 py-1 rounded-lg"
                           : "hover:text-purple-600 hover:bg-purple-100 px-3 py-1 rounded-lg"
-                      }`}
+                        }`}
                     >
                       {link.label}
                     </Link>

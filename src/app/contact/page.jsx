@@ -47,9 +47,9 @@ export default function ContactPage() {
     };
 
     return (
-        <div className="min-h-screen">
+        <div className="min-h-screen ">
             <BreadCramp title="تواصل معنا" />
-            <div className="m-auto flex justify-center align-middle">
+            <div className="m-auto -mt-20 pb-40 flex justify-center align-middle">
                 <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-2xl" data-aos="fade-up">
                     <h2 className="text-[38px] font-medium text-center text-[#121D2F] mb-6">أرسل لنا وسنتواصل معك</h2>
                     <Formik

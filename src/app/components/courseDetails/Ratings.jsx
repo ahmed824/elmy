@@ -3,30 +3,44 @@ import { FaStar, FaRegStar } from "react-icons/fa";
 
 export default function Ratings({ data }) {
     return (
-        <div className="bg-white shadow-md rounded-lg p-6 flex flex-col">
+        <div className="bg-white shadow-md rounded-lg p-4 md:p-6 flex flex-col">
             {/* Title */}
-            <h2 className="text-lg font-bold text-[#121D2F] text-right mb-2 border-b-2 pb-3 mr-2 border-[#F3F3F3]">التقييمات</h2>
+            <h2 className="text-lg font-bold text-[#121D2F] text-right mb-2 border-b-2 pb-3 mr-2 border-[#F3F3F3]">
+                التقييمات
+            </h2>
 
-            <div className="flex flex-row items-center w-full">
-                {/* Overall Rating (Right Section) */}
-                <div className="bg-[#FFF5F0] px-4 py-10 rounded-lg text-center w-40 shrink-0 m-2">
-                    <span className="text-3xl font-bold text-[#121D2F]">{data?.average}</span>
+            <div className="flex flex-col md:flex-row items-center w-full">
+                {/* Overall Rating (Top Section on Mobile, Left Section on Desktop) */}
+                <div className="bg-[#FFF5F0] px-4 py-6 md:py-10 rounded-lg text-center w-full md:w-40 shrink-0 m-2">
+                    <span className="text-2xl md:text-3xl font-bold text-[#121D2F]">
+                        {data?.average}
+                    </span>
                     <div className="flex justify-center text-gray-400 mt-1">
                         {Array.from({ length: 5 }, (_, i) =>
-                            i < data?.average ? <FaStar key={i} className="text-orange-400" /> : <FaRegStar key={i} />
+                            i < data?.average ? (
+                                <FaStar key={i} className="text-orange-400" />
+                            ) : (
+                                <FaRegStar key={i} />
+                            )
                         )}
                     </div>
-                    <p className="text-sm text-[#FF8F3C] mt-1">{data?.rating_text}</p>
+                    <p className="text-sm text-[#FF8F3C] mt-1">
+                        {data?.rating_text}
+                    </p>
                 </div>
 
                 {/* Ratings Section */}
-                <div className="flex-1 flex flex-col space-y-3">
+                <div className="flex-1 flex flex-col space-y-3 w-full mt-4 md:mt-0">
                     {[5, 4, 3, 2, 1].map((stars) => (
                         <div key={stars} className="flex items-center justify-center gap-3">
                             {/* Stars */}
                             <div className="flex text-orange-400">
                                 {Array.from({ length: 5 }, (_, i) =>
-                                    i < stars ? <FaStar key={i} /> : <FaRegStar key={i} className="text-gray-300" />
+                                    i < stars ? (
+                                        <FaStar key={i} />
+                                    ) : (
+                                        <FaRegStar key={i} className="text-gray-300" />
+                                    )
                                 )}
                             </div>
 
@@ -39,7 +53,9 @@ export default function Ratings({ data }) {
                             </div>
 
                             {/* Percentage */}
-                            <span className="text-gray-500 text-sm whitespace-nowrap inline-block w-[38px]">{data?.distribution_percentage[stars]}%</span>
+                            <span className="text-gray-500 text-sm whitespace-nowrap inline-block w-[38px]">
+                                {data?.distribution_percentage[stars]}%
+                            </span>
                         </div>
                     ))}
                 </div>

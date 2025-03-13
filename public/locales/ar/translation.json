@@ -33,7 +33,10 @@
     "supportAndPolicies": "الدعم و السياسات",
     "contactDirectly": "تواصل مباشرة",
     "whatsapp": "واتساب :966597431779",
-    "email": "البريد الالكتروني:support@elmyacademy.com",
+    "email": {
+      "label": "البريد الاكتروني",
+      "email":"support@elmyacademy.com"
+    },
     "subscribe": "اشترك في نشرتنا البريدية",
     "subscribeDescription": "يقوم المدربون من جميع أنحاء العالم بتعليم ملايين المتعلمين على علمي. نحن نقدم الأدوات والمهارات اللازمة لتعليم ما تحب.",
     "subscribeButton": "اشترك الآن",

@@ -173,7 +173,7 @@ export default function Opinion() {
       </div>
 
       {/* Vector Image at the bottom */}
-      <div className="absolute bottom-[-40px] sm:bottom-[-206px] left-0 w-full">
+      <div className="absolute bottom-[-40px] sm:bottom-[-104px] lg:bottom-[-206px] left-0 w-full">
         <Image
           src={Vector}
           alt="Vector Design"

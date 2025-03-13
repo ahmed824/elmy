@@ -19,21 +19,23 @@ export default function CourseDetailsClient({ course }) {
     ];
 
     return (
-        <div className="mt-4">
-            {/* Tabs Section */}
-            <div className="flex gap-4 rounded-full bg-white shadow-md my-4 justify-center align-middle">
-                {tabs.map((tab) => (
-                    <button
-                        key={tab.id}
-                        onClick={() => setActiveTab(tab.name)}
-                        className={`whitespace-nowrap py-2 px-10 my-3 rounded-full transition-all ${activeTab === tab.name
-                            ? "bg-purple-500 text-white"
-                            : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-                            }`}
-                    >
-                        {tab.name}
-                    </button>
-                ))}
+        <div className="mt-4 pb-40">
+            {/* Responsive Tabs Section */}
+            <div className="w-full overflow-x-auto no-scrollbar">
+                <div className="flex gap-2 md:gap-4 rounded-full bg-white shadow-md my-4 p-2 md:p-4 min-w-max">
+                    {tabs.map((tab) => (
+                        <button
+                            key={tab.id}
+                            onClick={() => setActiveTab(tab.name)}
+                            className={`whitespace-nowrap py-2 px-4 md:px-10 my-1 md:my-3 rounded-full transition-all text-sm md:text-base ${activeTab === tab.name
+                                ? "bg-purple-500 text-white"
+                                : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                                }`}
+                        >
+                            {tab.name}
+                        </button>
+                    ))}
+                </div>
             </div>
 
             {/* Course Summary - Displays Everything */}
@@ -59,12 +61,6 @@ export default function CourseDetailsClient({ course }) {
                                 بثقة، أنشئ واحفظ دفاتر العمل، وافهم تنسيقات الملفات الأساسية لتبسيط
                             </p>
                         </div>
-
-                        {/* <div className="mt-4 text-right">
-                            <a href="#" className="text-purple-500 font-semibold">
-                                أظهر المزيد
-                            </a>
-                        </div> */}
                     </div>
 
                     <div className="my-4">

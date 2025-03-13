@@ -8,11 +8,9 @@ export default function page() {
     const { id, name } = useParams();
     const decodedName = decodeURIComponent(name);
 
-    
+
     return (
         <div>
-
-
             <div className='m-auto'>
                 <Courses id={id} name={decodedName} />
             </div>
