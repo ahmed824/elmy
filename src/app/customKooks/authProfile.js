@@ -8,8 +8,8 @@ const fetchUserProfile = async () => {
   if (!token) {
     throw new Error('No authentication token found');
   }
-
-  const response = await axiosInstance.get('auth/profile?lang=ar');
+  const lang = localStorage.getItem("i18nextLng");
+  const response = await axiosInstance.get(`auth/profile?lang=${lang}`);
   console.log('API Response:', response.data); // Debug API response
   return response.data;
 };

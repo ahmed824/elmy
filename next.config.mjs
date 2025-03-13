@@ -1,9 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  distDir: '.next',
-  
+  distDir: ".next",
+
   images: {
-    domains: ["app.sci.com.sa"],
+    domains: ["app.sci.com.sa", "em.test"],
   },
   i18n: {
     locales: ["en", "ar"],

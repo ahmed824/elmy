@@ -2,20 +2,25 @@ import { useQuery } from "@tanstack/react-query";
 import { baseUrl } from "../baseUrl";
 import axiosInstance from "./token";
 import { toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
-
+import "react-toastify/dist/ReactToastify.css";
 // Function to get student courses
-export const getStudentCourses = async (lang = "en") => {
+export const getStudentCourses = async (lang = "ar") => {
+
   try {
-    const response = await axiosInstance.get(`${baseUrl}student/courses?lang=${lang}`);
+    const response = await axiosInstance.get(
+      `${baseUrl}student/courses?lang=${lang}`
+    );
     return response.data.data; // Accessing "data" inside the response
   } catch (error) {
-    throw new Error(error.response?.data?.message || "Failed to fetch student courses");
+    throw new Error(
+      error.response?.data?.message || "Failed to fetch student courses"
+    );
   }
 };
 
 // Custom hook to use student courses
-export const useStudentCourses = (lang) => {
+export const useStudentCourses = () => {
+  const lang = localStorage.getItem("i18nextLng");
   return useQuery({
     queryKey: ["studentCourses", lang],
     queryFn: () => getStudentCourses(lang),

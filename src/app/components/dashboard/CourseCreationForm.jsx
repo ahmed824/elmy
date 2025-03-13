@@ -116,7 +116,7 @@ export default function CourseCreationForm() {
   return (
     <>
       <BreadCramp title={"إضافة دورة جديدة"} />
-      <div className="flex flex-col lg:flex-row container mx-auto">
+      <div className="flex flex-col lg:flex-row container mx-auto pb-3 md:pb-20">
         <div className="w-full lg:w-2/3 p-6">
           <Formik
             initialValues={initialValues}
@@ -652,19 +652,20 @@ export default function CourseCreationForm() {
                       </label>
                     )}
                   </div>
-                  <div className="flex justify-end gap-4 mt-6">
-                    <label htmlFor="isPreveiw" className="flex justify-center items-center gap-2">
-                      <span>
-                        معاينة
-                      </span>
+                  <div className="flex justify-start gap-4 mt-6">
+                    <label
+                      htmlFor="isPreveiw"
+                      className="flex justify-center items-center gap-2"
+                    >
+                      <span>معاينة</span>
                       <input
-                      type='checkbox'
-                      name='isPreveiw'
-                      id='isPreveiw'
-                      className=" w-3"
-                    />
+                        type="checkbox"
+                        name="isPreveiw"
+                        id="isPreveiw"
+                        className="preview"
+                      />
                     </label>
-                    
+
                     <button
                       type="submit"
                       className="bg-[#2ACF7B] text-white px-4 py-2 rounded"
