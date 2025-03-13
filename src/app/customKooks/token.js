@@ -7,31 +7,18 @@ const axiosInstance = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
+  withCredentials: true,
 });
 
 // Fetch the XSRF token and store it in cookies
-const fetchXsrfToken = async () => {
-  try {
-    await axios.get("https://app.sci.com.sa/sanctum/csrf-cookie", {
-      withCredentials: true,
-    });
-  } catch (error) {
-    console.error("Failed to fetch XSRF token:", error);
-  }
-};
+
 
 // Ensure the XSRF token is fetched before making any requests
-const ensureXsrfToken = async () => {
-  const xsrfToken = Cookies.get("XSRF-TOKEN");
-  if (!xsrfToken) {
-    await fetchXsrfToken();
-  }
-};
 
 // Add a request interceptor to include the XSRF token in the headers
 axiosInstance.interceptors.request.use(
   async (config) => {
-    await ensureXsrfToken(); // Ensure the XSRF token is fetched
+     // Ensure the XSRF token is fetched
 
     const token = Cookies.get("elmy_token");
     if (token) {

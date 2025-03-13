@@ -34,7 +34,7 @@ export default function ProgressBox({ icon, color, title, count }) {
       >
         <Image src={icon} alt={icon} />
       </div>
-      <p className="font-bold text-5xl m-2">00</p>
+      <p className="font-bold text-5xl m-2">{count }</p>
       <p>{t(title)}</p>
     </div>
   );

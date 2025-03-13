@@ -519,3 +519,16 @@ ul.country-list.text-right {
 .animate-bounce-slow {
   animation: bounceSlow 2s infinite ease-in-out;
 }
+
+.preview{
+  
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  background-color: #A239F0;
+
+}
